@@ -1,5 +1,7 @@
 // Метод includes()
-// Метод includes(value) проверяет есть ли в массиве элемент со значением value и возвращает true или false соответственно. Область применения этого метода сводится к ситуациям, когда необходимо проверить есть ли элемент в массиве и не важна его позиция (индекс).
+// Метод includes(value) проверяет есть ли в массиве элемент со значением value и возвращает true или false соответственно.
+// Область применения этого метода сводится к ситуациям,
+// когда необходимо проверить есть ли элемент в массиве и не важна его позиция(индекс).
 
 // const planets = ["Earth", "Mars", "Venus"];
 
@@ -7,6 +9,7 @@
 // console.log(planets.includes("Mars")); // true
 // console.log(planets.includes("Venus")); // true
 // console.log(planets.includes("Jupiter")); // false
+
 // Задание
 // Функция checkFruit(fruit) принимает строку с названием фрукта (параметр fruit), и проверяет есть ли такой фрукт в массиве fruits.
 
@@ -32,3 +35,4 @@ function checkFruit(fruit) {
 
 console.log(checkFruit("plum"));
 console.log(checkFruit("Pear"));
+console.log(checkFruit("mandarin"));
