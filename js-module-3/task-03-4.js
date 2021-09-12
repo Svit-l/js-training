@@ -1,41 +1,82 @@
-// Метод slice()
-// Метод slice(begin, end) возвращает новый массив, содержащий копию части исходного массива, не изменяя его.
-// Копия делается от begin и до, но не включая, end - индексы элементов исходного массива.
+// Доступ к вложенным свойствам
+// const user = {
+//   name: "Jacques Gluke",
+//   tag: "jgluke",
+//   location: {
+//     country: "Jamaica",
+//     city: "Ocho Rios",
+//   },
+//   hobbies: ["swiming", "music", "sci-fi"],
+// };
+// Для доступа к вложенным свойствам используется цепочка обращений «через точку». Например, если необходимо получить значение страны пользователя, записываем user.location.country, где user.location это обращение (путь) к объекту в свойстве location, а user.locaton.country обращение к свойству country в этом объекте. То есть, «точка» указывает следующую вложенность.
 
-// Если begin и end не указаны, будет создана полная копия исходного массива.
-// Если не указан end, копирование будет от start и до конца исходного массива.
-// Если значение start отрицательное, а end не указан, то будут скопированы последние N элементов.
-// const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+// const location = user.location;
+// console.log(location); // Объект location
 
-// console.log(planets.slice(0, 2)); // ['Earth', 'Mars']
-// console.log(planets.slice(0, 4)); // ['Earth', 'Mars', 'Venus', 'Jupiter']
-// console.log(planets.slice(1, 3)); // ['Mars', 'Venus']
-// console.log(planets.slice(-2)); // ['Jupiter', 'Saturn']
-// console.log(planets.slice()); // ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn']
+// const country = user.location.country;
+// console.log(country); // "Jamaica"
+// Если значение свойства это массив, то в нашем примере user.hobbies - обращение к этому массиву.
+// алее, можно получить доступ к его элементам через квадратные скобки и индекс или использовать свойства и методы.
+
+// const hobbies = user.hobbies;
+// console.log(hobbies); // ["swiming", "music", "sci-fi"]
+
+// const firstHobby = user.hobbies[0];
+// console.log(firstHobby); // "swiming"
+
+// const numberOfHobbies = user.hobbies.length;
+// console.log(numberOfHobbies); // 3
+
 // Задание
-// Дополни код так, чтобы переменные содержали частичные копии исходного массива fruits.
+// Дополни код присвоив объявленным переменным выражения обращения к соответствующим свойствам обьекта apartment.
 
-// firstTwoEls - массив из первых двух элементов
-// nonExtremeEls - массив из всех элементов кроме первого и последнего
-// lastThreeEls - массив из трёх последних элементов
+// ownerName - имя владельца;
+// ownerPhone - телефон владельца;
+// ownerEmail - почта владельца;
+// numberOfTags - количество элементов массива в свойстве tags;
+// firstTag - первый элемент массива в свойстве tags;
+// lastTag - последний элемент массива в свойстве tags.
 // Тесты
-// Объявлена переменная fruits
-// Значение переменной fruits это массив ["apple", "plum", "pear", "orange", "banana"]
-// Объявлена переменная firstTwoEls
-// Значение переменной firstTwoEls это массив ["apple", "plum"]
-// Объявлена переменная nonExtremeEls
-// Значение переменной nonExtremeEls это массив ["plum", "pear", "orange"]
-// Объявлена переменная lastThreeEls
-// Значение переменной lastThreeEls это массив ["pear", "orange", "banana"]
-// Переменной lastThreeEls присвоена копия части массива fruits после применения метода slice с правильными аргументами
+// Объявлена переменная apartment с помощью const
+// Значение переменной apartment это объект
+// Объявлена переменная ownerName с помощью const
+// Значение переменной ownerName это строка "Henry"
+// Объявлена переменная ownerPhone с помощью const
+// Значение переменной ownerPhone это "982-126-1588"
+// Объявлена переменная ownerEmail с помощью const
+// Значение переменной ownerEmail это "henry.carter@aptmail.com"
+// Объявлена переменная numberOfTags с помощью const
+// Значение переменной numberOfTags это 3
+// Объявлена переменная firstTag с помощью const
+// Значение переменной firstTag это "premium"
+// Объявлена переменная lastTag с помощью const
+// Значение переменной lastTag это "top"
 
-const fruits = ["apple", "plum", "pear", "orange", "banana"];
+const apartment = {
+  imgUrl: "https://via.placeholder.com/640x480",
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+  tags: ["premium", "promoted", "top"],
+  owner: {
+    name: "Henry",
+    phone: "982-126-1588",
+    email: "henry.carter@aptmail.com",
+  },
+};
 
 // Change code below this line
-const firstTwoEls = fruits.slice(0, 2);
-const nonExtremeEls = fruits.slice(1, fruits.length - 1);
-const lastThreeEls = fruits.slice(fruits.length - 3, fruits.length);
+const ownerName = apartment.owner.name;
+const ownerPhone = apartment.owner.phone;
+const ownerEmail = apartment.owner.email;
+const numberOfTags = apartment.tags.length;
+const firstTag = apartment.tags[0];
+const lastTag = apartment.tags[apartment.tags.length - 1];
+// Change code above this line
 
-console.log(firstTwoEls);
-console.log(nonExtremeEls);
-console.log(lastThreeEls);
+console.log(ownerName);
+console.log(ownerPhone);
+console.log(ownerEmail);
+console.log(numberOfTags);
+console.log(firstTag);
+console.log(lastTag);

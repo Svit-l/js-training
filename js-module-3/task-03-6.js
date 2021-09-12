@@ -1,32 +1,56 @@
-// Задача: композиция массивов
+// Изменение значения свойства
+// После того, как объект создан, значение его свойств можно изменить. Для этого необходимо обратиться к ним по имени, например, «через точку», и присвоить новое значение.
+
+// const book = {
+//   title: "The Last Kingdom",
+//   author: "Bernard Cornwell",
+//   genres: ["historical prose", "adventure"],
+//   public: true,
+//   rating: 8.38,
+// };
+
+// book.rating = 9;
+// book.public = false;
+// book.genres.push("drama");
+
+// console.log(book.rating); // 9
+// console.log(book.public); // false
+// console.log(book.genres); // ["historical prose", "adventure", "drama"]
 // Задание
-// Напиши функцию makeArray(firstArray, secondArray, maxLength) для создания нового массива со всеми элементами двух исходных firstArray и secondArray.
-// Параметр maxLength содержит максимально допустимую длину нового массива.
+// Дополни код обновив значения свойств объекта apartment:
 
-// Если количество элементов нового массива больше maxLength, функция должна вернуть копию массива длиной maxLength элементов.
-// В противном случае функция должна вернуть новый массив целиком.
-
+// цену в свойстве price на 5000;
+// рейтинг квартиры в свойстве rating на 4.7;
+// имя владельца во вложенном свойстве name на "Henry Sibola";
+// массив тегов в свойстве tags добавив в конец строку "trusted".
 // Тесты
-// Объявлена функция makeArray(firstArray, secondArray, maxLength)
-// Вызов makeArray(["Mango", "Poly"], ["Ajax", "Chelsea"], 3) возвращает ["Mango", "Poly", "Ajax"]
-// Вызов makeArray(["Mango", "Poly", "Houston"], ["Ajax", "Chelsea"], 4) возвращает ["Mango", "Poly", "Houston", "Ajax"]
-// Вызов makeArray(["Mango"], ["Ajax", "Chelsea", "Poly", "Houston"], 3) возвращает ["Mango", "Ajax", "Chelsea"]
-// Вызов makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 2) возвращает ["Earth", "Jupiter"]
-// Вызов makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 4) возвращает ["Earth", "Jupiter", "Neptune", "Uranus"]
-// Вызов makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus", "Venus"], 0) возвращает []
-// Вызов функции makeArray() со случайными массивами и случайным числом возвращает правильный массив
+// Объявлена переменная apartment
+// Значение переменной apartment это объект
+// Значение вложенного свойства price это число 5000
+// Значение вложенного свойства rating это число 4.7
+// Значение вложенного свойства name это строка "Henry Sibola"
+// Значение вложенного свойства tags это массив ["premium", "promoted", "top", "trusted"]
 
-function makeArray(firstArray, secondArray, maxLength) {
-  // Change code below this line
-  const newArray = firstArray.concat(secondArray);
-  if (newArray.length > maxLength) {
-    return newArray.slice(0, maxLength);
-  } else {
-    return newArray;
-  }
-  // Change code above this line
-}
+const apartment = {
+  imgUrl: "https://via.placeholder.com/640x480",
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+  tags: ["premium", "promoted", "top"],
+  owner: {
+    name: "Henry",
+    phone: "982-126-1588",
+    email: "henry.carter@aptmail.com",
+  },
+};
 
-console.log(makeArray(["Mango", "Poly"], ["Ajax", "Chelsea"], 3));
-console.log(makeArray(["Mango", "Poly", "Houston"], ["Ajax", "Chelsea"], 4));
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus", "Venus"], 0));
+// Change code below this line
+apartment.price = 5000;
+apartment.rating = 4.7;
+apartment.owner.name = "Henry Sibola";
+apartment.tags.push("trusted");
+
+console.log(apartment.price);
+console.log(apartment.rating);
+console.log(apartment.owner.name);
+console.log(apartment.tags.push("trusted"));

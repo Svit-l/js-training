@@ -1,28 +1,57 @@
-// Метод concat()
-// Метод concat используется для объединения двух или более массивов. Он не изменяет массив на котором вызывается, а возвращает новый. Порядок аргументов метода влияет на порядок элементов нового массива.
+// Доступ к свойствам через квадратные скобки
+// Второй способ получить доступ к свойству объекта это синтаксис обьект["ключ_свойства"]. Похоже на обращение к элементу массива с отличием в том, что в скобках указывается не индекс элемента, а имя свойства как строка.
 
-// const firstArray = ["Mercury", "Venus", "Earth"];
-// const secondArray = ["Mars", "Jupiter"];
-// const thirdArray = ["Saturn", "Uranus", "Neptune"];
-// const allPlanets = firstArray.concat(secondArray, thirdArray);
+// Синтаксис «квадратных скобок» используется значительно реже. Как правило в случаях когда имя свойства заранее неизвестно или оно хранится в переменной (как значение параметра функции, например).
 
-// console.log(firstArray); // ['Mercury', 'Venus', 'Earth'];
-// console.log(allPlanets); // ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+// На место обращения будет возвращено значение свойства с таким именем.
+// Если в объекте нет свойства с таким именем, на место обращения вернётся undefined.
+// const book = {
+//   title: "The Last Kingdom",
+//   author: "Bernard Cornwell",
+//   genres: ["historical prose", "adventure"],
+//   public: true,
+//   rating: 8.38,
+// };
+
+// const bookTitle = book["title"];
+// console.log(bookTitle); // "The Last Kingdom"
+
+// const bookGenres = book["genres"];
+// console.log(bookGenres); // ["historical prose", "adventure"]
+
+// const propKey = "author";
+// const bookAuthor = book[propKey];
+// console.log(bookAuthor); // "Bernard Cornwell"
 // Задание
-// Дополни код так, чтобы в переменной allClients получился массив всех элементов массивов oldClients и newClients.
+// Дополни код присвоив объявленным переменным выражения обращения к соответствующим свойствам обьекта apartment используя синтаксис «квадратных скобок».
 
+// aptRating - рейтинг;
+// aptDescr - описание;
+// aptPrice - цена;
+// aptTags - теги.
 // Тесты
-// Объявлена переменная oldClients
-// Значение переменной oldClients это массив ["Mango", "Ajax", "Poly", "Kiwi"]
-// Объявлена переменная newClients
-// Значение переменной newClients это массив ["Peach", "Houston"]
-// Объявлена переменная allClients
-// Значение переменной allClients это массив ["Mango", "Ajax", "Poly", "Kiwi", "Peach", "Houston"]
-// Переменной allClients присвоен массив после применения метода concat с правильными аргументами
+// Объявлена переменная apartment
+// Значение переменной apartment это объект
+// Объявлена переменная aptRating
+// Значение переменной aptRating это 4
+// Объявлена переменная aptDescr
+// Значение переменной aptDescr это "Spacious apartment in the city center"
+// Объявлена переменная aptPrice
+// Значение переменной aptPrice это 2153
+// Объявлена переменная aptTags
+// Значение переменной aptTags это ["premium", "promoted", "top"]
 
-const oldClients = ["Mango", "Ajax", "Poly", "Kiwi"];
-const newClients = ["Peach", "Houston"];
+const apartment = {
+  imgUrl: "https://via.placeholder.com/640x480",
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+  tags: ["premium", "promoted", "top"],
+};
 
-const allClients = oldClients.concat(newClients); // Change this line
-
-console.log(allClients);
+// Change code below this line
+const aptRating = apartment["rating"];
+const aptDescr = apartment["descr"];
+const aptPrice = apartment["price"];
+const aptTags = apartment["tags"];
+// Change code above this line

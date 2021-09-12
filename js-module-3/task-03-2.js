@@ -1,29 +1,53 @@
-// Метод массива join()
-// Метод массивов join(delimeter) позволяет соединить элементы массива в строку. В строке элементы будут разделены символом или группой символов указанных в delimeter. То есть это операция обратная методу строк split(delimeter).
+// Вложенные свойства
+// Значением свойства может быть другой объект. Это используется для хранения вложенных и группированных данных.
 
-// const words = ["JavaScript", "is", "amazing"];
-// console.log(words.join("")); // 'JavaScriptisamazing'
-// console.log(words.join(" ")); // 'JavaScript is amazing'
-// console.log(words.join("*")); // 'JavaScript*is*amazing'
+// Например, статистика пользователя социальной сети состоит из количества последователей, просмотров и лайков, и хранить эти данные удобнее всего в виде объекта. Тоже самое с местоположением, отдельно страна и город.
+
+// В будущем это можно будет использовать для поиска пользователей по стране, городу, минимальному или максимальному количеству последователей и т. д.
+
+// const user = {
+//   name: "Jacques Gluke",
+//   tag: "jgluke",
+//   location: {
+//     country: "Jamaica",
+//     city: "Ocho Rios",
+//   },
+//   stats: {
+//     followers: 5603,
+//     views: 4827,
+//     likes: 1308,
+//   },
+// };
 // Задание
-// Дополни код функции makeStringFromArray(array, delimeter) так, чтобы она возвращала в переменной string результат соединения элементов массива array c разделителем delimeter - строку.
+// Дополни объект квартиры свойством owner, значением которого будет объект с информацией о владельце. Добавь ему следующие свойства:
 
+// name - имя владельца, значение "Henry";
+// phone - телефон, значение "982-126-1588";
+// email - почта, значение "henry.carter@aptmail.com".
 // Тесты
-// Объявлена функция makeStringFromArray(array, delimeter)
-// Вызов makeStringFromArray(["Mango", "hurries", "to", "the", "train"], " ") возвращает "Mango hurries to the train"
-// Вызов makeStringFromArray(["M", "a", "n", "g", "o"], "")) возвращает "Mango"
-// Вызов makeStringFromArray(["top", "picks", "for", "you"], "_") возвращает "top_picks_for_you"
+// Объявлена переменная apartment
+// Значение переменной apartment это объект
+// У объекта переменной apartment присутствуют свойства imgUrl, descr, rating, price и tag со значениями
+// В объекте apartment есть свойство owner
+// Значение свойства owner это объект
+// В объекте owner есть свойство name
+// Значение свойства name это "Henry"
+// В объекте owner есть свойство phone
+// Значение свойства phone это "982-126-1588"
+// В объекте owner есть свойствао email
+// Значение свойства email это "henry.carter@aptmail.com"
 
-function makeStringFromArray(array, delimeter) {
-  let string;
-  // Change code below this line
-  string = array.join(delimeter);
-  // Change code above this line
-  return string;
-}
+const apartment = {
+  imgUrl: "https://via.placeholder.com/640x480",
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+  tags: ["premium", "promoted", "top"],
+  owner: {
+    name: "Henry",
+    phone: "982-126-1588",
+    email: "henry.carter@aptmail.com",
+  },
+};
 
-console.log(
-  makeStringFromArray(["Mango", "hurries", "to", "the", "train"], " ")
-);
-
-console.log(makeStringFromArray(["M", "a", "n", "g", "o"], ""));
+console.log(apartment);

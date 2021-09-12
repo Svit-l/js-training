@@ -1,26 +1,55 @@
-// Задача: сумма чисел (цикл for)
+// Короткие свойства
+// Иногда, при создании объекта, значение свойства необходимо взять из переменной или параметра функции с таким же именем, как и само свойство.
+
+// Синтксис в следующем примере слишком громоздкий, потому что приходится дублировать имя свойства и имя переменной, в которой хранится необходимое значение.
+
+// const name = "Генри Сибола";
+// const age = 25;
+
+// const user = {
+//   name: name,
+//   age: age,
+// };
+
+// console.log(user.name); // "Генри Сибола"
+// console.log(user.age); // 25
+// Синтаксис коротких свойств (shorthand properties) решает эту проблему, позволяя использовать имя переменной как имя свойства, а её значение как значение свойства.
+
+// const name = "Генри Сибола";
+// const age = 25;
+
+// const user = {
+//   name,
+//   age,
+// };
+
+// console.log(user.name); // "Генри Сибола"
+// console.log(user.age); // 25
+// То есть, при объявлении объекта достаточно указать только имя свойства, а значение будет взято из переменной с аналогичным именем.
+
 // Задание
-// Напиши функцию calculateTotal(number), которая принимает целое число (параметр number) и возвращает сумму всех целых чисел от единицы и до этого числа.
-// Например, если number равно 3, то сумма это 1 + 2 + 3, то есть 6.
+// Дополни код объявления объекта так, чтобы у него были свойства name, price, image и tags со значениями из переменных с аналогичными именами. Обязательно используй синтаксис коротких свойств.
 
 // Тесты
-// Объявлена функция calculateTotal(number)
-// Вызов функции calculateTotal(1) возвращает 1
-// Вызов функции calculateTotal(3) возвращает 6
-// Вызов функции calculateTotal(7) возвращает 28
-// Вызов функции calculateTotal(18) возвращает 171
-// Вызов функции calculateTotal(24) возвращает 300
-// Вызов функции calculateTotal() со случайным числом возвращает правильное значение
+// Объявлена переменная product
+// Значение переменной product это объект
+// Значение вложенного свойства name это строка "Repair Droid"
+// Значение вложенного свойства price это число 2500
+// Значение вложенного свойства image это строка "https://via.placeholder.com/640x480"
+// Значение вложенного свойства tags это массив ["on sale", "trending", "best buy"]
 
-function calculateTotal(number) {
+const name = "Repair Droid";
+const price = 2500;
+const image = "https://via.placeholder.com/640x480";
+const tags = ["on sale", "trending", "best buy"];
+
+const product = {
   // Change code below this line
-  let sum = 0;
-  for (let i = 0; i <= number; i += 1) {
-    sum += i;
-  }
-  return sum;
+  name,
+  price,
+  image,
+  tags,
   // Change code above this line
-}
+};
 
-console.log(calculateTotal(18));
-console.log(calculateTotal(24));
+console.log(product.name);

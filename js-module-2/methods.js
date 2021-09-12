@@ -17,3 +17,6 @@ console.log(newArray);
 
 console.log(newArray.unshift("Doly", 3, 5, "nady"));
 console.log(newArray);
+
+console.log(newArray.splice(1, 3));
+console.log(newArray);

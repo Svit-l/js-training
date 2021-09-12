@@ -1,28 +1,54 @@
-// Метод строк split()
-// Теория
-// Метод split(delimeter) позволяет превратить строку в массив, «разбив» его по разделителю delimeter. Если разделитель это пустая строка, то получится массив отдельных символов. Разделителем может быть один или несколько символов.
-// const name = "Mango";
-// console.log(name.split("")); // ["M", "a", "n", "g", "o"]
+// Цикл for...in
+// В отличии от массива или строки, объект - это не итерируемая сущность,
+// то есть его нельзя перебрать циклами for или for...of.
+// Для перебора объектов используется специальный цикл for...in, который перебирает ключи объекта object.
 
-// const message = "JavaScript essentials";
-// console.log(message.split(" ")); // ["JavaScript", "essentials"]
+// for (key in object) {
+//   // инструкции
+// }
+
+// Переменная key доступная только в теле цикла.
+// На каждой итерации в неё будет записано значение ключа(имя) свойства.
+// Для того чтобы получить значение свойства с таким ключом(именем), используется синтаксис квадратных скобок.
+
+// const book = {
+//   title: "The Last Kingdom",
+//   author: "Bernard Cornwell",
+//   genres: ["historical prose", "adventure"],
+//   rating: 8.38,
+// };
+
+// for (const key in book) {
+//   // Ключ
+//   console.log(key);
+//   // Значение свойства с таким ключом
+//   console.log(book[key]);
+// }
 // Задание
-// Дополни код функции splitMessage(message, delimeter) так, чтобы она возвращала в переменной words результат разделения строки message по разделителю delimeter - массив строк.
+// Перебери объект apartment используя цикл for...in и запиши в массив keys все его ключи, а в массив values все значения его свойств.
+
 // Тесты
-// •	Объявлена функция splitMessage(message, delimeter)
-// •	Вызов splitMessage("Mango hurries to the train", " ") возвращает ["Mango", "hurries", "to", "the", "train"]
-// •	Вызов splitMessage("Mango", "") возвращает ["M", "a", "n", "g", "o"]
-// •	Вызов splitMessage("best_for_week", "_") возвращает ["best", "for", "week"]
+// Объявлена переменная apartment
+// Значение переменной apartment это объект
+// Объявлена переменная keys
+// Значение переменной keys это массив ["descr", "rating", "price"]
+// Объявлена переменная values
+// Значение переменной values это массив ["Spacious apartment in the city center", 4, 2153]
 
-// Решение
-
-function splitMessage(message, delimeter) {
-  let words;
-  // Change code below this line
-  words = message.split(delimeter);
-  // Change code above this line
-  return words;
+const apartment = {
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+};
+let keys = [];
+let values = [];
+// Change code below this line
+for (let key in apartment) {
+  keys.push(key);
 }
 
-console.log(splitMessage("Mango hurries to the train", " "));
-console.log(splitMessage("best_for_week", "_"));
+for (let value in apartment) {
+  values.push(apartment[value]);
+}
+console.log(keys);
+console.log(values);
