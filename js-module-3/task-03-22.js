@@ -1,31 +1,54 @@
-// Метод push()
-// Метод push() позволяет добавить один или несколько элементов в конец массива, без необходимости указывать индексы добавляемых элементов.
+// Значения по умолчанию
+// Для того чтобы избежать присвоения undefined при деструктуризации несуществующих свойств, можно задать переменным значения по умолчанию, которые будут присвоены только в случае когда в объекте нет свойства с таким именем.
 
-// const planets = ["Earth", "Mars", "Venus"];
-// planets.push("Jupiter");
-// planets.push("Saturn", "Uranus", "Neptune");
+// const book = {
+//   title: "The Last Kingdom",
+//   author: "Bernard Cornwell",
+// };
 
-// console.log(planets); // ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+// // Добавим картинку обложки если её нет в объекте книги
+// const {
+//   title,
+//   coverImage = "https://via.placeholder.com/640/480",
+//   author,
+// } = book;
+
+// console.log(title); // "The Last Kingdom"
+// console.log(author); // "Bernard Cornwell"
+// console.log(coverImage); // "https://via.placeholder.com/640/480"
 // Задание
-// Дополни код функции createArrayOfNumbers(min, max) так, чтобы она возвращала массив всех целых чисел от значения min до max.
+// В прогнозе максимальных температур также может быть необязательное свойство icon - иконка погоды. Замени объявления переменных yesterday, today, tomorrow и icon одной операцией деструктуризации свойств объекта highTemperatures. Задай значение по умолчанию для icon - строку "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg".
 
 // Тесты
-// Объявлена функция createArrayOfNumbers(min, max)
-// Вызов функции createArrayOfNumbers(1, 3) возвращает [1, 2, 3]
-// Вызов функции createArrayOfNumbers(14, 17) возвращает [14, 15, 16, 17]
-// Вызов функции createArrayOfNumbers(29, 34) возвращает [29, 30, 31, 32, 33, 34]
-// Вызов функции createArrayOfNumbers() со случайными min и max возвращает правильный массив
-// В цикле for использовался метод push
+// Объявлена переменная highTemperatures
+// Значение переменной highTemperatures это объект
+// Объявлена переменная highTemperatures
+// Значение переменной highTemperatures это объект
+// Объявлена переменная yesterday с помощью деструктуризации
+// Значение переменной yesterday это число 28
+// Объявлена переменная today с помощью деструктуризации
+// Значение переменной today это число 26
+// Объявлена переменная tomorrow с помощью деструктуризации
+// Значение переменной tomorrow это число 33
+// Объявлена переменная icon с помощью деструктуризации
+// Значение переменной icon это строка "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg".
+// Используется деструктуризация объекта
 
-function createArrayOfNumbers(min, max) {
-  const numbers = [];
-  // Change code below this line
-  for (let index = min; index <= max; index++) {
-    numbers.push(index);
-  }
-  // Change code above this line
-  return numbers;
-}
+const highTemperatures = {
+  yesterday: 28,
+  today: 26,
+  tomorrow: 33,
+};
+// Change code below this line
 
-console.log(createArrayOfNumbers(29, 34));
-console.log(createArrayOfNumbers(14, 17));
+const {
+  yesterday,
+  today,
+  tomorrow,
+  icon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
+} = highTemperatures;
+
+// Change code above this line
+const meanTemperature = (yesterday + today + tomorrow) / 3;
+
+console.log(meanTemperature);

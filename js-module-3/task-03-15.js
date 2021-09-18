@@ -1,28 +1,39 @@
-// Метод concat()
-// Метод concat используется для объединения двух или более массивов. Он не изменяет массив на котором вызывается, а возвращает новый. Порядок аргументов метода влияет на порядок элементов нового массива.
+// Метод Object.values()
+// Если метод Object.keys(obj) возвращает массив ключей собственных свойств объекта, то метод Object.values(obj) возвращает массив значений его собственных свойств. Если в объекте нет свойств, метод Object.values(obj) вернёт пустой массив.
 
-// const firstArray = ["Mercury", "Venus", "Earth"];
-// const secondArray = ["Mars", "Jupiter"];
-// const thirdArray = ["Saturn", "Uranus", "Neptune"];
-// const allPlanets = firstArray.concat(secondArray, thirdArray);
+// const book = {
+//   title: "The Last Kingdom",
+//   author: "Bernard Cornwell",
+//   rating: 8.38,
+// };
+// const keys = Object.keys(book);
+// console.log(keys); // ["title", "author", "genres", "rating"]
 
-// console.log(firstArray); // ['Mercury', 'Venus', 'Earth'];
-// console.log(allPlanets); // ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+// const values = Object.values(book);
+// console.log(values); // ["The Last Kingdom", "Bernard Cornwell", 8.38]
+// Массив значений свойств также можно перебрать циклом for...of, например для получения общей суммы числовых значений.
+
 // Задание
-// Дополни код так, чтобы в переменной allClients получился массив всех элементов массивов oldClients и newClients.
+// Запиши в переменную keys массив ключей собственных свойств объекта apartment, а в переменную values массив всех значений его свойств. Используй методы Object.keys() и Object.values().
 
 // Тесты
-// Объявлена переменная oldClients
-// Значение переменной oldClients это массив ["Mango", "Ajax", "Poly", "Kiwi"]
-// Объявлена переменная newClients
-// Значение переменной newClients это массив ["Peach", "Houston"]
-// Объявлена переменная allClients
-// Значение переменной allClients это массив ["Mango", "Ajax", "Poly", "Kiwi", "Peach", "Houston"]
-// Переменной allClients присвоен массив после применения метода concat с правильными аргументами
+// Объявлена переменная apartment
+// Значение переменной apartment это объект
+// Объявлена переменная keys
+// Значение переменной keys это массив ["descr", "rating", "price"]
+// Объявлена переменная values
+// Значение переменной values это массив ["Spacious apartment in the city center", 4, 2153]
+// Для получения массива ключей объекта apartment используется Object.keys()
+// Для получения массива значений объекта apartment используется Object.values()
 
-const oldClients = ["Mango", "Ajax", "Poly", "Kiwi"];
-const newClients = ["Peach", "Houston"];
+const apartment = {
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+};
+// Change code below this line
+const keys = Object.keys(apartment);
+const values = Object.values(apartment);
 
-const allClients = oldClients.concat(newClients); // Change this line
-
-console.log(allClients);
+console.log(keys);
+console.log(values);

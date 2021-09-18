@@ -1,40 +1,89 @@
-// Цикл for...of
-// Инструкция for...of объявляет цикл, перебирающий итерируемые объекты, такие как массивы и строки. Тело цикла будет выполняться для значения каждого элемента. Это хорошая замена циклу for, если не нужен доступ к счётчику итерации.
+// Паттерн «Объект настроек»
+// Если функция принимает более двух-трёх аргументов, очень просто запутаться в какой последовательности что передавать. В результате получается очень неочевидный код в месте её вызова.
 
-// for (const variable of iterable) {
-//   // тело цикла
+// function doStuffWithBook(title, numberOfPages, downloads, rating, public) {
+//   // Делаем что-то с параметрами
+//   console.log(title);
+//   console.log(numberOfPages);
+//   // И так далее
 // }
 
-// variable — переменная, которая будет хранить значение элемента на каждой итерации
-// iterable — коллекция, которая имеет перечислимые элементы, например массив
+// // ❌ Что такое 736? Что такое 10283? Что такое true?
+// doStuffWithBook("Последнее королевство", 736, 10283, 8.38, true);
+// Паттерн «Объект настроек» помогает решить эту проблему, заменяя набор параметров всего одним - объектом с именованными свойствами.
 
-// const planets = ["Earth", "Mars", "Venus"];
+// function doStuffWithBook(book) {
+//   // Делаем что-то со свойствами объекта
+//   console.log(book.title);
+//   console.log(book.numberOfPages);
+//   // И так далее
+// }
+// Тогда во время её вызова передаём один объект с необходимыми свойствами.
 
-// for (const planet of planets) {
-//   console.log(planet);
+// // ✅ Всё понятно
+// doStuffWithBook({
+//   title: "Последнее королевство",
+//   numberOfPages: 736,
+//   downloads: 10283,
+//   rating: 8.38,
+//   public: true,
+// });
+// Ещё один плюс в том, что можно деструктуризировать объект в параметре book.
+
+// // Это можно сделать в теле функции.
+// function doStuffWithBook(book) {
+//   const { title, numberOfPages, downloads, rating, public } = book;
+//   console.log(title);
+//   console.log(numberOfPages);
+//   // И так далее
 // }
 
+// Или в сигнатуре (подписи), разницы нет.
+// function doStuffWithBook({ title, numberOfPages, downloads, rating, public }) {
+//   console.log(title);
+//   console.log(numberOfPages);
+//   // И так далее
+// }
 // Задание
-// Выполни рефакторинг кода функции calculateTotalPrice(order) заменив цикл for на for...of.
+// Функция calculateMeanTemperature(forecast) принимает один параметр forecast - объект температур на два дня следующего формата.
+
+// {
+//   today: { low: 10, high: 20 },
+//   tomorrow: { low: 20, high: 30 }
+// }
+// Замени объявления переменных todayLow, todayHigh, tomorrowLow и tomorrowHigh одной операцией деструктуризации свойств объекта forecast.
 
 // Тесты
-// Объявлена функция calculateTotalPrice(order)
-// Вызов функции calculateTotalPrice([12, 85, 37, 4]) возвращает 138
-// Вызов функции calculateTotalPrice([164, 48, 291]) возвращает 503
-// Вызов функции calculateTotalPrice([412, 371, 94, 63, 176]) возвращает 1116
-// Вызов функции calculateTotalPrice([]) возвращает 0
-// Вызов функции calculateTotalPrice() со случайным массивом чисел возвращает правильную сумму
+// Объявлена функция calculateMeanTemperature(forecast)
+// В теле функции используется деструктуризация объекта
+// В теле функции объявлена переменная todayHigh с помощью деструктуризации
+// В теле функции объявлена переменная todayLow с помощью деструктуризации
+// В теле функции объявлена переменная tomorrowLow с помощью деструктуризации
+// В теле функции объявлена переменная tomorrowHigh с помощью деструктуризации
+// Вызов calculateMeanTemperature({ today: {low: 28, high: 32}, tomorrow: {low: 25, high: 29} }) возвращает 28.5
+// Вызов calculateMeanTemperature({ today: {low: 37, high: 40}, tomorrow: {low: 33, high: 38} }) возвращает 37
 
-function calculateTotalPrice(order) {
-  let total = 0;
-  // Change code below this line
-  for (let element of order) {
-    total += element;
-  }
+// Change code below this line
+function calculateMeanTemperature(forecast) {
+  const {
+    today: { low: todayLow, high: todayHigh },
+
+    tomorrow: { low: tomorrowLow, high: tomorrowHigh },
+  } = forecast;
+
   // Change code above this line
-  return total;
+  return (todayLow + todayHigh + tomorrowLow + tomorrowHigh) / 4;
 }
 
-console.log(calculateTotalPrice([164, 48, 291]));
-console.log(calculateTotalPrice([412, 371, 94, 63, 176]));
-console.log(calculateTotalPrice([]));
+console.log(
+  calculateMeanTemperature({
+    today: { low: 28, high: 32 },
+    tomorrow: { low: 25, high: 29 },
+  })
+);
+console.log(
+  calculateMeanTemperature({
+    today: { low: 37, high: 40 },
+    tomorrow: { low: 33, high: 38 },
+  })
+);

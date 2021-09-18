@@ -1,52 +1,72 @@
-// Задача: генератор slug
+// Метод Object.keys()
+// У встроенного класса Object есть несколько полезных методов для работы с объектами.
+// Первый из них это Object.keys(obj), который принимает объект и возвращает массив ключей его собственных свойств.
+// Если в объекте нет свойств, метод вернёт пустой массив.
+
+// const book = {
+//   title: "The Last Kingdom",
+//   genres: ["historical prose", "adventure"],
+//   rating: 8.38,
+// };
+// const keys = Object.keys(book);
+// console.log(keys); // ['title', 'author', 'genres', 'rating']
+// Скомбинировав результат Object.keys() и цикл for...of можно удобно перебрать собственные свойства объекта, не прибегая к использованию архаического цикла for...in с проверками принадлежности свойств.
+
+// const book = {
+//   author: "Bernard Cornwell",
+//   genres: ["historical prose", "adventure"],
+//   rating: 8.38,
+// };
+// const keys = Object.keys(book);
+
+// for (const key of keys) {
+//   // Ключ
+//   console.log(key);
+//   // Значение свойства
+//   console.log(book[key]);
+// }
+// Мы перебираем массив ключей объекта и на каждой итерации получаем значение свойства с таким ключом.
+
 // Задание
-// Термин slug - это человеко-понятный уникальный идентификатор, который используется в веб-разработке для создания читабельных URL-адесов.
+// Перебери объект apartment используя метод Object.keys() и цикл for...of.
+// Запиши в переменную keys массив ключей собственных свойств объекта apartment,
+// и добавь в массив values все значения его свойств.
 
-// Например, вместо того чтобы пользователь увидел в адресной строке mysite.com/posts/1q8fh74tx, можно сделать slug из названия статьи. В результате адрес получится более приятным для восприятия: mysite.com/posts/arrays-for-begginers.
-
-// Внимание
-// Slug это всегда строка в нижнем регистре, слова которой разделены тире.
-
-// Напиши функцию slugify(title) которая принимает заголовок статьи, параметр title, и возвращает slug, созданный из этой строки.
-
-// Значением параметра title будут строки, слова которых разделены только пробелами
-// Все символы slug должны быть в нижнем регистре
-// Все слова slug должна быть разделены тире
 // Тесты
-// Объявлена функция slugify(title)
-// Вызов slugify("Arrays for begginers") возвращает "arrays-for-begginers"
-// Вызов slugify("English for developer") возвращает "english-for-developer"
-// Вызов slugify("Ten secrets of JavaScript") возвращает "ten-secrets-of-javascript"
-// Вызов slugify("How to become a JUNIOR developer in TWO WEEKS") возвращает "how-to-become-a-junior-developer-in-two-weeks"
+// Объявлена переменная apartment.
+// Значение переменной apartment это объект.
+// Объявлена переменная keys.
+// Значение переменной keys это массив ["descr", "rating", "price"].
+// Значение переменной keys получено с помощью метода Object.keys().
+// Объявлена переменная values.
+// Значение переменной values это массив ["Spacious apartment in the city center", 4, 2153].
+// Значение переменной values получено с помощью цикла for...of.
 
-function slugify(title) {
-  // Change code below this line
-  const titleLowerCase = title.toLowerCase();
-  const newTitle = titleLowerCase.split(" ");
-  const slug = newTitle.join("-");
-  return slug;
-  // Change code above this line
+const apartment = {
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+};
+const values = [];
+// Change code below this line
+const keys = Object.keys(apartment);
+for (const key of keys) {
+  values.push(apartment[key]);
 }
 
-console.log(slugify("Arrays for begginers"));
+console.log(keys);
+console.log(values);
 
-console.log(slugify("How to become a JUNIOR developer in TWO WEEKS"));
+// const book = {
+//   author: "Bernard Cornwell",
+//   genres: ["historical prose", "adventure"],
+//   rating: 8.38,
+// };
+// const keys = Object.keys(book);
 
-// function string_to_slug(str) {
-//   str = str.replace(/^\s+|\s+$/g, ""); // trim
-//   str = str.toLowerCase();
-
-//   // remove accents, swap ñ for n, etc
-//   var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-//   var to = "aaaaeeeeiiiioooouuuunc------";
-//   for (var i = 0, l = from.length; i < l; i++) {
-//     str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
-//   }
-
-//   str = str
-//     .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
-//     .replace(/\s+/g, "-") // collapse whitespace and replace by -
-//     .replace(/-+/g, "-"); // collapse dashes
-
-//   return str;
+// for (const key of keys) {
+//   // Ключ
+//   console.log(key);
+//   // Значение свойства
+//   console.log(book[key]);
 // }

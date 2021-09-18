@@ -1,30 +1,49 @@
-// Итерация по массиву
-// Цикл for можно использовать для итерации по массиву, то есть «перебрать» его поэлементно.
-
-// const planets = ["Earth", "Mars", "Venus"];
-
-// for (let i = 0; i < planets.length; i += 1) {
-//   console.log(planets[i]);
-// }
-// Для доступа к элементам используется синтаксис квадратных скобок массив[индекс], где индекс - это значение счётчика цикла от 0 и до последнего индекса массива, который на единицу меньше длины массива.
-
+// Задача. Коллекция значений свойства
 // Задание
-// Дополни код цикла for так, чтобы он последовательно логировал все элементы массива fruits.
+// Напиши функцию getAllPropValues(propName) которая принимает один параметр propName - имя (ключ) свойства.
+// Функция должна вернуть массив всех значений свойства с таким именем из каждого объекта в массиве products.
+// Если в объектах нет свойства с таким именем, функция должна вернуть пустой массив.
 
 // Тесты
-// Объявлена переменная fruits
-// Значение переменной fruits это массив ["apple", "plum", "pear", "orange"]
-// Объявлена переменная i - счётчик цикла
-// Начальное значение переменной i равно 0
-// Условие цикла приводится к true до тех пор, пока i меньше 4
-// На каждой итерации значение переменной i увеличивается на единицу
-// В теле цикла for объявляется переменная const fruit и этой переменной присваивается значение - элемент массива
-// В теле цикла for используется вывод в консоль переменной fruit
+// Объявлена функция getAllPropValues(propName)
+// Вызов getAllPropValues("name") возвращает ["Radar", "Scanner", "Droid", "Grip"]
+// Вызов getAllPropValues("quantity") возвращает [4, 3, 7, 9]
+// Вызов getAllPropValues("price") возвращает [1300, 2700, 400, 1200]
+// Вызов getAllPropValues("category") возвращает []
 
-const fruits = ["apple", "plum", "pear", "orange"];
+const products = [
+  { name: "Radar", price: 1300, quantity: 4 },
+  { name: "Scanner", price: 2700, quantity: 3 },
+  { name: "Droid", price: 400, quantity: 7 },
+  { name: "Grip", price: 1200, quantity: 9 },
+];
 
-for (let i = 0; i < fruits.length; i += 1) {
-  // Change this line
-  const fruit = fruits[i]; // Change this line
-  console.log(fruit);
+function getAllPropValues(propName) {
+  // Change code below this line
+  const propNames = [];
+
+  for (const product of products) {
+    if (product[propName]) {
+      propNames.push(product[propName]);
+    }
+  }
+  return propNames;
+  // Change code above this line
 }
+
+
+// function getAllPropValues(propName) {
+//   for (const product of products) { - перебрали массив
+//     console.log(product); - на каждой итерации вывели объект
+//     if (product[propName]) {  - сделали проверку, что в объекте есть свойство
+// условие возвращает true или false, следовательно дословный перевод - в продукте есть свойство propName?
+//       console.log(`contains ${propName}`); - если true вывели эту консоль
+//       continue; -условие выполнилось, пошли на следующую итерацию
+//      }
+//     console.log(`not contains ${propName}`); - если false вывели эту консоль
+//   }
+// }
+
+
+console.log(getAllPropValues("name"));
+console.log(getAllPropValues("category"));

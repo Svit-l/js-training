@@ -1,30 +1,64 @@
-// Задача: фильтрация массива чисел
+// Изменение имени переменной
+// При деструктуризации можно изменить имя переменной в которую распаковывается значение свойства. Сначала пишем имя свойства из которого хотим получить значение, после чего ставим двоеточие и пишем имя переменной в которую необходимо поместить значение этого свойства.
+
+// const firstBook = {
+//   title: "Последнее королевство",
+//   coverImage:
+//     "https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg",
+// };
+
+// const {
+//   title: firstTitle,
+//   coverImage: firstCoverImage = "https://via.placeholder.com/640/480",
+// } = firstBook;
+
+// console.log(firstTitle); // Последнее королевство
+// console.log(firstCoverImage); // https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg
+
+// const secondBook = {
+//   title: "Сон смешного человека",
+// };
+
+// const {
+//   title: secondTitle,
+//   coverImage: secondCoverImage = "https://via.placeholder.com/640/480",
+// } = secondBook;
+
+// console.log(secondTitle); // Сон смешного человека
+// console.log(secondCoverImage); // https://via.placeholder.com/640/480
+// Такая запись читается как «Создать переменную firstTitle, в которую поместить значение свойства title из объекта firstBook» и т. д.
+
 // Задание
-// Напиши функцию filterArray(numbers, value), которая принимает массив чисел (параметр numbers)
-// и возвращает новый массив, в котором будут только те элементы массива numbers, которые больше чем значение параметра value(число).
+// Замени объявления переменных highYesterday, highToday, highTomorrow и highIcon одной операцией деструктуризации свойств объекта highTemperatures. Задай значение по умолчанию для highIcon - строку "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg".
 
 // Тесты
-// Объявлена функция filterArray(numbers, value)
-// Вызов функции filterArray([1, 2, 3, 4, 5], 3) возвращает [4, 5]
-// Вызов функции filterArray([1, 2, 3, 4, 5], 4) возвращает [5]
-// Вызов функции filterArray([1, 2, 3, 4, 5], 5) возвращает []
-// Вызов функции filterArray([12, 24, 8, 41, 76], 38) возвращает [41, 76]
-// Вызов функции filterArray([12, 24, 8, 41, 76], 20) возвращает [24, 41, 76]
-// Вызов функции filterArray() со случайным массивом и числом возвращает правильный массив
-// В цикле for использовался метод push
+// Объявлена переменная highTemperatures
+// Значение переменной highTemperatures это объект
+// Объявлена переменная highYesterday
+// Значение переменной highYesterday это число 28
+// Объявлена переменная highToday
+// Значение переменной highToday это число 26
+// Объявлена переменная highTomorrow
+// Значение переменной highTomorrow это число 33
+// Объявлена переменная highIcon
+// Значение переменной highIcon это строка "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg"
+// Используется деструктуризация объекта
 
-function filterArray(numbers, value) {
-  // Change code below this line
-  const newArray = [];
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] > value) {
-      newArray.push(numbers[i]);
-    }
-  }
-  return newArray;
-  // Change code above this line
-}
+const highTemperatures = {
+  yesterday: 28,
+  today: 26,
+  tomorrow: 33,
+};
+// Change code below this line
 
-console.log(filterArray([1, 2, 3, 4, 5], 3));
-console.log(filterArray([12, 24, 8, 41, 76], 38));
-console.log(filterArray([12, 24, 8, 41, 76], 20));
+const {
+  yesterday: highYesterday,
+  today: highToday,
+  tomorrow: highTomorrow,
+  icon: highIcon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
+} = highTemperatures;
+
+// Change code above this line
+const meanTemperature = (highYesterday + highToday + highTomorrow) / 3;
+
+console.log(meanTemperature);

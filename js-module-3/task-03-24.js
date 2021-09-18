@@ -1,38 +1,65 @@
-// Метод includes()
-// Метод includes(value) проверяет есть ли в массиве элемент со значением value и возвращает true или false соответственно.
-// Область применения этого метода сводится к ситуациям,
-// когда необходимо проверить есть ли элемент в массиве и не важна его позиция(индекс).
+// Деструктуризация в циклах
+// При переборе массива объектов циклом for...of получаются множественные обращения к свойствам объекта.
 
-// const planets = ["Earth", "Mars", "Venus"];
+// const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+// ];
 
-// console.log(planets.includes("Earth")); // true
-// console.log(planets.includes("Mars")); // true
-// console.log(planets.includes("Venus")); // true
-// console.log(planets.includes("Jupiter")); // false
+// for (const book of books) {
+//   console.log(book.title);
+//   console.log(book.author);
+//   console.log(book.rating);
+// }
+// Для того, чтобы сократить количество повторений, можно деструктуризировать свойства объекта в локальные переменные в теле цикла.
 
+// for (const book of books) {
+//   const { title, author, rating } = book;
+
+//   console.log(title);
+//   console.log(author);
+//   console.log(rating);
+// }
+// Если в объекте немного свойств, деструктуризацию можно выполнить прямо в месте объявления переменной book.
+
+// for (const { title, author, rating } of books) {
+//   console.log(title);
+//   console.log(author);
+//   console.log(rating);
+// }
 // Задание
-// Функция checkFruit(fruit) принимает строку с названием фрукта (параметр fruit), и проверяет есть ли такой фрукт в массиве fruits.
+// Выполни рефакторинг цикла for...of так, чтобы в нём использовалась деструктуризация объекта..
 
-// Дополни код функции так, что если:
-
-// фрукт есть в массиве, то функция возвращает true;
-// фрукта нет в массиве, то функция возвращает false.
 // Тесты
-// Объявлена функция checkFruit(fruit)
-// Вызов checkFruit("plum") возвращает true
-// Вызов checkFruit("mandarin") возвращает false
-// Вызов checkFruit("pear") возвращает true
-// Вызов checkFruit("Pear") возвращает false
-// Вызов checkFruit("apple") возвращает true
-// Вызов функции checkFruit() со случайным словом возвращает правильное значение boolean
-// В функции использовался метод includes
+// Объявлена переменная colors
+// Значение переменной colors это массив
+// Объявлена переменная hexColors
+// Значение переменной hexColors это массив ["#f44336", "#2196f3", "#4caf50", "#ffeb3b"]
+// Объявлена переменная rgbColors
+// Значение переменной rgbColors это массив ["244,67,54", "33,150,243", "76,175,80", "255,235,59"]
+// Для перебора массива используется цикл for...of
+// В цикле for...of используется деструктуризация объекта
 
-function checkFruit(fruit) {
-  const fruits = ["apple", "plum", "pear", "orange"];
+const colors = [
+  { hex: "#f44336", rgb: "244,67,54" },
+  { hex: "#2196f3", rgb: "33,150,243" },
+  { hex: "#4caf50", rgb: "76,175,80" },
+  { hex: "#ffeb3b", rgb: "255,235,59" },
+];
 
-  return fruits.includes(fruit); // Change this line
+const hexColors = [];
+const rgbColors = [];
+// Change code below this line
+
+for (const { hex, rgb } of colors) {
+  hexColors.push(hex);
+  rgbColors.push(rgb);
 }
-
-console.log(checkFruit("plum"));
-console.log(checkFruit("Pear"));
-console.log(checkFruit("mandarin"));

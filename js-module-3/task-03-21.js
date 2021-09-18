@@ -1,33 +1,65 @@
-// Задача: поиск самого длинного слова
+// Деструктуризация объектов
+// Сложные данные всегда представлены объектом. Множественные обращения к свойствам объекта визуально загрязняют код.
+
+// const book = {
+//   title: "The Last Kingdom",
+//   author: "Bernard Cornwell",
+//   genres: ["historical prose", "adventure"],
+//   public: true,
+//   rating: 8.38,
+// };
+
+// const accessType = book.public ? "публичном" : "закрытом";
+// const message = `Книга ${book.title} автора ${book.author} с рейтингом ${book.rating} находится в ${accessType} доступе.`;
+// Деструктуризация позволяет «распаковать» значения свойств объекта в локальные переменные. Это делает код в месте их использования менее «шумным».
+
+// const book = {
+//   title: "The Last Kingdom",
+//   author: "Bernard Cornwell",
+//   genres: ["historical prose", "adventure"],
+//   public: true,
+//   rating: 8.38,
+// };
+
+// // Деструктуризируем
+// const { title, author, public, rating, coverImage } = book;
+// console.log(coverImage); // undefined
+
+// const accessType = public ? "публичном" : "закрытом";
+// const message = `Книга ${title} автора ${author} с рейтингом ${rating} находится в ${accessType} доступе.`;
+// Деструктуризация всегда находится в левой части операции присвоения. Переменным внутри фигурных скобок присваиваются значения свойств объекта. Если имя переменной и имя свойства совпадают, то происходит присваивание, в противном случае ей будет присвоено undefined. Порядок объявления переменных в фигурных скобках не важен.
+
 // Задание
-// Напиши функцию findLongestWord(string),
-// которая принимает произвольную строку состоящую только из слов разделённых пробелом(параметр string)
-// и возвращает самое длинное слово в этой строке.
+// Пришел трёхдневный прогноз максимальных температур и мы считаем среднюю температуру за три дня (meanTemperature). Замени объявления переменных yesterday, today и tomorrow одной операцией деструктуризации свойств объекта highTemperatures.
 
 // Тесты
-// Объявлена функция findLongestWord(string)
-// Вызов функции findLongestWord("The quick brown fox jumped over the lazy dog") возвращает jumped
-// Вызов функции findLongestWord("Google do a roll") возвращает Google
-// Вызов функции findLongestWord("May the force be with you") возвращает force
-// Вызов функции findLongestWord() со случайной строкой возвращает правильное значение
+// Объявлена переменная highTemperatures
+// Значение переменной highTemperatures это объект
+// Объявлена переменная yesterday с помощью деструктуризации
+// Значение переменной yesterday это число 28
+// Объявлена переменная today с помощью деструктуризации
+// Значение переменной today это число 26
+// Объявлена переменная tomorrow с помощью деструктуризации
+// Значение переменной tomorrow это число 33
+// Объявлена переменная meanTemperature
+// Значение переменной meanTemperature это число 29
+// Используется синтаксис деструктуризации объекта highTemperatures
 
-function findLongestWord(string) {
-  // Change code below this line
-  let array = string.split(" ");
-  // console.log(array);
-  let lengthWord = 0;
-  let longestWord = "";
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].length >= lengthWord) {
-      lengthWord = array[i].length;
-      longestWord = array[i];
-      // console.log(lengthWord);
-      // console.log(array[i]);
-    }
-  }
-  return longestWord;
-  // Change code above this line
-}
+const highTemperatures = {
+  yesterday: 28,
+  today: 26,
+  tomorrow: 33,
+};
+// Change code below this line
 
-console.log(findLongestWord("The quick brown fox jumped over the lazy dog"));
-console.log(findLongestWord("May the force be with you"));
+const {
+  yesterday,
+  today,
+  tomorrow,
+  icon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
+} = highTemperatures;
+
+// Change code above this line
+const meanTemperature = (yesterday + today + tomorrow) / 3;
+
+console.log(meanTemperature);

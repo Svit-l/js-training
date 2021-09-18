@@ -1,33 +1,70 @@
-// Задача: общие элементы
+// Глубокая деструктуризация
+// Для деструктуризации свойств вложенных объектов используются те же принципы, что и в трёх предыдущих упражнениях.
+
+// const user = {
+//   name: "Jacques Gluke",
+//   tag: "jgluke",
+//   stats: {
+//     followers: 5603,
+//     views: 4827,
+//     likes: 1308,
+//   },
+// };
+
+// const {
+//   name,
+//   tag,
+//   stats: { followers, views: userViews, likes: userLikes = 0 },
+// } = user;
+
+// console.log(name); // Jacques Gluke
+// console.log(tag); // jgluke
+// console.log(followers); // 5603
+// console.log(userViews); // 4827
+// console.log(userLikes); // 1308
 // Задание
-// Общими элементами массивов называют те элементы, которые присутствуют во всех массивах.
-
-// Например, в двух массивах [1, 3, 5] и [0, 8, 5, 3] общими будут числа 3 и 5, т.к. они присутствуют в обоих исходных массивах.
-// А числа 0, 1 и 8 присутствуют только в одном из массивов.
-
-// Напиши функцию getCommonElements(array1, array2) которая получает два массива произвольной длины в параметры array1 и array2,
-// и возвращает новый массив, состоящий из тех элементов, которые присутствуют в обоих исходных массивах.
+// Мы получили прогноз погоды на два дня, с минимальными и максимальными температурами, а также необязательными иконками. Замени объявления всех переменных одной операцией деструктуризации свойств объекта forecast. Задай значение по умолчанию для иконок, переменных todayIcon и tomorrowIcon - строку "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg".
 
 // Тесты
-// Объявлена функция getCommonElements(array1, array2)
-// Вызов getCommonElements([1, 2, 3], [2, 4]) возвращает [2]
-// Вызов getCommonElements([1, 2, 3], [2, 1, 17, 19]) возвращает [1, 2]
-// Вызов getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27]) возвращает [12, 27, 3]
-// Вызов getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40]) возвращает [10, 30, 40]
-// Вызов getCommonElements([1, 2, 3], [10, 20, 30]) возвращает []
-// Вызов функции getCommonElements() со случайными двумя массивами возвращает правильный массив
-// В цикле for использовались методы includes и push
+// Объявлена переменная forecast
+// Значение переменной forecast это объект
+// Объявлена переменная highToday с помощью деструктуризации
+// Значение переменной highToday это число 32
+// Объявлена переменная lowToday с помощью деструктуризации
+// Значение переменной lowToday это число 28
+// Объявлена переменная todayIcon с помощью деструктуризации
+// Значение переменной todayIcon это строка "https://www.flaticon.com/svg/static/icons/svg/861/861059.svg"
+// Объявлена переменная highTomorrow с помощью деструктуризации
+// Значение переменной highTomorrow это число 31
+// Объявлена переменная lowTomorrow с помощью деструктуризации
+// Значение переменной lowTomorrow это число 27
+// Объявлена переменная tomorrowIcon с помощью деструктуризации
+// Значение переменной tomorrowIcon это строка "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg"
+// Используется синтаксис деструктуризации объекта highTemperatures
 
-function getCommonElements(array1, array2) {
-  // Change code below this line
-  const newArray = [];
-  for (let i = 0; i < array1.length; i++) {
-    if (array2.includes(array1[i])) {
-      newArray.push(array1[i]);
-    }
-  }
-  return newArray;
-  // Change code above this line
-}
-console.log(getCommonElements([1, 2, 3], [2, 1, 17, 19]));
-console.log(getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27]));
+const forecast = {
+  today: {
+    low: 28,
+    high: 32,
+    icon: "https://www.flaticon.com/svg/static/icons/svg/861/861059.svg",
+  },
+  tomorrow: {
+    low: 27,
+    high: 31,
+  },
+};
+// Change code below this line
+
+const {
+  today: {
+    low: lowToday,
+    high: highToday,
+    icon: todayIcon = "https://www.flaticon.com/svg/static/icons/svg/861/861059.svg",
+  },
+
+  tomorrow: {
+    low: lowTomorrow,
+    high: highTomorrow,
+    icon: tomorrowIcon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
+  },
+} = forecast;

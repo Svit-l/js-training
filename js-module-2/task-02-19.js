@@ -28,3 +28,15 @@ for (let i = 0; i < fruits.length; i += 1) {
   const fruit = fruits[i]; // Change this line
   console.log(fruit);
 }
+
+// const fruits = ["apple", "plum", "pear", "orange"];
+
+// for (let i = 0; i < fruits.length; i += 1) {
+//   console.log(fruits[i]);
+// }
+
+// const fruits = ["apple", "plum", "pear", "orange"];
+
+// for (const fruit of fruits) {
+//   console.log(fruit);
+// }

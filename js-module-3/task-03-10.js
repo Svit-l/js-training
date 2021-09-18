@@ -35,6 +35,24 @@
 // Объявлена переменная values
 // Значение переменной values это массив ["Spacious apartment in the city center", 4, 2153]
 
+// const apartment = {
+//   descr: "Spacious apartment in the city center",
+//   rating: 4,
+//   price: 2153,
+// };
+// let keys = [];
+// let values = [];
+// // Change code below this line
+// for (let key in apartment) {
+//   keys.push(key);
+// }
+
+// for (let value in apartment) {
+//   values.push(apartment[value]);
+// }
+// console.log(keys);
+// console.log(values);
+
 const apartment = {
   descr: "Spacious apartment in the city center",
   rating: 4,
@@ -45,10 +63,8 @@ let values = [];
 // Change code below this line
 for (let key in apartment) {
   keys.push(key);
+  values.push(apartment[key]);
 }
 
-for (let value in apartment) {
-  values.push(apartment[value]);
-}
 console.log(keys);
 console.log(values);

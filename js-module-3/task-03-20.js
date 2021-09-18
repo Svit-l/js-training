@@ -1,24 +1,34 @@
-// Задача: подсчёт суммы покупки
+// Задача. Общая стоимость товара
 // Задание
-// Напиши функцию calculateTotalPrice(order), которая принимает один параметр order - массив чисел, и рассчитывает общую сумму его элементов.
-// Общая сумма элементов должна сохраняться в переменной total, которая возвращается, как результат работы функции.
+// Напиши функцию calculateTotalPrice(productName) которая принимает один параметр productName - название товара. Функция должна вернуть общую стоимость (цена * количество) товара с таким именем из массива products.
 
 // Тесты
-// Объявлена функция calculateTotalPrice(order)
-// Вызов функции calculateTotalPrice([12, 85, 37, 4]) возвращает 138
-// Вызов функции calculateTotalPrice([164, 48, 291]) возвращает 503
-// Вызов функции calculateTotalPrice([412, 371, 94, 63, 176]) возвращает 1116
-// Вызов функции calculateTotalPrice() со случайным массивом возвращает правильное значение
+// Объявлена функция calculateTotalPrice(productName)
+// Вызов calculateTotalPrice("Blaster") возвращает 0
+// Вызов calculateTotalPrice("Radar") возвращает 5200
+// Вызов calculateTotalPrice("Droid") возвращает 2800
+// Вызов calculateTotalPrice("Grip") возвращает 10800
+// Вызов calculateTotalPrice("Scanner") возвращает 8100
 
-function calculateTotalPrice(order) {
-  let total = 0;
-  // Change code below this line
-  for (let i = 0; i < order.length; i++) {
-    total = total + order[i];
+const products = [
+  { name: "Radar", price: 1300, quantity: 4 },
+  { name: "Scanner", price: 2700, quantity: 3 },
+  { name: "Droid", price: 400, quantity: 7 },
+  { name: "Grip", price: 1200, quantity: 9 },
+];
+
+function calculateTotalPrice(productName) {
+  // Пиши код ниже этой строки
+  let productTotalPrice = 0;
+  for (const product of products) {
+    if (product.name === productName) {
+      productTotalPrice = product.price * product.quantity;
+    }
   }
-  // Change code above this line
-  return total;
+  return productTotalPrice;
+  // Пиши код выше этой строки
 }
 
-console.log(calculateTotalPrice([12, 85, 37, 4])); //138
-console.log(calculateTotalPrice([412, 371, 94, 63, 176])); //1116
+console.log(calculateTotalPrice("Droid"));
+console.log(calculateTotalPrice("Grip"));
+console.log(calculateTotalPrice("Blaster"));

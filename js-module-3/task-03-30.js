@@ -1,36 +1,29 @@
-// Оператор break
-// Прервать выполнение цикла можно в любой момент. Для этого существует оператор break, который полностью прекращает выполнение цикла и передаёт управление на строку за его телом.
-
-// В примере ищем число 3. Как только выполнится условие if, цикл прекратит своё выполнение (будет прерван).
-
-// for (let i = 0; i <= 5; i += 1) {
-//   console.log(i);
-
-//   if (i === 3) {
-//     console.log("Нашли число 3, прерываем выполнение цикла");
-//     break;
-//   }
-// }
-
-// console.log("Лог после цикла");
+// Задача. Карточки задач
 // Задание
-// Дополни код так, чтобы в переменную number записывалось первое число от start до end, которое делится на 5 без остатка.
+// Напиши функцию makeTask(data) которая принимает один параметр data - объект со следующими свойствами.
+
+// text - текст задачи.
+// category - категория задачи.
+// priority - приоритет задачи.
+// Функция должна составить и вернуть новый объект задачи, не изменяя напрямую параметр data. В новом объекте должно быть свойство completed, значение которого хранится в одноимённой локальной переменной.
+
+// В параметре data гарантированно будет только свойство text, а остальные два, category и priority, могут отсутствовать. Тогда, в новом объекте задачи, в свойствах category и priority должны быть значения по умолчанию, хранящиеся в одноимённых локальных переменных.
 
 // Тесты
-// Объявлена переменная start со значением 6
-// Объявлена переменная end со значением 27
-// Объявлена переменная number без инициализации
-// Итоговое значение переменной number равно 10
-// В цикле for используется break для выхода до завершения всех итераций цикла
+// Объявлена функция makeTask(data)
+// Вызов makeTask({}) возвращает { category: "General", priority: "Normal", completed: false }
+// Вызов makeTask({ category: "Homemade", priority: "Low", text: "Take out the trash" }) возвращает { category: "Homemade", priority: "Low", text: "Take out the trash", completed: false }
+// Вызов makeTask({ category: "Finance", text: "Take interest" }) возвращает { category: "Finance", priority: "Normal", text: "Take interest", completed: false }
+// Вызов makeTask({ priority: "Low", text: "Choose shampoo" }) возвращает { category: "General", priority: "Low", text: "Choose shampoo", completed: false }
+// Вызов makeTask({ text: "Buy bread" }) возвращает { category: "General", priority: "Normal", text: "Buy bread", completed: false }
 
-const start = 6;
-const end = 27;
-let number;
+function makeTask(data) {
+  const completed = false;
+  const category = "General";
+  const priority = "Normal";
+  // Change code below this line
 
-for (let i = start; i < end; i += 1) {
-  if (i % 5 === 0) {
-    number = i;
-    break;
-  }
+  // Change code above this line
 }
-console.log(number);
+
+// console.log(number);

@@ -1,29 +1,27 @@
-// Метод массива join()
-// Метод массивов join(delimeter) позволяет соединить элементы массива в строку. В строке элементы будут разделены символом или группой символов указанных в delimeter. То есть это операция обратная методу строк split(delimeter).
-
-// const words = ["JavaScript", "is", "amazing"];
-// console.log(words.join("")); // 'JavaScriptisamazing'
-// console.log(words.join(" ")); // 'JavaScript is amazing'
-// console.log(words.join("*")); // 'JavaScript*is*amazing'
+// Задача. Подсчёт свойств
 // Задание
-// Дополни код функции makeStringFromArray(array, delimeter) так, чтобы она возвращала в переменной string результат соединения элементов массива array c разделителем delimeter - строку.
+// Напиши функцию countProps(object), которая считает и возвращает количество собственных свойств объекта в параметре object.
+// Используй переменную propCount для хранения количества свойств объекта.
 
 // Тесты
-// Объявлена функция makeStringFromArray(array, delimeter)
-// Вызов makeStringFromArray(["Mango", "hurries", "to", "the", "train"], " ") возвращает "Mango hurries to the train"
-// Вызов makeStringFromArray(["M", "a", "n", "g", "o"], "")) возвращает "Mango"
-// Вызов makeStringFromArray(["top", "picks", "for", "you"], "_") возвращает "top_picks_for_you"
+// Объявлена функция countProps(object)
+// Вызов countProps({}) возвращает 0
+// Вызов countProps({ name: "Mango", age: 2 }) возвращает 2
+// Вызов countProps({ mail: "poly@mail.com", isOnline: true, score: 500 }) возвращает 3
+// Функция подсчитывает только собственные свойства объекта
 
-function makeStringFromArray(array, delimeter) {
-  let string;
+function countProps(object) {
+  let propCount = 0;
   // Change code below this line
-  string = array.join(delimeter);
-  // Change code above this line
-  return string;
+  for (const key in object) {
+    if (object.hasOwnProperty(key)) {
+      propCount += 1;
+    }
+    // Change code above this line
+  }
+  return propCount;
 }
 
-console.log(
-  makeStringFromArray(["Mango", "hurries", "to", "the", "train"], " ")
-);
-
-console.log(makeStringFromArray(["M", "a", "n", "g", "o"], ""));
+console.log(countProps({}));
+console.log(countProps({ name: "Mango", age: 2 }));
+console.log(countProps({ mail: "poly@mail.com", isOnline: true, score: 500 }));

@@ -1,26 +1,55 @@
-// Задача: сумма чисел (цикл for)
+// Задача. Поиск объекта по значению свойства
 // Задание
-// Напиши функцию calculateTotal(number), которая принимает целое число (параметр number) и возвращает сумму всех целых чисел от единицы и до этого числа.
-// Например, если number равно 3, то сумма это 1 + 2 + 3, то есть 6.
+// Напиши функцию getProductPrice(productName),
+// которая принимает один параметр productName - название продукта.
+// Функция ищет объект продукта с таким именем(свойство name) в массиве products и возвращает его цену(свойство price).
+// Если продукт с таким названием не найден, функция должна возвращать null.
 
 // Тесты
-// Объявлена функция calculateTotal(number)
-// Вызов функции calculateTotal(1) возвращает 1
-// Вызов функции calculateTotal(3) возвращает 6
-// Вызов функции calculateTotal(7) возвращает 28
-// Вызов функции calculateTotal(18) возвращает 171
-// Вызов функции calculateTotal(24) возвращает 300
-// Вызов функции calculateTotal() со случайным числом возвращает правильное значение
+// Объявлена функция getProductPrice(productName).
+// Вызов getProductPrice("Radar") возвращает 1300.
+// Вызов getProductPrice("Grip") возвращает 1200.
+// Вызов getProductPrice("Scanner") возвращает 2700.
+// Вызов getProductPrice("Droid") возвращает 400.
+// Вызов getProductPrice("Engine") возвращает null.
 
-function calculateTotal(number) {
+const products = [
+  { name: "Radar", price: 1300, quantity: 4 },
+  { name: "Scanner", price: 2700, quantity: 3 },
+  { name: "Droid", price: 400, quantity: 7 },
+  { name: "Grip", price: 1200, quantity: 9 },
+];
+
+function getProductPrice(productName) {
   // Change code below this line
-  let sum = 0;
-  for (let i = 0; i <= number; i += 1) {
-    sum += i;
+  let productPrice = null;
+  for (const product of products) {
+    if (product.name === productName) {
+      productPrice = product.price;
+    }
   }
-  return sum;
+  return productPrice;
   // Change code above this line
 }
+console.log(getProductPrice("Radar"));
+console.log(getProductPrice("Scanner"));
+console.log(getProductPrice("Droid"));
+console.log(getProductPrice("Engine"));
 
-console.log(calculateTotal(18));
-console.log(calculateTotal(24));
+// const book = {
+//   title: "The Last Kingdom",
+//   author: "Bernard Cornwell",
+//   genres: ["historical prose", "adventure"],
+//   public: true,
+//   rating: 8.38,
+// };
+
+// const bookTitle = book["title"];
+// console.log(bookTitle); // 'The Last Kingdom'
+
+// const bookGenres = book["genres"];
+// console.log(bookGenres); // ['historical prose', 'adventurs']
+
+// const propKey = "author";
+// const bookAuthor = book[propKey];
+// console.log(bookAuthor); // 'Bernard Cornwell'
