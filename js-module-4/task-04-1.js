@@ -31,6 +31,16 @@
 // Объявлена переменная pointer
 // Значение переменной pointer это ссылка на функцию makePizza
 
+// ============Исходный код задачи
+// function makePizza() {
+//   return "Your pizza is being prepared, please wait.";
+// }
+// // Change code below this line
+
+// const result = null;
+// const pointer = null;
+
+// ++++++++++++++Решение
 function makePizza() {
   return "Your pizza is being prepared, please wait.";
 }

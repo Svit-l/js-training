@@ -28,6 +28,21 @@
 // Вызов makeMessage("Royal Grand", makePizza) возвращает строку "Pizza Royal Grand is being prepared, please wait..."
 // Вызов makeMessage("Ultracheese", deliverPizza) возвращает строку "Delivering Ultracheese pizza."
 
+// ============Исходный код задачи
+// function deliverPizza(pizzaName) {
+//   return `Delivering ${pizzaName} pizza.`;
+// }
+
+// function makePizza(pizzaName) {
+//   return `Pizza ${pizzaName} is being prepared, please wait...`;
+// }
+
+// // Chande code below this line
+// function makeMessage(pizzaName) {
+//   return;
+// }
+
+// ++++++++++++++Решение
 function deliverPizza(pizzaName) {
   return `Delivering ${pizzaName} pizza.`;
 }

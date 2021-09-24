@@ -1,59 +1,66 @@
-// Добавление свойств
-// Операция добавления нового свойства после создания объекта ничем не отличается от изменения значения уже существующего свойства. Если при записи значения по имени, такого свойства в объекте нет, оно будет создано.
-
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-//   genres: ["historical prose", "adventure"],
-//   public: true,
-//   rating: 8.38,
-// };
-
-// book.pageCount = 836;
-// book.originalLanguage = "en";
-// book.translations = ["ua", "ru"];
-
-// console.log(book.pageCount); // 836
-// console.log(book.originalLanguage); // "en"
-// console.log(book.translations); // ["ua", "ru"]
+// Задача. Общие элементы
 // Задание
-// Добавь объекту apartment несколько новых свойств:
+// Функция getCommonElements(firstArray, secondArray) принимает два массива
+//  произвольной длины в параметры firstArray и secondArray,
+//   и возвращает новый массив их общих элементов, то есть тех которые есть в обоих массивах.
 
-// area - площадь в квадратных метрах, число 60;
-// rooms - количество комнат, число 3;
-// location - местоположение квартиры, обьект со следующими вложенными свойствами;
-// country - страна, строка "Jamaica";
-// city - город, строка "Kingston".
+// Выполни рефакторинг функции так, чтобы вместо цикла for она использовала метод forEach.
+
 // Тесты
-// Объявлена переменная apartment
-// Значение переменной apartment это объект
-// Значение вложенного свойства area это число 60
-// Значение вложенного свойства rooms это число 3
-// Значение вложенного свойства location это объект
-// Значение вложенного свойства location.country это строка "Jamaica"
-// Значение вложенного свойства location.city это строка "Kingston"
+// Объявлена функция getCommonElements(firstArray, secondArray)
+// Для перебора параметра (массива) использован метод forEach
+// Вызов getCommonElements([1, 2, 3], [2, 4]) возвращает [2]
+// Вызов getCommonElements([1, 2, 3], [2, 1, 17, 19]) возвращает [1, 2]
+// Вызов getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27]) возвращает [12, 27, 3]
+// Вызов getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40]) возвращает [10, 30, 40]
+// Вызов getCommonElements([1, 2, 3], [10, 20, 30]) возвращает []
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
-const apartment = {
-  imgUrl: "https://via.placeholder.com/640x480",
-  descr: "Spacious apartment in the city center",
-  rating: 4.7,
-  price: 5000,
-  tags: ["premium", "promoted", "top", "trusted"],
-  owner: {
-    name: "Henry Sibola",
-    phone: "982-126-1588",
-    email: "henry.carter@aptmail.com",
-  },
-};
+// ============Исходный код задачи
+// function getCommonElements(firstArray, secondArray) {
+//   const commonElements = [];
+//   // Change code below this line
 
-// Change code below this line
-apartment.area = 60;
-apartment.rooms = 3;
-apartment.location = {
-  country: "Jamaica",
-  city: "Kingston",
-};
+//   for (let i = 0; i < firstArray.length; i += 1) {
+//     if (secondArray.includes(firstArray[i])) {
+//       commonElements.push(firstArray[i]);
+//     }
+//   }
 
-console.log(apartment.area);
-console.log(apartment.rooms);
-console.log(apartment.location);
+//   return commonElements;
+//   // Change code above this line
+// }
+
+// ++++++++++++++Решение
+function getCommonElements(firstArray, secondArray) {
+  const commonElements = [];
+  // Change code below this line
+
+  firstArray.forEach((element) => {
+    if (secondArray.includes(element)) {
+      commonElements.push(element);
+    }
+  });
+
+  return commonElements;
+  // Change code above this line
+}
+
+// // ++++++++++++++Решение 2
+// function getCommonElements(firstArray, secondArray) {
+//   const commonElements = [];
+//   // Change code below this line
+
+//   firstArray.forEach(function (element) {
+//     if (secondArray.includes(element)) {
+//       commonElements.push(element);
+//     }
+//   });
+
+//   return commonElements;
+//   // Change code above this line
+// }
+
+console.log(getCommonElements([1, 2, 3], [2, 4]));
+console.log(getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40]));
+console.log(getCommonElements([1, 2, 3], [10, 20, 30]));

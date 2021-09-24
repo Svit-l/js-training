@@ -1,56 +1,64 @@
-// Изменение значения свойства
-// После того, как объект создан, значение его свойств можно изменить. Для этого необходимо обратиться к ним по имени, например, «через точку», и присвоить новое значение.
-
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-//   genres: ["historical prose", "adventure"],
-//   public: true,
-//   rating: 8.38,
-// };
-
-// book.rating = 9;
-// book.public = false;
-// book.genres.push("drama");
-
-// console.log(book.rating); // 9
-// console.log(book.public); // false
-// console.log(book.genres); // ["historical prose", "adventure", "drama"]
+// /Задача. Фильтрация массива чисел
 // Задание
-// Дополни код обновив значения свойств объекта apartment:
+// Функция filterArray(numbers, value) принимает массив чисел numbers и возвращает новый массив,
+// в котором будут только те элементы оригинального массива, которые больше чем значение параметра value.
 
-// цену в свойстве price на 5000;
-// рейтинг квартиры в свойстве rating на 4.7;
-// имя владельца во вложенном свойстве name на "Henry Sibola";
-// массив тегов в свойстве tags добавив в конец строку "trusted".
+// Выполни рефакторинг функции так, чтобы вместо цикла for она использовала метод forEach.
+
 // Тесты
-// Объявлена переменная apartment
-// Значение переменной apartment это объект
-// Значение вложенного свойства price это число 5000
-// Значение вложенного свойства rating это число 4.7
-// Значение вложенного свойства name это строка "Henry Sibola"
-// Значение вложенного свойства tags это массив ["premium", "promoted", "top", "trusted"]
+// Объявлена функция filterArray(numbers, value)
+// Для перебора массива numbers использован метод forEach
+// Вызов функции filterArray([1, 2, 3, 4, 5], 3) возвращает [4, 5]
+// Вызов функции filterArray([1, 2, 3, 4, 5], 4) возвращает [5]
+// Вызов функции filterArray([1, 2, 3, 4, 5], 5) возвращает []
+// Вызов функции filterArray([12, 24, 8, 41, 76], 38) возвращает [41, 76]
+// Вызов функции filterArray([12, 24, 8, 41, 76], 20) возвращает [24, 41, 76]
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
-const apartment = {
-  imgUrl: "https://via.placeholder.com/640x480",
-  descr: "Spacious apartment in the city center",
-  rating: 4,
-  price: 2153,
-  tags: ["premium", "promoted", "top"],
-  owner: {
-    name: "Henry",
-    phone: "982-126-1588",
-    email: "henry.carter@aptmail.com",
-  },
-};
+// ============Исходный код задачи
+// function filterArray(numbers, value) {
+//   const filteredNumbers = [];
+//   // Change code below this line
 
-// Change code below this line
-apartment.price = 5000;
-apartment.rating = 4.7;
-apartment.owner.name = "Henry Sibola";
-apartment.tags.push("trusted");
+//   for (let i = 0; i < numbers.length; i += 1) {
+//     if (numbers[i] > value) {
+//       filteredNumbers.push(numbers[i]);
+//     }
+//   }
 
-console.log(apartment.price);
-console.log(apartment.rating);
-console.log(apartment.owner.name);
-console.log(apartment.tags.push("trusted"));
+//   // Change code above this line
+//   return filteredNumbers;
+// }
+
+// ++++++++++++++Решение
+function filterArray(numbers, value) {
+  const filteredNumbers = [];
+  // Change code below this line
+
+  numbers.forEach((number) => {
+    if (number > value) {
+      filteredNumbers.push(number);
+    }
+  });
+
+  // Change code above this line
+  return filteredNumbers;
+}
+
+// ++++++++++++++Решение 2
+
+// function filterArray(numbers, value) {
+//   const filteredNumbers = [];
+//   // Change code below this line
+
+//   numbers.forEach(function (number) {
+//     if (number > value) {
+//       filteredNumbers.push(number);
+//     }
+
+//   // Change code above this line
+//   return filteredNumbers;
+// }
+
+console.log(filterArray([1, 2, 3, 4, 5], 3));
+console.log(filterArray([12, 24, 8, 41, 76], 20));

@@ -1,70 +1,62 @@
-// Цикл for...in
-// В отличии от массива или строки, объект - это не итерируемая сущность,
-// то есть его нельзя перебрать циклами for или for...of.
-// Для перебора объектов используется специальный цикл for...in, который перебирает ключи объекта object.
+// Стрелочные функции как коллбеки
+// Анонимные стрелочные функции отлично подходят как коллбеки для перебирающих методов массива из-за более краткого синтаксиса объявления, особенно если не нужно тело функции.
 
-// for (key in object) {
-//   // инструкции
-// }
+// const numbers = [5, 10, 15, 20, 25];
 
-// Переменная key доступная только в теле цикла.
-// На каждой итерации в неё будет записано значение ключа(имя) свойства.
-// Для того чтобы получить значение свойства с таким ключом(именем), используется синтаксис квадратных скобок.
+// // Объявление функции
+// numbers.forEach(function (number, index) {
+//   console.log(`Индекс ${index}, значение ${number}`);
+// });
 
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-//   genres: ["historical prose", "adventure"],
-//   rating: 8.38,
+// // Анонимная стрелочная функция
+// numbers.forEach((number, index) => {
+//   console.log(`Индекс ${index}, значение ${number}`);
+// });
+// Стрелочную коллбек-функцию также можно объявлять отдельно и передавать на неё ссылку. Это стоит делать если одна функция используется в нескольих местах программы или если она громоздкая.
+
+// const numbers = [5, 10, 15, 20, 25];
+
+// const logMessage = (number, index) => {
+//   console.log(`Индекс ${index}, значение ${number}`);
 // };
 
-// for (const key in book) {
-//   // Ключ
-//   console.log(key);
-//   // Значение свойства с таким ключом
-//   console.log(book[key]);
-// }
+// numbers.forEach(logMessage);
 // Задание
-// Перебери объект apartment используя цикл for...in и запиши в массив keys все его ключи, а в массив values все значения его свойств.
+// Выполни рефакторинг функции calculateTotalPrice(orderedItems) заменив её объявление на стрелочную функцию.
+//  Замени коллбек - функцию передаваемую в метод forEach() на стрелочную функцию.
 
 // Тесты
-// Объявлена переменная apartment
-// Значение переменной apartment это объект
-// Объявлена переменная keys
-// Значение переменной keys это массив ["descr", "rating", "price"]
-// Объявлена переменная values
-// Значение переменной values это массив ["Spacious apartment in the city center", 4, 2153]
+// Объявлена переменная calculateTotalPrice
+// Переменной calculateTotalPrice присвоена стрелочная функция с параметром (orderedItems)
+// Для перебора массива orderedItems использован метод forEach
+// Коллбек для метода forEach это стрелочная функция
+// Вызов функции calculateTotalPrice([12, 85, 37, 4]) возвращает 138
+// Вызов функции calculateTotalPrice([164, 48, 291]) возвращает 503
+// Вызов функции calculateTotalPrice([412, 371, 94, 63, 176]) возвращает 1116
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
-// const apartment = {
-//   descr: "Spacious apartment in the city center",
-//   rating: 4,
-//   price: 2153,
-// };
-// let keys = [];
-// let values = [];
-// // Change code below this line
-// for (let key in apartment) {
-//   keys.push(key);
-// }
+// ============Исходный код задачи
 
-// for (let value in apartment) {
-//   values.push(apartment[value]);
-// }
-// console.log(keys);
-// console.log(values);
-
-const apartment = {
-  descr: "Spacious apartment in the city center",
-  rating: 4,
-  price: 2153,
-};
-let keys = [];
-let values = [];
 // Change code below this line
-for (let key in apartment) {
-  keys.push(key);
-  values.push(apartment[key]);
-}
+// function calculateTotalPrice(orderedItems) {
+//   let totalPrice = 0;
 
-console.log(keys);
-console.log(values);
+//   orderedItems.forEach(function (item) {
+//     totalPrice += item;
+//   });
+
+//   return totalPrice;
+// }
+
+// ++++++++++++++Решение
+const calculateTotalPrice = (orderedItems) => {
+  let totalPrice = 0;
+
+  orderedItems.forEach((item) => (totalPrice += item));
+
+  return totalPrice;
+};
+
+// Change code above this line
+console.log(calculateTotalPrice([12, 85, 37, 4]));
+console.log(calculateTotalPrice([412, 371, 94, 63, 176]));

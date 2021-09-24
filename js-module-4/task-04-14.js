@@ -1,27 +1,45 @@
-// Задача. Подсчёт свойств 2.0
+// Метод map()
+// Большинство перебирающих методов массива это чистые функции. Они создают новый массив, заполняют его, применяя к значению каждого элемента указанную коллбек-функцию, после чего возвращают этот новый массив.
+
+// Метод map(callback) используется для трансформации массива. Он вызывает коллбек-функцию для каждого элемента исходного массива, а результат её работы записывает в новый массив, который и будет результатом выполнения метода.
+
+// массив.map((element, index, array) => {
+//   // Тело коллбек-функции
+// });
+// Поэлементно перебирает оригинальный массив.
+// Не изменяет оригинальный массив.
+// Результат работа коллбек-функции записывается в новый массив.
+// Возвращает новый массив такой же длины.
+// Его можно использовать для того, чтобы изменить каждый элемент массива. Оригинальный массив используется как эталон, на базе которого можно сделать другую коллекцию.
+
+// const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+
+// const planetsInUpperCase = planets.map(planet => planet.toUpperCase());
+// console.log(planetsInUpperCase); // ["EARTH", "MARS", "VENUS", "JUPITER"]
+
+// const planetsInLowerCase = planets.map(planet => planet.toLowerCase());
+// console.log(planetsInLowerCase); // ["earth", "mars", "venus", "jupiter"]
+
+// // Оригинальный массив не изменился
+// console.log(planets); // ["Earth", "Mars", "Venus", "Jupiter"]
+// Использование анонимных стрелочных функций с неявным возвратом сильно сокращает «шум» объявления коллбек-функции, делая код чище и проще для восприятия.
+
 // Задание
-// Выполни рефакторинг функции countProps(object) используя метод Object.keys() и, возможно, но необязательно, цикл for...of.
+// Дополни код так, чтобы в переменной planetsLengths получился массив длин названий планет. Обязательно используй метод map().
 
 // Тесты
-// Объявлена функция countProps(object)
-// Вызов countProps({}) возвращает 0
-// Вызов countProps({ name: "Mango", age: 2 }) возвращает 2
-// Вызов countProps({ mail: "poly@mail.com", isOnline: true, score: 500 }) возвращает 3
-// Функция подсчитывает только собственные свойства объекта
-// Функция использует метод Object.keys() и, возможно, цикл for...of
+// Объявлена переменная planets
+// Значение переменной planets это массив ["Earth", "Mars", "Venus", "Jupiter"]
+// Объявлена переменная planetsLengths
+// Значение переменной planetsLengths это массив [5, 4, 6, 6]
+// Для перебора массива планет использован метод map()
 
-function countProps(object) {
-  // Change code below this line
-  let propCount = 0;
-  const keys = Object.keys(object);
-  for (const key of keys) {
-    propCount += 1;
-  }
+// ============Исходный код задачи
+const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+// Change code below this line
+const planetsLengths = planets;
 
-  return propCount;
-  // Change code above this line
-}
-
-console.log(countProps({}));
-console.log(countProps({ name: "Mango", age: 2 }));
-console.log(countProps({ mail: "poly@mail.com", isOnline: true, score: 500 }));
+// ++++++++++++++Решение
+const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+const planetsLengths = planets.map((planet) => planet.length);
+console.log(planetsLengths);

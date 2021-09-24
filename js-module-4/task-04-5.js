@@ -35,6 +35,20 @@
 // Вызов функции calculateTotalPrice([412, 371, 94, 63, 176]) возвращает 1116
 // Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
+// ============Исходный код задачи
+// function calculateTotalPrice(orderedItems) {
+//   let totalPrice = 0;
+//   // Change code below this line
+
+//   for (let i = 0; i < orderedItems.length; i += 1) {
+//     totalPrice += orderedItems[i];
+//   }
+
+//   // Change code above this line
+//   return totalPrice;
+// }
+
+// ++++++++++++++Решение
 function calculateTotalPrice(orderedItems) {
   let totalPrice = 0;
   // Change code below this line

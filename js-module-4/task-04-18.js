@@ -1,55 +1,105 @@
-// Задача. Поиск объекта по значению свойства
+// Задача. Почты пользователей
+// Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
+
+const users = [
+  {
+    name: "Moore Hensley",
+    email: "moorehensley@indexia.com",
+    eyeColor: "blue",
+    friends: ["Sharron Pace"],
+    isActive: false,
+    balance: 2811,
+    skills: ["ipsum", "lorem"],
+    gender: "male",
+    age: 37,
+  },
+  {
+    name: "Sharlene Bush",
+    email: "sharlenebush@tubesys.com",
+    eyeColor: "blue",
+    friends: ["Briana Decker", "Sharron Pace"],
+    isActive: true,
+    balance: 3821,
+    skills: ["tempor", "mollit", "commodo", "veniam", "laborum"],
+    gender: "female",
+    age: 34,
+  },
+  {
+    name: "Ross Vazquez",
+    email: "rossvazquez@xinware.com",
+    eyeColor: "green",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+    isActive: false,
+    balance: 3793,
+    skills: ["nulla", "anim", "proident", "ipsum", "elit"],
+    gender: "male",
+    age: 24,
+  },
+  {
+    name: "Elma Head",
+    email: "elmahead@omatom.com",
+    eyeColor: "green",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+    isActive: true,
+    balance: 2278,
+    skills: ["adipisicing", "irure", "velit"],
+    gender: "female",
+    age: 21,
+  },
+  {
+    name: "Carey Barr",
+    email: "careybarr@nurali.com",
+    eyeColor: "blue",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+    isActive: true,
+    balance: 3951,
+    skills: ["ex", "culpa", "nostrud"],
+    gender: "male",
+    age: 27,
+  },
+  {
+    name: "Blackburn Dotson",
+    email: "blackburndotson@furnigeer.com",
+    eyeColor: "brown",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    isActive: false,
+    balance: 1498,
+    skills: ["non", "amet", "ipsum"],
+    gender: "male",
+    age: 38,
+  },
+  {
+    name: "Sheree Anthony",
+    email: "shereeanthony@kog.com",
+    eyeColor: "brown",
+    friends: ["Goldie Gentry", "Briana Decker"],
+    isActive: true,
+    balance: 2764,
+    skills: ["lorem", "veniam", "culpa"],
+    gender: "female",
+    age: 39,
+  },
+];
 // Задание
-// Напиши функцию getProductPrice(productName),
-// которая принимает один параметр productName - название продукта.
-// Функция ищет объект продукта с таким именем(свойство name) в массиве products и возвращает его цену(свойство price).
-// Если продукт с таким названием не найден, функция должна возвращать null.
+// Дополни функцию getUserEmails(users) так, чтобы она возвращала массив почтовых адресов пользователей (свойство email)
+// из массива объектов в параметре users.
 
 // Тесты
-// Объявлена функция getProductPrice(productName).
-// Вызов getProductPrice("Radar") возвращает 1300.
-// Вызов getProductPrice("Grip") возвращает 1200.
-// Вызов getProductPrice("Scanner") возвращает 2700.
-// Вызов getProductPrice("Droid") возвращает 400.
-// Вызов getProductPrice("Engine") возвращает null.
+// Объявлена переменная getUserNames
+// Переменной getUserNames присвоена стрелочная функция с параметром (users)
+// Для перебора параметра users используется метод map()
+// Вызов функции с указанным массивом пользователей возвращает массив
+// ["moorehensley@indexia.com", "sharlenebush@tubesys.com", "rossvazquez@xinware.com", "elmahead@omatom.com", "careybarr@nurali.com", "blackburndotson@furnigeer.com", "shereeanthony@kog.com"]
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
-const products = [
-  { name: "Radar", price: 1300, quantity: 4 },
-  { name: "Scanner", price: 2700, quantity: 3 },
-  { name: "Droid", price: 400, quantity: 7 },
-  { name: "Grip", price: 1200, quantity: 9 },
-];
+// // ============Исходный код задачи
+// // Change code below this line
+// const getUserEmails = users => {};
+// // Change code above this line
 
-function getProductPrice(productName) {
-  // Change code below this line
-  let productPrice = null;
-  for (const product of products) {
-    if (product.name === productName) {
-      productPrice = product.price;
-    }
-  }
-  return productPrice;
-  // Change code above this line
-}
-console.log(getProductPrice("Radar"));
-console.log(getProductPrice("Scanner"));
-console.log(getProductPrice("Droid"));
-console.log(getProductPrice("Engine"));
+// ++++++++++++++Решение
+// Change code below this line
+const getUserEmails = (users) => users.map((user) => user.email);
+// Change code above this line
 
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-//   genres: ["historical prose", "adventure"],
-//   public: true,
-//   rating: 8.38,
-// };
-
-// const bookTitle = book["title"];
-// console.log(bookTitle); // 'The Last Kingdom'
-
-// const bookGenres = book["genres"];
-// console.log(bookGenres); // ['historical prose', 'adventurs']
-
-// const propKey = "author";
-// const bookAuthor = book[propKey];
-// console.log(bookAuthor); // 'Bernard Cornwell'
+console.log(getUserEmails(users));

@@ -1,44 +1,48 @@
-// Вычисляемые свойства
-// Бывают ситуации, когда при объявлении обьекта необходимо добавить свойство с именем, которое мы заранее не знаем, потому что оно хранится как значение переменной или как результат выполнения функции.
+// Неявный возврат
+// В стрелочной функции после символа => идёт её тело. Здесь может быть два варианта: с фигурными скобками и без них.
 
-// Раньше для этого необходимо было сначала создать объект, а потом добавлять свойства через квадратные скобки, что не совсем удобно.
-
-// const propName = "name";
-// const user = {
-//   age: 25
+// const add = (a, b, c) => {
+//   console.log(a, b, c);
+//   return a + b + c;
 // };
+// Если фигурные скобки есть, и функция должна возвращать какое-то значение, необходимо явно поставить return. Это называется явный возврат (explicit return). Такой синтаксис используется в том случае, если в теле функции нужно выполнить ещё какие-то инструкции кроме возврата значения.
 
-// user[propName] = "Генри Сибола";
-// console.log(user.name); // "Генри Сибола"
-// Синтаксис вычисляемых свойств (computed properties) помогает избежать лишнего кода и в некоторых случаях упростить его. Значением вычисляемого свойства может быть любое валидное выражение.
+// const add = (a, b, c) => a + b + c;
+// Если фигурных скобок нет, то возвращается результат выражения стоящего после =>. Это называется неявный возврат (implicit return). В примере вернётся результат выражения сложения параметров a, b и c.
 
-// const propName = "name";
-// const user = {
-//   age: 25,
-//   // Имя этого свойства будет взято из значения переменной propName
-//   [propName]: "Генри Сибола"
-// };
+// Синтаксис неявного возврата сильно сокращает «шум» объявления функции с телом и возвращаемым выражением, но подходит только в случае когда в теле функции не нужно выполнять никаких дополнительных инструкций кроме возврата значения.
 
-// console.log(user.name); // "Генри Сибола"
+// // До
+// function classicAdd(a, b, c) {
+//   return a + b + c;
+// }
+
+// // После
+// const arrowAdd = (a, b, c) => a + b + c;
 // Задание
-// Дополни код объявления объекта credentials так, чтобы в результате у него были два свойства: email и password, имена которых хранятся в переменных emailInputName и passwordInputName.
-
-// Значением свойства email должна быть строка "henry.carter@aptmail.com", а значением свойства password - строка "jqueryismyjam".
+// Выполни рефакторинг функции calculateTotalPrice() так, чтобы она использовала неявный возврат.
 
 // Тесты
-// Объявлена переменная credentials
-// Значение переменной credentials это объект
-// В объекте credentials есть свойство email
-// Значение вложенного свойства email это строка "henry.carter@aptmail.com"
-// В объекте credentials есть свойство password
-// Значение вложенного свойства password это строка "jqueryismyjam"
+// Объявлена переменная calculateTotalPrice
+// Переменной calculateTotalPrice присвоена стрелочная функция с параметрами (quantity, pricePerItem)
+// В функции использован неявный возврат
+// Вызов calculateTotalPrice(5, 100) возвращает 500
+// Вызов calculateTotalPrice(8, 60) возвращает 480
+// Вызов calculateTotalPrice(3, 400) возвращает 1200
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
-const emailInputName = "email";
-const passwordInputName = "password";
+// ============Исходный код задачи
 
-const credentials = {
-  // Change code below this line
-  [emailInputName]: "henry.carter@aptmail.com",
-  [passwordInputName]: "jqueryismyjam",
-  // Change code above this line
-};
+// // Change code below this line
+// const calculateTotalPrice = (quantity, pricePerItem) => {
+//   return quantity * pricePerItem;
+// };
+// // Change code above this line
+
+// ++++++++++++++Решение
+// Change code below this line
+const calculateTotalPrice = (quantity, pricePerItem) => quantity * pricePerItem;
+// Change code above this line
+
+console.log(calculateTotalPrice(5, 100));
+console.log(calculateTotalPrice(3, 400));

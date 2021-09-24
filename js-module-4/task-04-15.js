@@ -1,39 +1,74 @@
-// Метод Object.values()
-// Если метод Object.keys(obj) возвращает массив ключей собственных свойств объекта, то метод Object.values(obj) возвращает массив значений его собственных свойств. Если в объекте нет свойств, метод Object.values(obj) вернёт пустой массив.
+// Метод map() и массив объектов
+// Мы уже знаем что повседневная задача это манипуляция массивом объектов. Например, получить массив значений свойства из всех объектов. Есть массив студентов, а нужно получить отдельный массив их имён.
 
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-//   rating: 8.38,
-// };
-// const keys = Object.keys(book);
-// console.log(keys); // ["title", "author", "genres", "rating"]
+// const students = [
+//   { name: "Mango", score: 83 },
+//   { name: "Poly", score: 59 },
+//   { name: "Ajax", score: 37 },
+//   { name: "Kiwi", score: 94 },
+//   { name: "Houston", score: 64 },
+// ];
 
-// const values = Object.values(book);
-// console.log(values); // ["The Last Kingdom", "Bernard Cornwell", 8.38]
-// Массив значений свойств также можно перебрать циклом for...of, например для получения общей суммы числовых значений.
+// const names = students.map(student => student.name);
+// console.log(names); // ["Mango", "Poly", "Ajax", "Kiwi", "Houston"]
+// Используя метод map() можно перебрать массив объектов, и в коллбек-функции вернуть значение свойства каждого из них.
 
 // Задание
-// Запиши в переменную keys массив ключей собственных свойств объекта apartment, а в переменную values массив всех значений его свойств. Используй методы Object.keys() и Object.values().
+// Используя метод map() сделай так, чтобы в переменной titles получился массив названий книг (свойство title) из всех объектов массива books.
 
 // Тесты
-// Объявлена переменная apartment
-// Значение переменной apartment это объект
-// Объявлена переменная keys
-// Значение переменной keys это массив ["descr", "rating", "price"]
-// Объявлена переменная values
-// Значение переменной values это массив ["Spacious apartment in the city center", 4, 2153]
-// Для получения массива ключей объекта apartment используется Object.keys()
-// Для получения массива значений объекта apartment используется Object.values()
+// Объявлена переменная books
+// Значение переменной books это массив
+// Объявлена переменная titles
+// Значение переменной titles это массив ["The Last Kingdom", "Beside Still Waters", "The Dream of a Ridiculous Man", "Redder Than Blood", "Enemy of God"]
+// Для перебора массива books используется метод map() как чистая функция
 
-const apartment = {
-  descr: "Spacious apartment in the city center",
-  rating: 4,
-  price: 2153,
-};
+// ============Исходный код задачи
+// const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+//   {
+//     title: "The Dream of a Ridiculous Man",
+//     author: "Fyodor Dostoevsky",
+//     rating: 7.75,
+//   },
+//   { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+//   { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+// ];
+// // Change code below this line
+
+// const titles = books;
+
+// ++++++++++++++Решение
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+];
 // Change code below this line
-const keys = Object.keys(apartment);
-const values = Object.values(apartment);
 
-console.log(keys);
-console.log(values);
+const titles = books.map((book) => book.title);
+
+console.log(titles);

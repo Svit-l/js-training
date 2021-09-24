@@ -1,79 +1,48 @@
-// Метод hasOwnProperty()
-// Разберём концепцию собственных и несобственных свойств объекта и научимся правильно использовать цикл for...in.
-
-// const animal = {
-//   legs: 4,
-// };
-// const dog = Object.create(animal);
-// dog.name = "Mango";
-
-// console.log(dog); // {name: 'Mango'}
-// console.log(dog.name); // 'Mango'
-// console.log(dog.legs); // 4
-// Метод Object.create(animal) создаёт и возвращает новый объект, связывая его с объектом animal.
-// Поэтому можно получить значение свойства legs обратившись к нему как dog.legs, хотя его нет в объекте dog - это несобственное свойство из объекта animal.
-
-// Оператор in, который используется в цикле for...in, не делает различия между собственными и несобственными свойствами объекта.
-// Эта особенность мешает, так как мы всегда хотим перебрать только собственные свойства.
-// Для того чтобы узнать есть в объекте собственное свойство или нет, используется метод hasOwnProperty(key), который возвращает true или false.
-
-// // ❌ Возвращает true для всех свойств
-// console.log("name" in dog); // true
-// console.log("legs" in dog); // true
-
-// // ✅ Возвращает true только для собственных свойств
-// console.log(dog.hasOwnProperty("name")); // true
-// console.log(dog.hasOwnProperty("legs")); // false
-// Поэтому при переборе циклом for...in необходимо на каждой итерации добавить проверку на собственное свойство.
-// Даже если сейчас мы уверены в том что у объекта нет несобственных свойств, это оградит от возможных ошибок в будущем.
-
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-//   genres: ["historical prose", "adventure"],
-//   rating: 8.38,
-// };
-
-// for (const key in book) {
-//   // Если это собственное свойство - выполняем тело if
-//   if (book.hasOwnProperty(key)) {
-//     console.log(key);
-//     console.log(book[key]);
-//   }
-
-//   // Если это не собственное свойство - ничего не делаем
-// }
+// Задача. Фильтрация массива чисел 2.0
 // Задание
-// Выполни рефакторинг решения предыдущего задания добавив в цикл for...in проверку на собственное свойство.
+// Замени объявление функции filterArray() и коллбек для метода forEach() на стрелочные функции.
 
 // Тесты
-// Объявлена переменная advert.
-// Значение переменной advert это объект.
-// Объявлена переменная apartment.
-// Значение переменной apartment это объект.
-// Объявлена переменная keys.
-// Значение переменной keys это массив ["descr", "rating", "price"].
-// Объявлена переменная values.
-// Значение переменной values это массив ["Spacious apartment in the city center", 4, 2153].
+// Объявлена переменная filterArray
+// Переменной filterArray присвоена стрелочная функция с параметрами (numbers, value)
+// Для перебора массива numbers использован метод forEach
+// Коллбек для метода forEach это стрелочная функция
+// Вызов функции filterArray([1, 2, 3, 4, 5], 3) возвращает [4, 5]
+// Вызов функции filterArray([1, 2, 3, 4, 5], 4) возвращает [5]
+// Вызов функции filterArray([1, 2, 3, 4, 5], 5) возвращает []
+// Вызов функции filterArray([12, 24, 8, 41, 76], 38) возвращает [41, 76]
+// Вызов функции filterArray([12, 24, 8, 41, 76], 20) возвращает [24, 41, 76]
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
-const keys = [];
-const values = [];
-const advert = {
-  service: "apt",
-};
-const apartment = Object.create(advert);
-apartment.descr = "Spacious apartment in the city center";
-apartment.rating = 4;
-apartment.price = 2153;
+// ============Исходный код задачи
+// Change code below this line
+// function filterArray(numbers, value) {
+//   const filteredNumbers = [];
 
-for (const key in apartment) {
-  // Change code below this line
-  if (apartment.hasOwnProperty(key)) {
-    keys.push(key);
-    values.push(apartment[key]);
-  }
+//   numbers.forEach(function (number) {
+//     if (number > value) {
+//       filteredNumbers.push(number);
+//     }
+//   });
+
+//   // Change code above this line
+//   return filteredNumbers;
+// }
+
+// ++++++++++++++Решение
+// Change code below this line
+const filterArray = (numbers, value) => {
+  const filteredNumbers = [];
+
+  numbers.forEach((number) => {
+    if (number > value) {
+      filteredNumbers.push(number);
+    }
+  });
+
   // Change code above this line
-}
+  return filteredNumbers;
+};
 
-console.log(keys);
-console.log(values);
+console.log(filterArray([1, 2, 3, 4, 5], 3));
+console.log(filterArray([12, 24, 8, 41, 76], 20));
