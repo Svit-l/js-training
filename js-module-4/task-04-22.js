@@ -1,54 +1,103 @@
-// Значения по умолчанию
-// Для того чтобы избежать присвоения undefined при деструктуризации несуществующих свойств, можно задать переменным значения по умолчанию, которые будут присвоены только в случае когда в объекте нет свойства с таким именем.
+// Задача. Пользователи с цветом глаз
+// Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
+const users = [
+  {
+    name: "Moore Hensley",
+    email: "moorehensley@indexia.com",
+    eyeColor: "blue",
+    friends: ["Sharron Pace"],
+    isActive: false,
+    balance: 2811,
+    gender: "male",
+  },
+  {
+    name: "Sharlene Bush",
+    email: "sharlenebush@tubesys.com",
+    eyeColor: "blue",
+    friends: ["Briana Decker", "Sharron Pace"],
+    isActive: true,
+    balance: 3821,
+    gender: "female",
+  },
+  {
+    name: "Ross Vazquez",
+    email: "rossvazquez@xinware.com",
+    eyeColor: "green",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+    isActive: false,
+    balance: 3793,
+    gender: "male",
+  },
+  {
+    name: "Elma Head",
+    email: "elmahead@omatom.com",
+    eyeColor: "green",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+    isActive: true,
+    balance: 2278,
+    gender: "female",
+  },
+  {
+    name: "Carey Barr",
+    email: "careybarr@nurali.com",
+    eyeColor: "blue",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+    isActive: true,
+    balance: 3951,
+    gender: "male",
+  },
+  {
+    name: "Blackburn Dotson",
+    email: "blackburndotson@furnigeer.com",
+    eyeColor: "brown",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    isActive: false,
+    balance: 1498,
+    gender: "male",
+  },
+  {
+    name: "Sheree Anthony",
+    email: "shereeanthony@kog.com",
+    eyeColor: "brown",
+    friends: ["Goldie Gentry", "Briana Decker"],
+    isActive: true,
+    balance: 2764,
+    gender: "female",
+  },
+];
 
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-// };
-
-// // Добавим картинку обложки если её нет в объекте книги
-// const {
-//   title,
-//   coverImage = "https://via.placeholder.com/640/480",
-//   author,
-// } = book;
-
-// console.log(title); // "The Last Kingdom"
-// console.log(author); // "Bernard Cornwell"
-// console.log(coverImage); // "https://via.placeholder.com/640/480"
 // Задание
-// В прогнозе максимальных температур также может быть необязательное свойство icon - иконка погоды. Замени объявления переменных yesterday, today, tomorrow и icon одной операцией деструктуризации свойств объекта highTemperatures. Задай значение по умолчанию для icon - строку "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg".
+// Дополни функцию getUsersWithEyeColor(users, color) так,
+// чтобы она возвращала массив пользователей у которых цвет глаз(свойство eyeColor)
+// совпадает со значением параметра color.
 
 // Тесты
-// Объявлена переменная highTemperatures
-// Значение переменной highTemperatures это объект
-// Объявлена переменная highTemperatures
-// Значение переменной highTemperatures это объект
-// Объявлена переменная yesterday с помощью деструктуризации
-// Значение переменной yesterday это число 28
-// Объявлена переменная today с помощью деструктуризации
-// Значение переменной today это число 26
-// Объявлена переменная tomorrow с помощью деструктуризации
-// Значение переменной tomorrow это число 33
-// Объявлена переменная icon с помощью деструктуризации
-// Значение переменной icon это строка "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg".
-// Используется деструктуризация объекта
+// Объявлена переменная getUsersWithEyeColor
+// Переменной getUsersWithEyeColor присвоена стрелочная функция с параметрами (users, color)
+// Для перебора параметра users используется метод filter()
+// Если значение параметра color это "blue", функция возвращает массив объектов пользователей с именами Moore Hensley, Sharlene Bush и Carey Barr
+// Если значение параметра color это "green", функция возвращает массив объектов пользователей с именами Ross Vazquez и Elma Head
+// Если значение параметра color это "brown", функция возвращает массив объектов пользователей с именами Blackburn Dotson и Sheree Anthony
+// Если значение параметра color это любая другая строка, функция возвращает пустой массив
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
-const highTemperatures = {
-  yesterday: 28,
-  today: 26,
-  tomorrow: 33,
-};
+// ============Исходный код задачи
+
 // Change code below this line
+// const getUsersWithEyeColor = (users, color) => {
 
-const {
-  yesterday,
-  today,
-  tomorrow,
-  icon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
-} = highTemperatures;
+// };
+// Change code above this line
+
+// ++++++++++++++Решение
+
+// Change code below this line
+const getUsersWithEyeColor = (users, color) =>
+  users.filter(({ eyeColor }) => eyeColor === color);
 
 // Change code above this line
-const meanTemperature = (yesterday + today + tomorrow) / 3;
 
-console.log(meanTemperature);
+console.log(getUsersWithEyeColor(users, "blue"));
+// console.log(getUsersWithEyeColor("green"));
+// console.log(getUsersWithEyeColor("brown"));
+// console.log(getUsersWithEyeColor("grey"));

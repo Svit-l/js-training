@@ -1,55 +1,97 @@
-// Операция spread при создании нового массива
-// Операция spread позволяет создать копию массива или «склеить» произвольное количество массивов в один новый. Раньше для этого использовали методы slice() и concat(), но операция распыления позволяет сделать тоже самое в более краткой форме.
+// Метод find()
+// Если метод filter(callack) используется для поиска всех элементов удовлетворяющим условию,
+// то метод find(callback) позволяет найти и вернуть первый подходящий элемент,
+//   после чего перебор массива прекращается.То есть он ищет до первого совпадения.
 
-// const temps = [14, -4, 25, 8, 11];
+// массив.find((element, index, array) => {
+//   // Тело коллбек-функции
+// });
+// Не изменяет оригинальный массив.
+// Поэлементно перебирает оригинальный массив.
+// Возвращает первый элемент удовлетворяющий условию, то есть когда коллбек возвращает true.
+// Если ни один элемент не подошёл, то есть для всех элементов коллбек вернул false, метод возвращает undefined.
+// Метод find() используется для одной задачи - поиска элемента по уникальному значению свойства. Например, поиск пользователя по почте, автомобиля по серийному номеру, книги по названию и т. п.
 
-// // Это точная, но независимая копия массива temps
-// const copyOfTemps = [...temps];
-// console.log(copyOfTemps); // [14, -4, 25, 8, 11]
-// В примере выше у нас есть ящик яблок temps и мы хотим сделать его точную копию. Берём пустой ящик и пересыпаем в него яблоки из исходного ящика temps - распыляем его в другую коллекцию. При этом ящик temps не изменится, в нём все ещё будут яблоки, а в новом ящике - их точные копии.
+// const colorPickerOptions = [
+//   { label: "red", color: "#F44336" },
+//   { label: "green", color: "#4CAF50" },
+//   { label: "blue", color: "#2196F3" },
+//   { label: "pink", color: "#E91E63" },
+//   { label: "indigo", color: "#3F51B5" },
+// ];
 
-// В следующем примере мы ссыпаем яблоки из двух ящиков в один новый. Оригинальные ящики (массивы) не изменятся, а в новом будут копии всех их яблок (элементов). Порядок распыления важен - он влияет на порядок элементов в новой коллекции.
+// colorPickerOptions.find((option) => option.label === "blue"); // { label: "blue", color: "#2196F3" }
+// colorPickerOptions.find((option) => option.label === "pink"); // { label: "pink", color: "#E91E63" }
+// colorPickerOptions.find((option) => option.label === "white"); // undefined
 
-// const lastWeekTemps = [14, 25, 11];
-// const currentWeekTemps = [23, 17, 18];
-// const allTemps = [...lastWeekTemps, ...currentWeekTemps];
-// console.log(allTemps); // [14, 25, 11, 23, 17, 18]
 // Задание
-// В переменных firstGroupScores, secondGroupScores и thirdGroupScores хранятся результаты тестирования отдельных групп. Используя распыление дополни код так, чтобы:
+// Используя метод find() дополни код так, чтобы:
 
-// В переменной allScores хранился массив всех результатов от первой до третьей группы.
-// В переменной bestScore был самый высокий общий балл.
-// В переменной worstScore был самый низкий общий балл.
+// В переменной bookWithTitle получился объект книги название которой (свойство title) совпадает со значением переменной BOOK_TITLE.
+// В переменной bookByAuthor получился объект книги автор который (свойство author) совпадает со значением переменной AUTHOR.
 // Тесты
-// Объявлена переменная firstGroupScores
-// Значение переменной firstGroupScores это массив [64, 42, 93]
-// Объявлена переменная secondGroupScores
-// Значение переменной secondGroupScores это массив [89, 14, 51, 26]
-// Объявлена переменная thirdGroupScores
-// Значение переменной thirdGroupScores это массив [29, 47, 18, 97, 81]
-// Объявлена переменная allScores.
-// Значение переменной allScores это массив [64, 42, 93, 89, 14, 51, 26, 29, 47, 18, 97, 81]
-// Объявлена переменная bestScore
-// Значение переменной bestScore это число 97
-// Объявлена переменная worstScore
-// Значение переменной worstScore это число 14
-// При присвоении значения переменной allScores использовался синтаксис ... для заполнения массива
-// Для передачи аргументов методу Math.max() используется синтаксис ... на массиве allScores
-// Для передачи аргументов методу Math.min() используется синтаксис ... на массиве allScores
+// Объявлена переменная books
+// Значение переменной books это массив
+// Объявлена переменная BOOK_TITLE
+// Значение переменной BOOK_TITLE это строка "The Dream of a Ridiculous Man"
+// Объявлена переменная AUTHOR
+// Значение переменной AUTHOR это строка "Robert Sheckley"
+// Объявлена переменная bookWithTitle
+// Значение переменной bookWithTitle это объект книги с названием выше "The Dream of a Ridiculous Man"
+// Объявлена переменная bookByAuthor
+// Значение переменной bookByAuthor это объект книги автора "Robert Sheckley"
+// Для перебора массива books использован метод find()
 
-// Change code below this line
+// ============Исходный код задачи
+// const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+//   {
+//     title: "The Dream of a Ridiculous Man",
+//     author: "Fyodor Dostoevsky",
+//     rating: 7.75,
+//   },
+//   { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+// ];
+// const BOOK_TITLE = "The Dream of a Ridiculous Man";
+// const AUTHOR = "Robert Sheckley";
+// // Change code below this line
 
-const firstGroupScores = [64, 42, 93];
-const secondGroupScores = [89, 14, 51, 26];
-const thirdGroupScores = [29, 47, 18, 97, 81];
-// Change code below this line
-const allScores = [
-  ...firstGroupScores,
-  ...secondGroupScores,
-  ...thirdGroupScores,
+// const bookWithTitle = books;
+// const bookByAuthor = books;
+
+// ++++++++++++++Решение
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
 ];
-const bestScore = Math.max(...allScores);
-const worstScore = Math.min(...allScores);
+const BOOK_TITLE = "The Dream of a Ridiculous Man";
+const AUTHOR = "Robert Sheckley";
+// Change code below this line
 
-console.log(bestScore);
-console.log(worstScore);
+const bookWithTitle = books;
+const bookByAuthor = books;
+
+console.log(getInactiveUsers(users));

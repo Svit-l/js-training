@@ -1,70 +1,108 @@
-// Глубокая деструктуризация
-// Для деструктуризации свойств вложенных объектов используются те же принципы, что и в трёх предыдущих упражнениях.
+// Задача. Список друзей
+// Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
 
-// const user = {
-//   name: "Jacques Gluke",
-//   tag: "jgluke",
-//   stats: {
-//     followers: 5603,
-//     views: 4827,
-//     likes: 1308,
-//   },
-// };
+const users = [
+  {
+    name: "Moore Hensley",
+    email: "moorehensley@indexia.com",
+    eyeColor: "blue",
+    friends: ["Sharron Pace"],
+    isActive: false,
+    balance: 2811,
+    gender: "male",
+    age: 37,
+  },
+  {
+    name: "Sharlene Bush",
+    email: "sharlenebush@tubesys.com",
+    eyeColor: "blue",
+    friends: ["Briana Decker", "Sharron Pace"],
+    isActive: true,
+    balance: 3821,
+    gender: "female",
+    age: 34,
+  },
+  {
+    name: "Ross Vazquez",
+    email: "rossvazquez@xinware.com",
+    eyeColor: "green",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+    isActive: false,
+    balance: 3793,
+    gender: "male",
+    age: 24,
+  },
+  {
+    name: "Elma Head",
+    email: "elmahead@omatom.com",
+    eyeColor: "green",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+    isActive: true,
+    balance: 2278,
+    gender: "female",
+    age: 21,
+  },
+  {
+    name: "Carey Barr",
+    email: "careybarr@nurali.com",
+    eyeColor: "blue",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+    isActive: true,
+    balance: 3951,
+    gender: "male",
+    age: 27,
+  },
+  {
+    name: "Blackburn Dotson",
+    email: "blackburndotson@furnigeer.com",
+    eyeColor: "brown",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    isActive: false,
+    balance: 1498,
+    gender: "male",
+    age: 38,
+  },
+  {
+    name: "Sheree Anthony",
+    email: "shereeanthony@kog.com",
+    eyeColor: "brown",
+    friends: ["Goldie Gentry", "Briana Decker"],
+    isActive: true,
+    balance: 2764,
+    gender: "female",
+    age: 39,
+  },
+];
 
-// const {
-//   name,
-//   tag,
-//   stats: { followers, views: userViews, likes: userLikes = 0 },
-// } = user;
-
-// console.log(name); // Jacques Gluke
-// console.log(tag); // jgluke
-// console.log(followers); // 5603
-// console.log(userViews); // 4827
-// console.log(userLikes); // 1308
 // Задание
-// Мы получили прогноз погоды на два дня, с минимальными и максимальными температурами, а также необязательными иконками. Замени объявления всех переменных одной операцией деструктуризации свойств объекта forecast. Задай значение по умолчанию для иконок, переменных todayIcon и tomorrowIcon - строку "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg".
+// Дополни функцию getFriends(users) так,
+//   чтобы она возвращала массив друзей всех пользователей(свойство friends).
+//   У нескольких пользователей могут быть одинаковые друзья,
+//   сделай так чтобы возвращаемый массив не содержал повторений.
 
 // Тесты
-// Объявлена переменная forecast
-// Значение переменной forecast это объект
-// Объявлена переменная highToday с помощью деструктуризации
-// Значение переменной highToday это число 32
-// Объявлена переменная lowToday с помощью деструктуризации
-// Значение переменной lowToday это число 28
-// Объявлена переменная todayIcon с помощью деструктуризации
-// Значение переменной todayIcon это строка "https://www.flaticon.com/svg/static/icons/svg/861/861059.svg"
-// Объявлена переменная highTomorrow с помощью деструктуризации
-// Значение переменной highTomorrow это число 31
-// Объявлена переменная lowTomorrow с помощью деструктуризации
-// Значение переменной lowTomorrow это число 27
-// Объявлена переменная tomorrowIcon с помощью деструктуризации
-// Значение переменной tomorrowIcon это строка "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg"
-// Используется синтаксис деструктуризации объекта highTemperatures
+// Объявлена переменная getFriends
+// Переменной getFriends присвоена стрелочная функция с параметром (users)
+// Вызов функции с указанным массивом пользователей возвращает массив
+// ["Sharron Pace", "Briana Decker", "Marilyn Mcintosh", "Padilla Garrison",
+//   "Naomi Buckner", "Goldie Gentry", "Aisha Tran", "Jordan Sampson", "Eddie Strong",
+//   "Jacklyn Lucas", "Linda Chapman"]
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
-const forecast = {
-  today: {
-    low: 28,
-    high: 32,
-    icon: "https://www.flaticon.com/svg/static/icons/svg/861/861059.svg",
-  },
-  tomorrow: {
-    low: 27,
-    high: 31,
-  },
-};
+// ============Исходный код задачи
+// // Change code below this line
+// const getFriends = (users) => {
+
+// };
+// // Change code above this line
+
+// ++++++++++++++Решение
 // Change code below this line
+const getFriends = (users) => {
+  const allFriends = users.flatMap(({ friends }) => friends);
+  return allFriends.filter(
+    (friend, index, array) => array.indexOf(friend) === index
+  );
+};
 
-const {
-  today: {
-    low: lowToday,
-    high: highToday,
-    icon: todayIcon = "https://www.flaticon.com/svg/static/icons/svg/861/861059.svg",
-  },
-
-  tomorrow: {
-    low: lowTomorrow,
-    high: highTomorrow,
-    icon: tomorrowIcon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
-  },
-} = forecast;
+console.log(getFriends(users));

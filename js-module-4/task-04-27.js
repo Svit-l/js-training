@@ -1,42 +1,100 @@
-// Операция spread при передаче аргументов
-// Синтаксис ... (spread) позволяет распылить коллекцию элементов (массив, строку или объект) в место, где ожидается набор отдельных значений. Конечно есть некоторые ограничения, например нельзя распылить массив в объект и наоборот.
-
-// Можно привести аналогию с ящиком яблок. Поставив ящик на пол не вынимая из него яблоки, получим аналог массива значений. Если высыпать яблоки из ящика на пол, произойдёт распыление - набор отдельных значений.
-
-// Отличие всего одно - в JavaScript распыление не изменяет оригинальную коллекцию, то есть делается копия каждого элемента. После распыления останется и ящик полный яблок, и копия каждого яблока на полу.
-
-// Например, метод Math.max(аргументы) ищет и возвращает самый большой из аргументов (чисел), то есть ожидает не массив значений, а произвольное количество аргументов.
-
-// const temps = [14, -4, 25, 8, 11];
-
-// // В консоли будет массив
-// console.log(temps);
-// // ❌ Так не сработает, потому что передаём целый массив
-// console.log(Math.max(temps)); // NaN
-
-// // В консоли будет набор отдельных чисел
-// console.log(...temps);
-// // ✅ Распылим коллекцию элементов как отдельные аргументы
-// console.log(Math.max(...temps)); // 25
-// То есть запись Math.max(...[14, -4, 25, 8, 11]), после интерпретации превращается в Math.max(14, -4, 25, 8, 11) - синтаксис ... возвращает распакованный массив, то есть распыляет его элементы как отдельные аргументы.
-
+// Задача. Неактивные пользователи
+// Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
+const users = [
+  {
+    name: "Moore Hensley",
+    email: "moorehensley@indexia.com",
+    eyeColor: "blue",
+    friends: ["Sharron Pace"],
+    isActive: false,
+    balance: 2811,
+    gender: "male",
+    age: 37,
+  },
+  {
+    name: "Sharlene Bush",
+    email: "sharlenebush@tubesys.com",
+    eyeColor: "blue",
+    friends: ["Briana Decker", "Sharron Pace"],
+    isActive: true,
+    balance: 3821,
+    gender: "female",
+    age: 34,
+  },
+  {
+    name: "Ross Vazquez",
+    email: "rossvazquez@xinware.com",
+    eyeColor: "green",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+    isActive: false,
+    balance: 3793,
+    gender: "male",
+    age: 24,
+  },
+  {
+    name: "Elma Head",
+    email: "elmahead@omatom.com",
+    eyeColor: "green",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+    isActive: true,
+    balance: 2278,
+    gender: "female",
+    age: 21,
+  },
+  {
+    name: "Carey Barr",
+    email: "careybarr@nurali.com",
+    eyeColor: "blue",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+    isActive: true,
+    balance: 3951,
+    gender: "male",
+    age: 27,
+  },
+  {
+    name: "Blackburn Dotson",
+    email: "blackburndotson@furnigeer.com",
+    eyeColor: "brown",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    isActive: false,
+    balance: 1498,
+    gender: "male",
+    age: 38,
+  },
+  {
+    name: "Sheree Anthony",
+    email: "shereeanthony@kog.com",
+    eyeColor: "brown",
+    friends: ["Goldie Gentry", "Briana Decker"],
+    isActive: true,
+    balance: 2764,
+    gender: "female",
+    age: 39,
+  },
+];
 // Задание
-// В переменной scores хранится массив результатов тестирования. Используя распыление и методы Math.max() и Math.min() дополни код так, чтобы в переменной bestScore был самый высокий балл, а в worstScore самый низкий.
+// Дополни функцию getInactiveUsers(users) так,
+// чтобы она возвращала массив неактивных пользователей, значение свойства isActive которых false.
 
 // Тесты
-// Объявлена переменная scores
-// Значение переменной scores это массив [89, 64, 42, 17, 93, 51, 26]
-// Объявлена переменная bestScore
-// Значение переменной bestScore это число 93
-// Объявлена переменная worstScore
-// Значение переменной worstScore это число 17
-// Для передачи аргументов методу Math.max() используется синтаксис ... на массиве scores
-// Для передачи аргументов методу Math.min() используется синтаксис ... на массиве scores
+// -Объявлена переменная getInactiveUsers.
 
-const scores = [89, 64, 42, 17, 93, 51, 26];
+// Переменной getInactiveUsers присвоена стрелочная функция с параметром users
+// Для перебора параметра users используется метод filter()
+// Вызов функции с указанным массивом пользователей возвращает массив объектов пользователей с именами Moore Hensley, Ross Vazquez и Blackburn Dotson
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+
+// ============Исходный код задачи
+// // Change code below this line
+// const getInactiveUsers = (users) => {
+
+// };
+// // Change code above this line
+
+// ++++++++++++++Решение
 // Change code below this line
-const bestScore = Math.max(...scores);
-const worstScore = Math.min(...scores);
+const getInactiveUsers = (users) =>
+  users.filter(({ isActive }) => isActive === false);
+// Change code above this line
 
-console.log(bestScore);
-console.log(worstScore);
+console.log(getInactiveUsers(users));

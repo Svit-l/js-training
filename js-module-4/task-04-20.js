@@ -16,9 +16,13 @@
 // const uniqueCourses = allCourses.filter(
 //   (course, index, array) => array.indexOf(course) === index
 // );
-// Используя array.indexOf(course) выполняем поиск первого совпадения текущего элемента course и получаем его индекс в оригинальном массиве всех курсов. В параметре index хранится индекс текущего элемента course при переборе массива методом filter.
+// Используя array.indexOf(course) выполняем поиск первого совпадения текущего элемента course
+// и получаем его индекс в оригинальном массиве всех курсов.
+// В параметре index хранится индекс текущего элемента course при переборе массива методом filter.
 
-// Если результат indexOf() и значение index равны - это уникальный элемент, потому что это первый раз когда такое значение встречается в массиве и на текущей итерации фильтр обрабатывает именно его.
+// Если результат indexOf() и значение index равны - это уникальный элемент,
+// потому что это первый раз когда такое значение встречается в массиве
+// и на текущей итерации фильтр обрабатывает именно его.
 
 // # Массив всех курсов
 // ["mathematics", "physics", "science", "mathematics", "physics", "biology"];
@@ -32,6 +36,7 @@
 // indexOf() вернёт 0, потому что ищет первое совпадение.
 // Значение параметра index будет 3.
 // Они не равны, значит это повторяющийся - не уникальный элемент.
+
 // Задание
 // Дополни код так, чтобы в переменной allGenres был массив всех жанров книг (свойство genres) из массива books, а в переменной uniqueGenres массив уникальных жанров - без повторений.
 
@@ -86,5 +91,12 @@ const books = [
   },
 ];
 // Change code below this line
-const allGenres = books;
-const uniqueGenres = allGenres;
+const allGenres = books.flatMap((book) => book.genres);
+
+console.log(allGenres);
+
+const uniqueGenres = allGenres.filter(
+  (genre, index, array) => array.indexOf(genre) === index
+);
+
+console.log(uniqueGenres);

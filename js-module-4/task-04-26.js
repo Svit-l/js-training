@@ -1,89 +1,98 @@
-// Паттерн «Объект настроек»
-// Если функция принимает более двух-трёх аргументов, очень просто запутаться в какой последовательности что передавать. В результате получается очень неочевидный код в месте её вызова.
+// Задача. Активные пользователи
+// Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
 
-// function doStuffWithBook(title, numberOfPages, downloads, rating, public) {
-//   // Делаем что-то с параметрами
-//   console.log(title);
-//   console.log(numberOfPages);
-//   // И так далее
-// }
-
-// // ❌ Что такое 736? Что такое 10283? Что такое true?
-// doStuffWithBook("Последнее королевство", 736, 10283, 8.38, true);
-// Паттерн «Объект настроек» помогает решить эту проблему, заменяя набор параметров всего одним - объектом с именованными свойствами.
-
-// function doStuffWithBook(book) {
-//   // Делаем что-то со свойствами объекта
-//   console.log(book.title);
-//   console.log(book.numberOfPages);
-//   // И так далее
-// }
-// Тогда во время её вызова передаём один объект с необходимыми свойствами.
-
-// // ✅ Всё понятно
-// doStuffWithBook({
-//   title: "Последнее королевство",
-//   numberOfPages: 736,
-//   downloads: 10283,
-//   rating: 8.38,
-//   public: true,
-// });
-// Ещё один плюс в том, что можно деструктуризировать объект в параметре book.
-
-// // Это можно сделать в теле функции.
-// function doStuffWithBook(book) {
-//   const { title, numberOfPages, downloads, rating, public } = book;
-//   console.log(title);
-//   console.log(numberOfPages);
-//   // И так далее
-// }
-
-// Или в сигнатуре (подписи), разницы нет.
-// function doStuffWithBook({ title, numberOfPages, downloads, rating, public }) {
-//   console.log(title);
-//   console.log(numberOfPages);
-//   // И так далее
-// }
+const users = [
+  {
+    name: "Moore Hensley",
+    email: "moorehensley@indexia.com",
+    eyeColor: "blue",
+    friends: ["Sharron Pace"],
+    isActive: false,
+    balance: 2811,
+    gender: "male",
+    age: 37,
+  },
+  {
+    name: "Sharlene Bush",
+    email: "sharlenebush@tubesys.com",
+    eyeColor: "blue",
+    friends: ["Briana Decker", "Sharron Pace"],
+    isActive: true,
+    balance: 3821,
+    gender: "female",
+    age: 34,
+  },
+  {
+    name: "Ross Vazquez",
+    email: "rossvazquez@xinware.com",
+    eyeColor: "green",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+    isActive: false,
+    balance: 3793,
+    gender: "male",
+    age: 24,
+  },
+  {
+    name: "Elma Head",
+    email: "elmahead@omatom.com",
+    eyeColor: "green",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+    isActive: true,
+    balance: 2278,
+    gender: "female",
+    age: 21,
+  },
+  {
+    name: "Carey Barr",
+    email: "careybarr@nurali.com",
+    eyeColor: "blue",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+    isActive: true,
+    balance: 3951,
+    gender: "male",
+    age: 27,
+  },
+  {
+    name: "Blackburn Dotson",
+    email: "blackburndotson@furnigeer.com",
+    eyeColor: "brown",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    isActive: false,
+    balance: 1498,
+    gender: "male",
+    age: 38,
+  },
+  {
+    name: "Sheree Anthony",
+    email: "shereeanthony@kog.com",
+    eyeColor: "brown",
+    friends: ["Goldie Gentry", "Briana Decker"],
+    isActive: true,
+    balance: 2764,
+    gender: "female",
+    age: 39,
+  },
+];
 // Задание
-// Функция calculateMeanTemperature(forecast) принимает один параметр forecast - объект температур на два дня следующего формата.
-
-// {
-//   today: { low: 10, high: 20 },
-//   tomorrow: { low: 20, high: 30 }
-// }
-// Замени объявления переменных todayLow, todayHigh, tomorrowLow и tomorrowHigh одной операцией деструктуризации свойств объекта forecast.
+// Дополни функцию getActiveUsers(users) так, чтобы она возвращала массив активных пользователей, значение свойства isActive которых true.
 
 // Тесты
-// Объявлена функция calculateMeanTemperature(forecast)
-// В теле функции используется деструктуризация объекта
-// В теле функции объявлена переменная todayHigh с помощью деструктуризации
-// В теле функции объявлена переменная todayLow с помощью деструктуризации
-// В теле функции объявлена переменная tomorrowLow с помощью деструктуризации
-// В теле функции объявлена переменная tomorrowHigh с помощью деструктуризации
-// Вызов calculateMeanTemperature({ today: {low: 28, high: 32}, tomorrow: {low: 25, high: 29} }) возвращает 28.5
-// Вызов calculateMeanTemperature({ today: {low: 37, high: 40}, tomorrow: {low: 33, high: 38} }) возвращает 37
+// Объявлена переменная getActiveUsers Переменной getActiveUsers присвоена стрелочная функция с параметром users
+// Для перебора параметра users используется метод filter()
+// Вызов функции с указанным массивом пользователей возвращает массив объектов пользователей с именами Sharlene Bush, Elma Head, Carey Barr и Sheree Anthony
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
+// ============Исходный код задачи
 // Change code below this line
-function calculateMeanTemperature(forecast) {
-  const {
-    today: { low: todayLow, high: todayHigh },
+// const getActiveUsers = (users) => {
 
-    tomorrow: { low: tomorrowLow, high: tomorrowHigh },
-  } = forecast;
+// };
+// Change code above this line
 
-  // Change code above this line
-  return (todayLow + todayHigh + tomorrowLow + tomorrowHigh) / 4;
-}
+// ++++++++++++++Решение
+// Change code below this line
+const getActiveUsers = (users) =>
+  users.filter(({ isActive }) => isActive === true);
+// Change code above this line
 
-console.log(
-  calculateMeanTemperature({
-    today: { low: 28, high: 32 },
-    tomorrow: { low: 25, high: 29 },
-  })
-);
-console.log(
-  calculateMeanTemperature({
-    today: { low: 37, high: 40 },
-    tomorrow: { low: 33, high: 38 },
-  })
-);
+console.log(getActiveUsers(users));

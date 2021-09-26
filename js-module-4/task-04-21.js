@@ -1,65 +1,105 @@
-// Деструктуризация объектов
-// Сложные данные всегда представлены объектом. Множественные обращения к свойствам объекта визуально загрязняют код.
+// Метод filter() и массив объектов
+// При работе с массивом объектов выполняется фильтрация по значению какого-то свойства. В результате получается новый массив отфильтрованных объектов.
 
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-//   genres: ["historical prose", "adventure"],
-//   public: true,
-//   rating: 8.38,
-// };
+// Например, есть массив студентов с баллами за тест. Необходимо отфильтровать лучших (балл выше 80), худших (балл ниже 50) и средних студентов (балл от 50 до 80).
 
-// const accessType = book.public ? "публичном" : "закрытом";
-// const message = `Книга ${book.title} автора ${book.author} с рейтингом ${book.rating} находится в ${accessType} доступе.`;
-// Деструктуризация позволяет «распаковать» значения свойств объекта в локальные переменные. Это делает код в месте их использования менее «шумным».
+// const LOW_SCORE = 50;
+// const HIGH_SCORE = 80;
+// const students = [
+//   { name: "Mango", score: 83 },
+//   { name: "Poly", score: 59 },
+//   { name: "Ajax", score: 37 },
+//   { name: "Kiwi", score: 94 },
+//   { name: "Houston", score: 64 },
+// ];
 
-// const book = {
-//   title: "The Last Kingdom",
-//   author: "Bernard Cornwell",
-//   genres: ["historical prose", "adventure"],
-//   public: true,
-//   rating: 8.38,
-// };
+// const best = students.filter(student => student.score >= HIGH_SCORE);
+// console.log(best); // Массив объектов с именами Mango и Kiwi
 
-// // Деструктуризируем
-// const { title, author, public, rating, coverImage } = book;
-// console.log(coverImage); // undefined
+// const worst = students.filter(student => student.score < LOW_SCORE);
+// console.log(worst); // Массив с одним объектом Ajax
 
-// const accessType = public ? "публичном" : "закрытом";
-// const message = `Книга ${title} автора ${author} с рейтингом ${rating} находится в ${accessType} доступе.`;
-// Деструктуризация всегда находится в левой части операции присвоения. Переменным внутри фигурных скобок присваиваются значения свойств объекта. Если имя переменной и имя свойства совпадают, то происходит присваивание, в противном случае ей будет присвоено undefined. Порядок объявления переменных в фигурных скобках не важен.
-
+// // В коллбек-функции удобно деструктуризировать свойства объекта
+// const average = students.filter(
+//   ({ score }) => score >= LOW_SCORE && score < HIGH_SCORE
+// );
+// console.log(average); // Массив объектов с именами Poly и Houston
 // Задание
-// Пришел трёхдневный прогноз максимальных температур и мы считаем среднюю температуру за три дня (meanTemperature). Замени объявления переменных yesterday, today и tomorrow одной операцией деструктуризации свойств объекта highTemperatures.
+// Используя метод filter() дополни код так, чтобы:
 
+// В переменной topRatedBooks получился массив книг
+// рейтинг которых(свойство rating) больше либо равно значению переменной MIN_RATING.
+// В переменной booksByAuthor получился массив книг
+// написанных автором с именем(свойство author) которое совпадает со значением в переменной AUTHOR.
 // Тесты
-// Объявлена переменная highTemperatures
-// Значение переменной highTemperatures это объект
-// Объявлена переменная yesterday с помощью деструктуризации
-// Значение переменной yesterday это число 28
-// Объявлена переменная today с помощью деструктуризации
-// Значение переменной today это число 26
-// Объявлена переменная tomorrow с помощью деструктуризации
-// Значение переменной tomorrow это число 33
-// Объявлена переменная meanTemperature
-// Значение переменной meanTemperature это число 29
-// Используется синтаксис деструктуризации объекта highTemperatures
+// Объявлена переменная books
+// Значение переменной books это массив объектов
+// Объявлена переменная MIN_RATING
+// Значение переменной MIN_RATING это число 8
+// Объявлена переменная AUTHOR
+// Значение переменной AUTHOR это строка "Bernard Cornwell"
+// Объявлена переменная topRatedBooks
+// Значение переменной topRatedBooks это массив книг с рейтингов выше 8
+// Объявлена переменная booksByAuthor
+// Значение переменной booksByAuthor это массив книг автор которых "Bernard Cornwell"
+// Для перебора массива books использован метод filter()
 
-const highTemperatures = {
-  yesterday: 28,
-  today: 26,
-  tomorrow: 33,
-};
+// ============Исходный код задачи
+// const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+//   {
+//     title: "The Dream of a Ridiculous Man",
+//     author: "Fyodor Dostoevsky",
+//     rating: 7.75,
+//   },
+//   { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+//   { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+// ];
+
+// const MIN_RATING = 8;
+// const AUTHOR = "Bernard Cornwell";
+// // Change code below this line
+
+// const topRatedBooks = books;
+// const booksByAuthor = books;
+
+// ++++++++++++++Решение
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+];
+
+const MIN_RATING = 8;
+const AUTHOR = "Bernard Cornwell";
 // Change code below this line
 
-const {
-  yesterday,
-  today,
-  tomorrow,
-  icon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
-} = highTemperatures;
+// const topRatedBooks = books.filter((book) => book.rating >= MIN_RATING);
+const topRatedBooks = books.filter(({ rating }) => rating >= MIN_RATING);
+const booksByAuthor = books.filter(({ author }) => author === AUTHOR);
 
-// Change code above this line
-const meanTemperature = (yesterday + today + tomorrow) / 3;
-
-console.log(meanTemperature);
+console.log(topRatedBooks);
+console.log(booksByAuthor);
