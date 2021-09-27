@@ -1,47 +1,84 @@
-// Задача. Карточки задач
+// Метод every()
+// Метод every(callback) проверяет проходят ли все элементы массива тест предоставляемый коллбек-функцией. Возвращает true или false.
+
+// массив.every((element, index, array) => {
+//   // Тело коллбек-функции
+// });
+// Не изменяет оригинальный массив.
+// Поэлементно перебирает оригинальный массив.
+// Возвращает true если все элементы массива удовлетворяют условию.
+// Возвращает false если хотя бы один элемент массива не удовлетворяет условию.
+// Перебор массива прекращается если коллбек возвращает false.
+// // Все элементы больше либо равны нулю? - да
+// [1, 2, 3, 4, 5].every((value) => value >= 0); // true
+
+// // Все элементы больше либо равны нулю? - нет
+// [1, 2, 3, -10, 4, 5].every((value) => value >= 0); // false
+// При работе с массивом объектов проверяется значение какого-то их свойства.
+
 // Задание
-// Напиши функцию makeTask(data) которая принимает один параметр data - объект со следующими свойствами.
+// Используя метод every() дополни код так, чтобы:
 
-// text - текст задачи.
-// category - категория задачи.
-// priority - приоритет задачи.
-// Функция должна составить и вернуть новый объект задачи, не изменяя напрямую параметр data.
-// В новом объекте должно быть свойство completed, значение которого хранится в одноимённой локальной переменной.
-
-// В параметре data гарантированно будет только свойство text, а остальные два, category и priority, могут отсутствовать.
-// Тогда, в новом объекте задачи, в свойствах category и priority должны быть значения по умолчанию, хранящиеся в одноимённых локальных переменных.
-
+// В переменной eachElementInFirstIsEven был результат проверки всех элементов массива firstArray на чётность.
+// В переменной eachElementInFirstIsOdd был результат проверки всех элементов массива firstArray на нечётность.
+// В переменной eachElementInSecondIsEven был результат проверки всех элементов массива secondArray на чётность.
+// В переменной eachElementInSecondIsOdd был результат проверки всех элементов массива secondArray на нечётность.
+// В переменной eachElementInThirdIsEven был результат проверки всех элементов массива thirdArray на чётность.
+// В переменной eachElementInThirdIsOdd был результат проверки всех элементов массива thirdArray на нечётность.
 // Тесты
-// Объявлена функция makeTask(data)
-// Вызов makeTask({}) возвращает { category: "General", priority: "Normal", completed: false }
-// Вызов makeTask({ category: "Homemade", priority: "Low", text: "Take out the trash" }) возвращает { category: "Homemade", priority: "Low", text: "Take out the trash", completed: false }
-// Вызов makeTask({ category: "Finance", text: "Take interest" }) возвращает { category: "Finance", priority: "Normal", text: "Take interest", completed: false }
-// Вызов makeTask({ priority: "Low", text: "Choose shampoo" }) возвращает { category: "General", priority: "Low", text: "Choose shampoo", completed: false }
-// Вызов makeTask({ text: "Buy bread" }) возвращает { category: "General", priority: "Normal", text: "Buy bread", completed: false }
+// Объявлена переменная firstArray
+// Значение переменной firstArray это массив [26, 94, 36, 18]
+// Объявлена переменная secondArray
+// Значение переменной secondArray это массив [17, 61, 23]
+// Объявлена переменная thirdArray
+// Значение переменной thirdArray это массив [17, 26, 94, 61, 36, 23, 18]
+// Объявлена переменная eachElementInFirstIsEven
+// Значение переменной eachElementInFirstIsEven это буль true
+// Объявлена переменная eachElementInFirstIsOdd
+// Значение переменной eachElementInFirstIsOdd это буль false
+// Объявлена переменная eachElementInSecondIsEven
+// Значение переменной eachElementInSecondIsEven это буль false
+// Объявлена переменная eachElementInSecondIsOdd
+// Значение переменной eachElementInSecondIsOdd это буль true
+// Объявлена переменная eachElementInThirdIsEven
+// Значение переменной eachElementInThirdIsEven это буль false
+// Объявлена переменная eachElementInThirdIsOdd
+// Значение переменной eachElementInThirdIsOdd это буль false
+// Для перебора массивов использован метод every()
 
-function makeTask(data) {
-  // console.log(data);
-  const completed = false;
-  const category = "General";
-  const priority = "Normal";
-  // Change code below this line
-  const dataNew = {
-    category,
-    priority,
-    completed,
-    ...data,
-  };
-  console.log(dataNew);
-  return dataNew;
-  // Change code above this line
-}
+// ============Исходный код задачи
+// const firstArray = [26, 94, 36, 18];
+// const secondArray = [17, 61, 23];
+// const thirdArray = [17, 26, 94, 61, 36, 23, 18];
+// // Change code below this line
 
-makeTask({});
+// const eachElementInFirstIsEven = firstArray;
+// const eachElementInFirstIsOdd = firstArray;
 
-makeTask({
-  category: "Homemade",
-  priority: "Low",
-  text: "Take out the trash",
-});
+// const eachElementInSecondIsEven = secondArray;
+// const eachElementInSecondIsOdd = secondArray;
 
-makeTask({ text: "Buy bread" });
+// const eachElementInThirdIsEven = thirdArray;
+// const eachElementInThirdIsOdd = thirdArray;
+
+// ++++++++++++++Решение
+const firstArray = [26, 94, 36, 18];
+const secondArray = [17, 61, 23];
+const thirdArray = [17, 26, 94, 61, 36, 23, 18];
+// Change code below this line
+
+const eachElementInFirstIsEven = firstArray.every((value) => value % 2 === 0);
+const eachElementInFirstIsOdd = firstArray.every((value) => value % 2 !== 0);
+
+const eachElementInSecondIsEven = secondArray.every((value) => value % 2 === 0);
+const eachElementInSecondIsOdd = secondArray.every((value) => value % 2 !== 0);
+
+const eachElementInThirdIsEven = thirdArray.every((value) => value % 2 === 0);
+const eachElementInThirdIsOdd = thirdArray.every((value) => value % 2 !== 0);
+
+console.log(eachElementInFirstIsEven);
+console.log(eachElementInFirstIsOdd);
+console.log(eachElementInSecondIsEven);
+console.log(eachElementInSecondIsOdd);
+console.log(eachElementInThirdIsEven);
+console.log(eachElementInThirdIsOdd);

@@ -1,75 +1,85 @@
-// Методы объекта
-// До сих пор мы рассматривали объекты только как хранилища взаимосвязанных данных, например информация о книге и т. п.
-// Объекты - хранилища обычно находятся в массиве таких же объектов, который представляет коллекцию однотипных элементов.
-// Объекты могут хранить не только данные, но и функции для работы с этими данными - методы.
-// Если значение свойства это функция, такое свойство называется методом объекта.
+// Метод reduce()
+// Метод reduce(callback, initialValue) используется для последовательной обработки каждого элемента массива с сохранением промежуточного результата, как аккумулятор. Немного сложнее других в усвоении, но результат стоит того.
 
-// // ✅ Логиески и синтаксически сгруппированные сущности
-// const bookShelf = {
-//   books: ["Последнее королевство", "Страж снов"],
-//   // Это метод объекта
-//   getBooks() {
-//     console.log("Этот метод будет возвращать все книги - свойство books");
-//   },
-//   // Это метод объекта
-//   addBook(bookName) {
-//     console.log("Этот метод будет добавлять новую книгу в свойство books");
-//   },
-// };
+// массив.reduce((previousValue, element, index, array) => {
+//   // Тело коллбек-функции
+// }, initialValue);
+// Не изменяет оригинальный массив.
+// Поэлементно перебирает оригинальный массив.
+// Возвращает что угодно.
+// Делает что угодно.
+// Легче всего представить его работу на примере подсчёта суммы элементов массива.
 
-// // Вызовы методов
-// bookShelf.getBooks();
-// bookShelf.addBook("Новая книга");
-// Такие объекты можно назвать «моделями». Они связывают данные и методы для работы с этими данными.
-// Например, можно было объявить переменную books и две функции getBooks() и addBook(bookName),
-// но тогда это были бы три независимые сущности без явной синтаксической, и со слабой логической связями.
+// const total = [2, 7, 3, 14, 6].reduce((previousValue, number) => {
+//   return previousValue + number;
+// }, 0);
 
-// // ❌ Слабосвязанные, независмые сущности
-// const books = [];
-// function getBooks() {}
-// function addBook() {}
+// console.log(total); // 32
+// Первый параметр коллбек-функции (previousValue) это аккумулятор, то есть промежуточный результат. Значение которое вернёт коллбек-функция на текущей итерации, будет значением этого параметра на следующей.
+
+// Вторым аргументом для reduce() можно передать необязательное начальное значение аккумулятора - параметр initialValue.
+
+// # Вначале метод reduce() создаёт внутреннюю переменную-аккумулятор и
+// # присваивает ей значение параметра initialValue или первого элемента
+// # перебираемого массива, если initialValue не задан.
+// previousValue = 0
+
+// # Далее коллбек-функция вызывается для каждого элемента массива. Текущее значение
+// # параметра previousValue это то, что вернула коллбек-функция на прошлой итерации.
+// Итерация 1 -> previousValue = 0 -> number = 2 -> return 0 + 2 -> return 2
+// Итерация 2 -> previousValue = 2 -> number = 7 -> return 2 + 7 -> return 9
+// Итерация 3 -> previousValue = 9 -> number = 3 -> return 9 + 3 -> return 12
+// Итерация 4 -> previousValue = 12 -> number = 14 -> return 12 + 14 -> return 26
+// Итерация 5 -> previousValue = 26 -> number = 6 -> return 26 + 6 -> return 32
+
+// # После того как весь массив перебран, метод reduce() возвращает значение аккумулятора.
+// Результат - 32
+// То есть метод reduce() используется когда необходимо взять «много» и привести к «одному». В повседневных задачах его применение сводится к работе с числами.
 
 // Задание
-// Добавь объекту bookShelf ещё два метода, которые пока что будут возвращать просто строки по аналогии с getBooks() и addBook(bookName).
-// Метод removeBook(bookName) будет удалять книгу по имени. Возвращает строку "Deleting book <имя книги>",
-// где < имя книги > это значение параметра bookName.
-// Метод updateBook(oldName, newName) будет обновлять название книги на новое.
-// Возвращает строку "Updating book <старое имя> to <новое имя>", где < старое имя > и < новое имя > это значения параметров oldName и newName соотвественно.
+// Игровому сервису необходим функционал подсчёта среднего времени проведённого в играх. Дополни код так, чтобы в переменной totalPlayTime получилось общее игровое время из массива playtimes.
 
 // Тесты
-// Объявлена переменная bookShelf
-// Значение переменной bookShelf это объект
-// Значение свойства bookShelf.getBooks это метод объекта
-// Вызов метода bookShelf.getBooks() возвращает строку "Возвращаем все книги"
-// Значение свойства bookShelf.addBook это метод объекта
-// Вызов метода bookShelf.addBook("Haze") возвращает строку "Adding book Haze"
-// Значение свойства bookShelf.removeBook это метод объекта
-// Вызов метода bookShelf.removeBook("Red sunset") возвращает строку "Deleting book Red sunset"
-// Значение свойства bookShelf.updateBook это метод объекта
-// Вызов метода bookShelf.updateBook("Sands of dune", "Dune") возвращает строку "Updating book Sands of dune to Dune"
+// Объявлена переменная players
+// Значение переменной players это объект игроков с игровым временем каждого
+// Объявлена переменная playtimes
+// Значение переменной playtimes это массив [1270, 468, 710, 244]
+// Объявлена переменная totalPlayTime
+// Значение переменной totalPlayTime это число 2692
+// Для перебора массива playtimes используется метод reduce()
+// Объявлена переменная averagePlayTime
+// Значение переменной averagePlayTime это число 673
 
-const bookShelf = {
-  // Change code below this line
-  books: ["The last kingdom", "The guardian of dreams"],
-  getBooks() {
-    return "Returning all books";
-  },
-  addBook(bookName) {
-    return `Adding book ${bookName}`;
-  },
+// ============Исходный код задачи
+// const players = {
+//   mango: 1270,
+//   poly: 468,
+//   ajax: 710,
+//   kiwi: 244,
+// };
+// const playtimes = Object.values(players); // [1270, 468, 710, 244]
+// // Change code below this line
 
-  removeBook(bookName) {
-    return `Deleting book ${bookName}`;
-  },
+// const totalPlayTime = playtimes;
 
-  updateBook(oldName, newName) {
-    return `Updating book ${oldName} to ${newName}`;
-  },
+// // Change code above this line
+// const averagePlayTime = totalPlayTime / playtimes.length;
 
-  // Change code above this line
+// ++++++++++++++Решение
+const players = {
+  mango: 1270,
+  poly: 468,
+  ajax: 710,
+  kiwi: 244,
 };
+const playtimes = Object.values(players); // [1270, 468, 710, 244]
+// Change code below this line
 
-console.log(bookShelf.getBooks());
-console.log(bookShelf.addBook("Haze"));
-console.log(bookShelf.removeBook("Red sunset"));
-console.log(bookShelf.updateBook("Sands of dune", "Dune"));
+const totalPlayTime = playtimes.reduce((previousValue, number) => {
+  return previousValue + number;
+}, 0);
+
+// Change code above this line
+const averagePlayTime = totalPlayTime / playtimes.length;
+
+console.log(averagePlayTime);

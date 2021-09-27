@@ -1,25 +1,51 @@
-// Задача. Удаляем зелье
+// Свой порядок сортировки чисел
+// Для указания своего порядка сортировки методу sort(compareFunction) нужно передать коллбек-функцию с двумя параметрами.
+// Это функция сравнения(compare function), порядок сортировки зависит от её результата.Метод sort() будет вызывать её для произвольных двух элементов.
+
+// массив.sort((a, b) => {
+//   // Callback function body
+// });
+// a - первый элемент для сравнения.
+// b - второй элемент для сравнения.
+// Если вызов compareFunction(a, b) возвращает любое отрицательное значение, то есть a меньше b, сортировка поставит a перед b. Это сортировка по возрастанию.
+
+// const scores = [61, 19, 74, 35, 92, 56];
+// const ascendingScores = [...scores].sort((a, b) => a - b);
+// console.log(ascendingScores); // [19, 35, 56, 61, 74, 92]
+// Если вызов compareFunction(a, b) возвращает любое положительное значение больше нуля, то есть b больше a, сортировка поставит b перед a. Это сортировка по убыванию.
+
+// const scores = [61, 19, 74, 35, 92, 56];
+// const descendingScores = [...scores].sort((a, b) => b - a);
+// console.log(descendingScores); // [92, 74, 61, 56, 35, 19]
+// Eсли вызов compareFunction(a, b) вернёт 0, сортировка оставит a и b неизменными по отношению друг к другу, но отсортирует их по отношению ко всем другим элементам. Но вообще не важно, что возвращать, если их взаимный порядок не имеет значения.
+
 // Задание
-// Дополни метод removePotion(potionName) так, чтобы он удалял зелье potionName из массива зелий в свойстве potions.
+// Онлайн бибилиотеке необходимо отображать книги сортированные по дате издания, по её возрастанию или убыванию. Дополни код так, чтобы в переменной ascendingReleaseDates получилась отсортированная по возрастанию копия массива releaseDates, а в переменной descendingReleaseDates копия отсортированная по убыванию.
 
 // Тесты
-// Объявлена переменная atTheOldToad
-// Значение переменной atTheOldToad это объект
-// Значение свойства atTheOldToad.potions это массив ["Speed potion", "Dragon breath", "Stone skin"]
-// Значение свойства atTheOldToad.removePotion это метод объекта
-// После первого вызова метода atTheOldToad.removePotion("Dragon breath"), в свойстве potions будет массив ["Speed potion", Stone skin"]
-// После второго вызова метода atTheOldToad.removePotion("Speed potion"), в свойстве potions будет массив ["Stone skin"]
+// Объявлена переменная releaseDates
+// Значение переменной releaseDates это массив [2016, 1967, 2008, 1984, 1973, 2012, 1997]
+// Объявлена переменная ascendingReleaseDates
+// Значение переменной ascendingReleaseDates это массив [1967, 1973, 1984, 1997, 2008, 2012, 2016]
+// Объявлена переменная descendingReleaseDates
+// Значение переменной descendingReleaseDates это массив [2016, 2012, 2008, 1997, 1984, 1973, 1967]
+// Использован метод sort()
 
-const atTheOldToad = {
-  potions: ["Speed potion", "Dragon breath", "Stone skin"],
-  removePotion(potionName) {
-    // Change code below this line
-    const potionIndex = this.potions.indexOf(potionName);
-    this.potions.splice(potionIndex, 1);
-    // console.log(atTheOldToad.potions);
-    // Change code above this line
-  },
-};
+// ============Исходный код задачи
+// const releaseDates = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
+// // Change code below this line
 
-atTheOldToad.removePotion("Dragon breath");
-atTheOldToad.removePotion("Speed potion");
+// const ascendingReleaseDates = releaseDates;
+
+// const descendingReleaseDates = releaseDates;
+
+// ++++++++++++++Решение
+const releaseDates = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
+// Change code below this line
+
+const ascendingReleaseDates = [...releaseDates].sort((a, b) => a - b);
+
+const descendingReleaseDates = [...releaseDates].sort((a, b) => b - a);
+
+console.log(ascendingReleaseDates);
+console.log(descendingReleaseDates);

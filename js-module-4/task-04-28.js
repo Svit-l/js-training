@@ -91,7 +91,8 @@ const BOOK_TITLE = "The Dream of a Ridiculous Man";
 const AUTHOR = "Robert Sheckley";
 // Change code below this line
 
-const bookWithTitle = books;
-const bookByAuthor = books;
+const bookWithTitle = books.find((books) => books.title === BOOK_TITLE);
+const bookByAuthor = books.find((books) => books.author === AUTHOR);
 
-console.log(getInactiveUsers(users));
+console.log(bookWithTitle);
+console.log(bookByAuthor);

@@ -1,4 +1,4 @@
-// Задача. Пользователь с почтой
+// Задача. Сортировка по балансу
 // Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
 const users = [
   {
@@ -65,39 +65,34 @@ const users = [
     gender: "female",
   },
 ];
+
 // Задание
-// Дополни функцию getUserWithEmail(users, email) так,
-// чтобы она возвращала объект пользователя,
-//   почта которого(свойство email) совпадает со значением параметра email.
+// Дополни функцию sortByAscendingBalance(users) так, чтобы она возвращала массив пользователей отсортированный по возрастанию их баланса (свойство balance).
 
 // Тесты
-// Объявлена функция getUserWithEmail(users, email)
-
-// Для перебора параметра users используется метод find()
-
-// Если значение параметра email это "shereeanthony@kog.com", функция возвращает объект пользователя с именем Sheree Anthony
-
-// Если значение параметра email это "elmahead@omatom.com", функция возвращает объект пользователя с именем Elma Head
-
-// Если значение параметра email это "blackburndotson@furnigeer.com", функция возвращает объект пользователя с именем Blackburn Dotson
-
-// Если в массиве users нет пользователя с почтой из параметра email, функция возвращает undefined
-
+// Объявлена переменная sortByAscendingBalance
+// Переменной sortByAscendingBalance присвоена стрелочная функция с параметром (users)
+// Значение параметра users не изменяется
+// Вызов функции с указанным массивом пользователей возвращает новый массив пользователей отсортированный по возрастанию их баланса
 // Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+// Для перебора параметра users использован метод sort()
 
 // ============Исходный код задачи
+
 // // Change code below this line
-// const getUserWithEmail = (users, email) => {
+// const sortByAscendingBalance = users => {
 
 // };
 // // Change code above this line
 
 // ++++++++++++++Решение
-// Change code below this line
-const getUserWithEmail = (users, email) =>
-  users.find((user) => user.email === email);
 
+// Change code below this line
+const sortByAscendingBalance = (users) => {
+  return [...users].sort(
+    (firstUser, secondUser) => firstUser.balance - secondUser.balance
+  );
+};
 // Change code above this line
 
-console.log(getUserWithEmail(users, "shereeanthony@kog.com"));
-console.log(getUserWithEmail(users, "blackburndotson@furnigeer.com"));
+console.log(sortByAscendingBalance(users));

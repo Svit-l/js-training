@@ -1,52 +1,92 @@
-// Операция rest для сбора всех аргументов функции
-// Операция ... (rest) позволяет собрать группу независимых элементов в новую коллекцию. Синтаксически это близнец операции распыления, но отличить их просто - распыление это когда ... находится в правой части операции присваивания, а сбор это когда ... находится в её левой части.
-
-// Вернёмся к аналогии с яблоками. Если на полу лежат яблоки и у нас есть пустой ящик, то операция rest позволит «собрать» яблоки в ящик. При этом оригинальные яблоки останутся на полу, а в ящике будет копия каждого яблока.
-
-// Одна из областей применения операции rest это создание функций которые могут принимать произвольное количество аргументов.
-
-// // Как объявить параметры функции так,
-// // чтобы можно было передать любое кол-во аргументов?
-// function multiply() {
-//   // ...
-// }
-
-// multiply(1, 2);
-// multiply(1, 2, 3);
-// multiply(1, 2, 3, 4);
-// Если убрать весь «синтаксический шум» и посмотреть на аргументы и параметры функции, то аргументы находятся в правой части операции присваивания, а параметры в левой, потому что значения аргументов присваиваются объявленным параметрам. Значит можно «собрать» все аргументы функции в один параметр используя операцию rest.
-
-// function multiply(...args) {
-//   console.log(args); // массив всех аргументов
-// }
-
-// multiply(1, 2);
-// multiply(1, 2, 3);
-// multiply(1, 2, 3, 4);
-// Имя параметра может быть произвольным. Чаще всего его называют args, restArgs или otherArgs, сокращённое от arguments.
-
+// Задача. Все ли пользователи активны
+// Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
+const users = [
+  {
+    name: "Moore Hensley",
+    email: "moorehensley@indexia.com",
+    eyeColor: "blue",
+    friends: ["Sharron Pace"],
+    isActive: false,
+    balance: 2811,
+    gender: "male",
+  },
+  {
+    name: "Sharlene Bush",
+    email: "sharlenebush@tubesys.com",
+    eyeColor: "blue",
+    friends: ["Briana Decker", "Sharron Pace"],
+    isActive: true,
+    balance: 3821,
+    gender: "female",
+  },
+  {
+    name: "Ross Vazquez",
+    email: "rossvazquez@xinware.com",
+    eyeColor: "green",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+    isActive: false,
+    balance: 3793,
+    gender: "male",
+  },
+  {
+    name: "Elma Head",
+    email: "elmahead@omatom.com",
+    eyeColor: "green",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+    isActive: true,
+    balance: 2278,
+    gender: "female",
+  },
+  {
+    name: "Carey Barr",
+    email: "careybarr@nurali.com",
+    eyeColor: "blue",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+    isActive: true,
+    balance: 3951,
+    gender: "male",
+  },
+  {
+    name: "Blackburn Dotson",
+    email: "blackburndotson@furnigeer.com",
+    eyeColor: "brown",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    isActive: false,
+    balance: 1498,
+    gender: "male",
+  },
+  {
+    name: "Sheree Anthony",
+    email: "shereeanthony@kog.com",
+    eyeColor: "brown",
+    friends: ["Goldie Gentry", "Briana Decker"],
+    isActive: true,
+    balance: 2764,
+    gender: "female",
+  },
+];
 // Задание
-// Используя операцию rest дополни код функции add() так, чтобы она принимала любое количество аргументов, считала и возвращала их сумму.
+// Дополни функцию isEveryUserActive(users) так,
+// чтобы она проверяла все ли пользователи сейчас активны(свойство isActive) и возвращала true или false.
 
 // Тесты
-// Объявлена функция add
-// Функция add использует параметр args
-// Для сбора аргументов в переменную args, в подписи функции используется синтаксис ... (оперетор rest)
-// Вызов add(15, 27) возвращает 42
-// Вызов add(12, 4, 11, 48) возвращает 75
-// Вызов add(32, 6, 13, 19, 8) возвращает 78
-// Вызов add(74, 11, 62, 46, 12, 36) возвращает 241
+// Объявлена переменная isEveryUserActive
+// Переменной isEveryUserActive присвоена стрелочная функция с параметром (users)
+// Для перебора параметра users используется метод every()
+// Вызов функции с указанным массивом пользователей возвращает false
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
+// ============Исходный код задачи
+// // Change code below this line
+// const isEveryUserActive = (users) => {
+
+// };
+// // Change code above this line
+
+// ++++++++++++++Решение
 // Change code below this line
-function add(...args) {
-  let total = 0;
-  for (const arg of args) {
-    total += arg;
-  }
-  return total;
-  // Change code above this line
-}
+const isEveryUserActive = (users) =>
+  users.every((user) => user.isActive === true);
+// Change code above this line
 
-console.log(add(15, 27));
-console.log(add(12, 4, 11, 48));
-console.log(add(74, 11, 62, 46, 12, 36));
+console.log(isEveryUserActive(users));

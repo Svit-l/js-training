@@ -1,87 +1,127 @@
-// Задача: расширяем инвентарь
+// Сортировка объектов
+// При работе с массивом объектов сортировка выполняется по числовому или строчному значению какого-то свойства. Например, есть группа студентов с баллами за тест. Необходимо отсортировать массив объектов по возрастанию и убыванию количества баллов, и по имени студента.
+
+// const students = [
+//   { name: "Mango", score: 83 },
+//   { name: "Poly", score: 59 },
+//   { name: "Ajax", score: 37 },
+//   { name: "Kiwi", score: 94 },
+// ];
+
+// const inAscendingScoreOrder = [...students].sort(
+//   (firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+// );
+
+// const inDescendingScoreOrder = [...students].sort(
+//   (firstStudent, secondStudent) => secondStudent.score - firstStudent.score
+// );
+
+// const inAlphabeticalOrder = [...students].sort((firstStudent, secondStudent) =>
+//   firstStudent.name.localeCompare(secondStudent.name)
+// );
+
 // Задание
-// Заказчица хочет чтобы каждое зелье было представлено не только именем, но и ценой, а в будущем может быть и другими характеристиками. Поэтому теперь в свойстве potions будет храниться массив объектов со следующими свойствами.
+// Дополни код так, чтобы:
 
-// {
-//   name: "Dragon breath",
-//   price: 700
-// }
-// Выполни рефакторинг методов объекта atTheOldToad так, чтобы они работали не с массивом строк, а с массивом объектов.
-
-// getPotions() - метод для получения всех зелий. Возвращает значение свойства potions.
-// addPotion(newPotion) - добавляет зелье newPotion (уже объект) в массив в свойстве potions, но только если такого зелья еще нет в инвентаре. В противном случае возвращается строка.
-// removePotion(potionName) - удаляет объект зелья с именем potionName из массива в свойстве potions.
-// updatePotionName(oldName, newName) - обновляет свойство name объекта-зелья с названием oldName на newName в массиве potions.
+// В переменной sortedByAuthorName получился массив книг отсортированный по имени автора в алфавитном порядке.
+// В переменной sortedByReversedAuthorName получился массив книг отсортированный по имени автора в обратном алфавитном порядке.
+// В переменной sortedByAscendingRating получился массив книг отсортированный по возрастанию рейтинга.
+// В переменной sortedByDescentingRating получился массив книг отсортированный по убыванию рейтинга.
 // Тесты
-// Объявлена переменная atTheOldToad
-// Значение переменной atTheOldToad это объект
-// Значение свойства atTheOldToad.getPotions это метод объекта
-// Вызов метода atTheOldToad.getPotions() для исходного объекта возвращает [ { name: "Speed potion", price: 460 }, { name: "Dragon breath", price: 780 }, { name: "Stone skin", price: 520 } ]
-// Значение свойства atTheOldToad.addPotion это метод объекта.
-// Для исходного объекта после вызова метода atTheOldToad.addPotion({ name: "Invisibility", price: 620 }), в массиве potions последним элементом будет этот объект
-// Для исходного объекта после вызова метода atTheOldToad.addPotion({ name: "Power potion", price: 270 }), в массиве potions последним элементом будет этот объект
-// Если добавляемое зелье уже есть в массиве potions, метод addPotion возвращает строку с текстом из исходного кода
-// Если добавляемое зелье уже есть в массиве potions, метод addPotion не добавляет в него передаваемый обьект
-// Для исходного объекта после вызова atTheOldToad.addPotion({ name: "Dragon breath", price: 700 }), массив potions не изменяется
-// Для исходного объекта после вызова atTheOldToad.addPotion({ name: "Stone skin", price: 240 }), массив potions не изменяется
-// Для исходного объекта вызов atTheOldToad.addPotion({ name: "Dragon breath", price: 700 }), возвращает строку "Error! Potion Dragon breath is already in your inventory!"
-// Для исходного объекта вызов atTheOldToad.addPotion({ name: "Stone skin", price: 240 }), возвращает строку "Error! Potion Stone skin is already in your inventory!"
-// Значение свойства atTheOldToad.removePotion это метод объекта
-// Для исходного объекта после вызова метода atTheOldToad.removePotion("Dragon breath"), в свойстве potions будет массив [ { name: "Speed potion", price: 460 }, { name: "Stone skin", price: 520 } ]
-// Для исходного объекта после вызова метода atTheOldToad.removePotion("Speed potion"), в свойстве potions будет массив [ { name: "Dragon breath", price: 780 }, { name: "Stone skin", price: 520 }]
-// Значение свойства atTheOldToad.updatePotionName это метод объекта
-// Для исходного объекта после вызова метода atTheOldToad.updatePotionName("Dragon breath", "Polymorth"),
-// в свойстве potions будет массив[{ name: "Speed potion", price: 460 }, { name: "Polymorth", price: 780 }, { name: "Stone skin", price: 520 }]
-// Для исходного объекта после вызова метода atTheOldToad.updatePotionName("Stone skin", "Invulnerability potion"),
-// в свойстве potions будет массив[{ name: "Speed potion", price: 460 }, { name: "Dragon breath", price: 780 }, { name: "Invulnerability potion", price: 520 }]
+// Объявлена переменная books
+// Значение переменной books это исходный массив объектов книг
+// Объявлена переменная sortedByAuthorName
+// Значение переменной sortedByAuthorName это массив книг отсортированный по имени автора в алфавитном порядке
+// Объявлена переменная sortedByReversedAuthorName
+// Значение переменной sortedByReversedAuthorName это массив книг отсортированный по имени автора в обратном алфавитном порядке
+// Объявлена переменная sortedByAscendingRating
+// Значение переменной sortedByAscendingRating это массив книг отсортированный по возрастанию рейтинга
+// Объявлена переменная sortedByDescentingRating
+// Значение переменной sortedByDescentingRating это массив книг отсортированный по убыванию рейтинга
+// Для перебора массива books используется метод sort()
 
-const atTheOldToad = {
-  potions: [
-    { name: "Speed potion", price: 460 },
-    { name: "Dragon breath", price: 780 },
-    { name: "Stone skin", price: 520 },
-  ],
-  // Change code below this line
-  getPotions() {
-    return this.potions;
-  },
-  addPotion(newPotion) {
-    for (const potion of this.potions) {
-      if (potion.name === newPotion.name) {
-        return `Error! Potion ${newPotion.name} is already in your inventory!`;
-      }
-    }
-    this.potions.push(newPotion);
-  },
-  removePotion(potionName) {
-    const { potions } = this;
-    for (let i = 0; i < potions.length; i += 1) {
-      const { name } = potions[i];
-      if (potionName === name) {
-        potions.splice(i, 1);
-      }
-    }
-    return `Potion ${potionName} is not in inventory!`;
-  },
-  updatePotionName(oldName, newName) {
-    const { potions } = this;
-    // console.log(potions);
-    for (let i = 0; i < potions.length; i += 1) {
-      let { name } = potions[i];
-      // console.log(name);
-      if (name === oldName) {
-        potions[i].name = newName;
-        return this.potions;
-      }
-    }
-    return `Potion ${oldName} is not in inventory!`;
-  },
-  // Change code above this line
-};
+// ============Исходный код задачи
+// const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+//   {
+//     title: "The Dream of a Ridiculous Man",
+//     author: "Fyodor Dostoevsky",
+//     rating: 7.75,
+//   },
+//   { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+//   { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+// ];
+// // Change code below this line
 
-// console.log(atTheOldToad.getPotions());
-// atTheOldToad.addPotion({ name: "Invisibility", price: 620 });
-// atTheOldToad.addPotion({ name: "Power potion", price: 270 });
-// atTheOldToad.addPotion({ name: "Dragon breath", price: 700 });
-// console.log(atTheOldToad.addPotion({ name: "Stone skin", price: 240 }));
-console.log(atTheOldToad.updatePotionName("Dragon breath", "Polymorth"));
+// const sortedByAuthorName = books;
+
+// const sortedByReversedAuthorName = books;
+
+// const sortedByAscendingRating = books;
+
+// const sortedByDescentingRating = books;
+
+// ++++++++++++++Решение
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+];
+// Change code below this line
+
+const sortedByAuthorName = [...books].sort((firstBook, secondBook) =>
+  firstBook.author.localeCompare(secondBook.author)
+);
+
+const sortedByReversedAuthorName = [...books].sort((firstBook, secondBook) =>
+  secondBook.author.localeCompare(firstBook.author)
+);
+
+const sortedByAscendingRating = [...books].sort(
+  (firstBook, secondBook) => firstBook.rating - secondBook.rating
+);
+
+const sortedByDescentingRating = [...books].sort(
+  (firstBook, secondBook) => secondBook.rating - firstBook.rating
+);
+
+console.log(sortedByAuthorName);
+console.log(sortedByReversedAuthorName);
+console.log(sortedByAscendingRating);
+console.log(sortedByDescentingRating);
+// console.log(descendingReleaseDates);
+
+// const inAscendingScoreOrder = [...students].sort(
+//   (firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+// );
+
+// const inDescendingScoreOrder = [...students].sort(
+//   (firstStudent, secondStudent) => secondStudent.score - firstStudent.score
+// );
+
+// const inAlphabeticalOrder = [...students].sort((firstStudent, secondStudent) =>
+//   firstStudent.name.localeCompare(secondStudent.name)
+// );

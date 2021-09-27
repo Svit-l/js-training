@@ -1,76 +1,57 @@
-// Доступ к свойствам объекта в его методах
-// Методы используются для работы со свойствами объекта, их изменения.
-// Для доступа к объекту в методе используется не имя переменной, например bookShelf,
-//   а ключевое слово this - контекст.Значением this будет объект перед «точкой»,
-//   то есть объект который вызвал этот метод, в нашем случае это ссылка на объект bookShelf.
+// Метод reduce() и массив объектов
+// При работе с массивом объектов выполняется редуцирование по значению какого-то свойства.
+// Например, есть массив студентов с баллами за тест.Необходимо получить средний бал.
 
-// const bookShelf = {
-//   books: ["Последнее королевство"],
-//   getBooks() {
-//     console.log(this);
-//   },
-// };
+// const students = [
+//   { name: "Mango", score: 83 },
+//   { name: "Poly", score: 59 },
+//   { name: "Ajax", score: 37 },
+//   { name: "Kiwi", score: 94 },
+//   { name: "Houston", score: 64 },
+// ];
 
-// // Перед точкой стоит объект bookShelf,
-// // поэтому при вызове метода, this будет хранить ссылку на него.
-// bookShelf.getBooks(); // {books: ["Последнее королевство"], getBooks: f}
-// Для того, чтобы получить доступ к свойствам объекта в методах,
-// мы обращаемся к нему через this и дальше как обычно - «через точку» к свойствам.
+// // Название аккумулятора может быть произвольным, это просто параметр функции
+// const totalScore = students.reduce((total, student) => {
+//   return total + student.score;
+// }, 0);
 
-// const bookShelf = {
-//   books: ["Последнее королевство"],
-//   getBooks() {
-//     return this.books;
-//   },
-//   addBook(bookName) {
-//     this.books.push(bookName);
-//   },
-//   removeBook(bookName) {
-//     const bookIndex = this.books.indexOf(bookName);
-//     this.books.splice(bookIndex, 1);
-//   },
-// };
-
-// console.log(bookShelf.getBooks()); // []
-// bookShelf.addBook("Мгла");
-// bookShelf.addBook("Страж снов");
-// console.log(bookShelf.getBooks()); // ["Последнее королевство", "Мгла", "Страж снов"]
-// bookShelf.removeBook("Мгла");
-// console.log(bookShelf.getBooks()); // ["Последнее королевство", "Страж снов"]
-// Будет логично задуматься - почему бы не использовать при обращении к свойствам имя объекта,
-// ведь мы явно не собираемся его менять.Дело в том, что имя объекта штука не надежная,
-//   методы одного объекта можно копировать в другой(с другим именем), а в будущем узнаем,
-//   что часто, при создании объекта мы заранее вовсе не знаем имени.Использование this гарантирует,
-//     что метод работает именно с тем объектом, который его вызвал.
+// const averageScore = totalScore / students.length;
 
 // Задание
-// Дополни метод updateBook(oldName, newName) так, чтобы он изменял название книги с oldName на newName в свойстве books.
-// Используй indexOf() для того, чтобы найти нужный элемент массива, и splice() для того чтобы заменить этот элемент
+// Нашему сервису необходимо рассчитать среднее время проведённое в одной игре для каждого игрока,
+// и получить общую сумму этих времён.
+// Рассчитать время для каждого из игроков,
+// можно разделив его время(свойство playtime) на количество игр(свойство gamesPlayed).
 
 // Тесты
-// Объявлена переменная bookShelf
+// Объявлена переменная players
+// Значение переменной players это массив объектов игроков
+// Объявлена переменная totalAveragePlaytimePerGame
+// Значение переменной totalAveragePlaytimePerGame это число 1023
+// Для перебора массива players используется метод reduce()
 
-// Значение переменной bookShelf это объект
+// ============Исходный код задачи
+// const players = [
+//   { name: "Mango", playtime: 1270, gamesPlayed: 4 },
+//   { name: "Poly", playtime: 469, gamesPlayed: 2 },
+//   { name: "Ajax", playtime: 690, gamesPlayed: 3 },
+//   { name: "Kiwi", playtime: 241, gamesPlayed: 1 },
+// ];
+// // Change code below this line
 
-// Значение свойства bookShelf.updateBook это метод объекта
+// const totalAveragePlaytimePerGame = players;
 
-// После вызова метода bookShelf.updateBook("Haze", "Dungeon chronicles"), значение свойства books это массив ["The last kingdom", "Dungeon chronicles", "The guardian of dreams"]
+// ++++++++++++++Решение
+const players = [
+  { name: "Mango", playtime: 1270, gamesPlayed: 4 },
+  { name: "Poly", playtime: 469, gamesPlayed: 2 },
+  { name: "Ajax", playtime: 690, gamesPlayed: 3 },
+  { name: "Kiwi", playtime: 241, gamesPlayed: 1 },
+];
+// Change code below this line
 
-// После вызова метода bookShelf.updateBook("The last kingdom", "Dune"), значение свойства books это массив ["Dune", "Haze", "The guardian of dreams"]
+const totalAveragePlaytimePerGame = players.reduce((previousValue, player) => {
+  return previousValue + player.playtime / player.gamesPlayed;
+}, 0);
 
-const bookShelf = {
-  books: ["The last kingdom", "Haze", "The guardian of dreams"],
-  updateBook(oldName, newName) {
-    // Change code below this line
-    const bookIndex = this.books.indexOf(oldName);
-    // console.log(this.books[bookIndex]);
-    if (bookIndex >= 0) {
-      this.books.splice(bookIndex, 1, newName);
-    }
-    // Change code above this line
-    console.log(this.books);
-  },
-};
-
-bookShelf.updateBook("Haze", "Dungeon chronicles");
-bookShelf.updateBook("The last kingdom", "Dune");
+console.log(totalAveragePlaytimePerGame);

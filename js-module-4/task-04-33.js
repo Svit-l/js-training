@@ -1,31 +1,94 @@
-// Задача. Массив совпадений
+// Задача. Есть ли активные пользователи
+// Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
+const users = [
+  {
+    name: "Moore Hensley",
+    email: "moorehensley@indexia.com",
+    eyeColor: "blue",
+    friends: ["Sharron Pace"],
+    isActive: false,
+    balance: 2811,
+    gender: "male",
+  },
+  {
+    name: "Sharlene Bush",
+    email: "sharlenebush@tubesys.com",
+    eyeColor: "blue",
+    friends: ["Briana Decker", "Sharron Pace"],
+    isActive: true,
+    balance: 3821,
+    gender: "female",
+  },
+  {
+    name: "Ross Vazquez",
+    email: "rossvazquez@xinware.com",
+    eyeColor: "green",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+    isActive: false,
+    balance: 3793,
+    gender: "male",
+  },
+  {
+    name: "Elma Head",
+    email: "elmahead@omatom.com",
+    eyeColor: "green",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+    isActive: true,
+    balance: 2278,
+    gender: "female",
+  },
+  {
+    name: "Carey Barr",
+    email: "careybarr@nurali.com",
+    eyeColor: "blue",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+    isActive: true,
+    balance: 3951,
+    gender: "male",
+  },
+  {
+    name: "Blackburn Dotson",
+    email: "blackburndotson@furnigeer.com",
+    eyeColor: "brown",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    isActive: false,
+    balance: 1498,
+    gender: "male",
+  },
+  {
+    name: "Sheree Anthony",
+    email: "shereeanthony@kog.com",
+    eyeColor: "brown",
+    friends: ["Goldie Gentry", "Briana Decker"],
+    isActive: true,
+    balance: 2764,
+    gender: "female",
+  },
+];
+
 // Задание
-// Функция findMatches() принимает произвольное количество аргументов. Первым аргументом всегда будет массив чисел, а остальные аргументы будут просто числами.
-
-// Дополни код функции так, чтобы она возвращала новый массив matches, в котором будут только те аргументы, начиная со второго, которые есть в массиве первого аргумента.
-
-// Например, findMatches([1, 2, 3, 4, 5], 1, 8, 2, 7) должна вернуть массив [1, 2], потому что только они есть в массиве первого аргумента.
+// Дополни функцию isAnyUserActive(users) так, чтобы она проверяла наличие активных пользователей (свойство isActive) и возвращала true или false.
 
 // Тесты
-// Объявлена функция findMatches()
-// Вызов findMatches([1, 2, 3, 4, 5], 1, 8, 2, 7) возвращает [1, 2]
-// Вызов findMatches([4, 89, 17, 36, 2], 8, 17, 89, 27, 2) возвращает [17, 89, 2]
-// Вызов findMatches([10, 24, 41, 6, 9, 19], 24, 11, 9, 23, 41) возвращает [24, 9, 41]
-// Вызов findMatches([63, 11, 8, 29], 4, 7, 16) возвращает []
+// Объявлена функция isAnyUserActive(users)
+// Для перебора параметра users используется метод some()
+// Вызов функции с указанным массивом пользователей возвращает true
+// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
+// ============Исходный код задачи
+// // Change code below this line
+// const isAnyUserActive = (users) => {};
+// // Change code above this line
+
+// ++++++++++++++Решение
 // Change code below this line
-function findMatches(firstArray, ...args) {
-  const matches = []; // Don't change this line
-  for (const arg of args) {
-    if (firstArray.includes(arg)) {
-      matches.push(arg);
-    }
-  }
+// const isAnyUserActive = (users) => users.some((user) => user.isActive === true);
+// Change code above this line
 
-  // Change code above this line
-  return matches;
-}
+// ++++++++++++++Решение 2
+// Change code below this line
+const isAnyUserActive = (users) =>
+  users.some(({ isActive }) => isActive === true);
+// Change code above this line
 
-console.log(findMatches([1, 2, 3, 4, 5], 1, 8, 2, 7));
-console.log(findMatches([10, 24, 41, 6, 9, 19], 24, 11, 9, 23, 41));
-console.log(findMatches([63, 11, 8, 29], 4, 7, 16));
+console.log(isAnyUserActive(users));

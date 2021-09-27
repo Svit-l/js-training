@@ -1,5 +1,6 @@
-// Задача. Пользователь с почтой
+// Задача. Пользователи и друзья
 // Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
+
 const users = [
   {
     name: "Moore Hensley",
@@ -41,7 +42,7 @@ const users = [
     name: "Carey Barr",
     email: "careybarr@nurali.com",
     eyeColor: "blue",
-    friends: ["Jordan Sampson", "Eddie Strong"],
+    friends: ["Jordan Sampson", "Eddie Strong", "Adrian Cross"],
     isActive: true,
     balance: 3951,
     gender: "male",
@@ -50,7 +51,12 @@ const users = [
     name: "Blackburn Dotson",
     email: "blackburndotson@furnigeer.com",
     eyeColor: "brown",
-    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    friends: [
+      "Jacklyn Lucas",
+      "Linda Chapman",
+      "Adrian Cross",
+      "Solomon Fokes",
+    ],
     isActive: false,
     balance: 1498,
     gender: "male",
@@ -65,39 +71,36 @@ const users = [
     gender: "female",
   },
 ];
+
 // Задание
-// Дополни функцию getUserWithEmail(users, email) так,
-// чтобы она возвращала объект пользователя,
-//   почта которого(свойство email) совпадает со значением параметра email.
+// Дополни функцию getNamesSortedByFriendCount(users) так,
+// чтобы она возвращала массив имён пользователей отсортированный по возрастанию количества их друзей(свойство friends).
 
 // Тесты
-// Объявлена функция getUserWithEmail(users, email)
-
-// Для перебора параметра users используется метод find()
-
-// Если значение параметра email это "shereeanthony@kog.com", функция возвращает объект пользователя с именем Sheree Anthony
-
-// Если значение параметра email это "elmahead@omatom.com", функция возвращает объект пользователя с именем Elma Head
-
-// Если значение параметра email это "blackburndotson@furnigeer.com", функция возвращает объект пользователя с именем Blackburn Dotson
-
-// Если в массиве users нет пользователя с почтой из параметра email, функция возвращает undefined
-
+// Объявлена переменная getNamesSortedByFriendCount
+// Переменной getNamesSortedByFriendCount присвоена стрелочная функция с параметром (users)
+// В теле функции используется цепочка методов
+// Значение параметра users не изменяется
+// Вызов функции с указанным массивом пользователей возвращает массив ["Moore Hensley", "Sharlene Bush", "Elma Head", "Sheree Anthony", "Ross Vazquez", "Carey Barr", "Blackburn Dotson"]
 // Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
 // ============Исходный код задачи
-// // Change code below this line
-// const getUserWithEmail = (users, email) => {
+// Change code below this line
+// const getNamesSortedByFriendCount = users => {
 
 // };
-// // Change code above this line
+// Change code above this line
 
 // ++++++++++++++Решение
 // Change code below this line
-const getUserWithEmail = (users, email) =>
-  users.find((user) => user.email === email);
-
+const getNamesSortedByFriendCount = (users) => {
+  return [...users]
+    .sort(
+      (firstUser, secondUser) =>
+        firstUser.friends.length - secondUser.friends.length
+    )
+    .map(({ name }) => name);
+};
 // Change code above this line
 
-console.log(getUserWithEmail(users, "shereeanthony@kog.com"));
-console.log(getUserWithEmail(users, "blackburndotson@furnigeer.com"));
+console.log(getNamesSortedByFriendCount(users));

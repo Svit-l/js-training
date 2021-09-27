@@ -1,4 +1,4 @@
-// Задача. Пользователь с почтой
+// Задача. Сортировка по количеству друзей
 // Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
 const users = [
   {
@@ -65,39 +65,34 @@ const users = [
     gender: "female",
   },
 ];
+
 // Задание
-// Дополни функцию getUserWithEmail(users, email) так,
-// чтобы она возвращала объект пользователя,
-//   почта которого(свойство email) совпадает со значением параметра email.
+// Дополни функцию sortByDescendingFriendCount(users) так,
+// чтобы она возвращала массив пользователей отсортированный по убыванию количества их друзей(свойство friends).
 
 // Тесты
-// Объявлена функция getUserWithEmail(users, email)
-
-// Для перебора параметра users используется метод find()
-
-// Если значение параметра email это "shereeanthony@kog.com", функция возвращает объект пользователя с именем Sheree Anthony
-
-// Если значение параметра email это "elmahead@omatom.com", функция возвращает объект пользователя с именем Elma Head
-
-// Если значение параметра email это "blackburndotson@furnigeer.com", функция возвращает объект пользователя с именем Blackburn Dotson
-
-// Если в массиве users нет пользователя с почтой из параметра email, функция возвращает undefined
-
+// Объявлена переменная sortByDescendingFriendCount
+// Переменной sortByDescendingFriendCount присвоена стрелочная функция с параметром (users)
+// Значение параметра users не изменяется
+// Для перебора параметра users использован метод sort()
+// Вызов функции с указанным массивом пользователей возвращает новый массив пользователей отсортированный по убыванию количества их друзей
 // Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
 // ============Исходный код задачи
 // // Change code below this line
-// const getUserWithEmail = (users, email) => {
+// const sortByDescendingFriendCount = users => {
 
 // };
 // // Change code above this line
 
 // ++++++++++++++Решение
 // Change code below this line
-const getUserWithEmail = (users, email) =>
-  users.find((user) => user.email === email);
-
+const sortByDescendingFriendCount = (users) => {
+  return [...users].sort(
+    (firstUser, secondUser) =>
+      secondUser.friends.length - firstUser.friends.length
+  );
+};
 // Change code above this line
 
-console.log(getUserWithEmail(users, "shereeanthony@kog.com"));
-console.log(getUserWithEmail(users, "blackburndotson@furnigeer.com"));
+console.log(sortByDescendingFriendCount(users));

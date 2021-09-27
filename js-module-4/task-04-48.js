@@ -1,4 +1,4 @@
-// Задача. Пользователь с почтой
+// Задача. Общий баланс
 // Этот массив объектов мы будем передавать в параметр users при вызове функции из задания.
 const users = [
   {
@@ -41,7 +41,7 @@ const users = [
     name: "Carey Barr",
     email: "careybarr@nurali.com",
     eyeColor: "blue",
-    friends: ["Jordan Sampson", "Eddie Strong"],
+    friends: ["Jordan Sampson", "Eddie Strong", "Adrian Cross"],
     isActive: true,
     balance: 3951,
     gender: "male",
@@ -50,7 +50,12 @@ const users = [
     name: "Blackburn Dotson",
     email: "blackburndotson@furnigeer.com",
     eyeColor: "brown",
-    friends: ["Jacklyn Lucas", "Linda Chapman"],
+    friends: [
+      "Jacklyn Lucas",
+      "Linda Chapman",
+      "Adrian Cross",
+      "Solomon Fokes",
+    ],
     isActive: false,
     balance: 1498,
     gender: "male",
@@ -65,39 +70,36 @@ const users = [
     gender: "female",
   },
 ];
+
 // Задание
-// Дополни функцию getUserWithEmail(users, email) так,
-// чтобы она возвращала объект пользователя,
-//   почта которого(свойство email) совпадает со значением параметра email.
+// Дополни функцию getTotalBalanceByGender(users, gender) так,
+// чтобы она возвращала общий баланс пользователей(свойство balance),
+// пол которых(свойство gender) совпадает со значением параметра gender.
 
 // Тесты
-// Объявлена функция getUserWithEmail(users, email)
-
-// Для перебора параметра users используется метод find()
-
-// Если значение параметра email это "shereeanthony@kog.com", функция возвращает объект пользователя с именем Sheree Anthony
-
-// Если значение параметра email это "elmahead@omatom.com", функция возвращает объект пользователя с именем Elma Head
-
-// Если значение параметра email это "blackburndotson@furnigeer.com", функция возвращает объект пользователя с именем Blackburn Dotson
-
-// Если в массиве users нет пользователя с почтой из параметра email, функция возвращает undefined
-
+// Объявлена переменная getTotalBalanceByGender
+// Переменной getTotalBalanceByGender присвоена стрелочная функция с параметрами (users, gender)
+// В теле функции используется цепочка методов в правильном порядке
+// Значение параметра users не изменяется
+// Если значение параметра gender это строка "male", функция возвращает число 12053
+// Если значение параметра gender это строка "female", функция возвращает число 8863
 // Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
 
 // ============Исходный код задачи
+// Change code below this line
+const getTotalBalanceByGender = (users, gender) => {
+  return [...users]
+    .filter((user) => user.gender === gender)
+    .reduce((totalBalans, user) => totalBalans + user.balance, 0);
+};
+// Change code above this line
+
+// ++++++++++++++Решение
 // // Change code below this line
-// const getUserWithEmail = (users, email) => {
+// const getTotalBalanceByGender = (users, gender) => {
 
 // };
 // // Change code above this line
 
-// ++++++++++++++Решение
-// Change code below this line
-const getUserWithEmail = (users, email) =>
-  users.find((user) => user.email === email);
-
-// Change code above this line
-
-console.log(getUserWithEmail(users, "shereeanthony@kog.com"));
-console.log(getUserWithEmail(users, "blackburndotson@furnigeer.com"));
+console.log(getTotalBalanceByGender(users, "male"));
+console.log(getTotalBalanceByGender(users, "female"));

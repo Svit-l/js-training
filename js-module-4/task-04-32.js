@@ -1,49 +1,89 @@
-// Операция rest для сбора части аргументов функции
-// Операция ... (rest) также позволяет собрать в массив только ту часть аргументов,
-// которая необходима, объявив параметры до «сбора».
+// Метод some()
+// Метод some(callback) проверяет проходит ли хотя бы один элемент массива тест предоставляемый коллбек-функцией. Возвращает true или false.
 
-function multiply(firstNumber, secondNumber, ...otherArgs) {
-  console.log(firstNumber); // Значение первого аргумента
-  console.log(secondNumber); // Значение второго аргумента
-  console.log(otherArgs); // Массив остальных аргументов
-}
+// массив.some((element, index, array) => {
+//   // Callback function body
+// });
+// Не изменяет оригинальный массив.
+// Поэлементно перебирает оригинальный массив.
+// Возвращает true если хотя бы один элемент массива удовлетворяет условию.
+// Возвращает false если ни один элемент массив не удовлетворяет условию.
+// Перебор массива прекращается если коллбек возвращает true.
+// // Есть хотя бы один элемент больше либо равный нулю? - да
+// [1, 2, 3, 4, 5].some(value => value >= 0); // true
 
-multiply(1, 2);
-multiply(1, 2, 3);
-multiply(1, 2, 3, 4);
+// // Есть хотя бы один элемент больше либо равный нулю? - да
+// [-7, -20, 3, -10, -14].some(value => value >= 0); // true
 
-// Все аргументы, для которых будут объявлены параметры, передадут им свои значения,
-// остальные аргументы будут помещены в массив.
-// Операция rest собирает все оставшиеся аргументы и поэтому должна идти последней в подписи функции,
-// иначе будет ошибка.
+// // Есть хотя бы один элемент меньше нуля? - нет
+// [1, 2, 3, 4, 5].some(value => value < 0); // false
+
+// // Есть хотя бы один элемент меньше нуля? - да
+// [1, 2, 3, -10, 4, 5].some(value => value < 0); // true
 
 // Задание
-// Функция addOverNum() считает сумму всех аргументов.
-// Измени параметры и тело функции addOverNum() так,
-//   чтобы она считала сумму только тех аргументов, которые больше чем заданное число.
-//   Это число должно быть первым параметром функции.
+// Используя метод some() дополни код так, чтобы:
 
+// В переменной anyElementInFirstIsEven был результат проверки наличия чётных элементов в массиве firstArray.
+// В переменной anyElementInFirstIsOdd был результат проверки наличия нечётных элементов в массиве firstArray.
+// В переменной anyElementInSecondIsEven был результат проверки наличия чётных элементов в массиве secondArray.
+// В переменной anyElementInSecondIsOdd был результат проверки наличия нечётных элементов в массиве secondArray.
+// В переменной anyElementInThirdIsEven был результат проверки наличия чётных элементов в массиве thirdArray.
+// В переменной anyElementInThirdIsOdd был результат проверки наличия нечётных элементов в массиве thirdArray.
 // Тесты
-// Объявлена функция addOverNum()
-// Вызов addOverNum(50, 15, 27) возвращает 0
-// Вызов addOverNum(10, 12, 4, 11, 48, 10, 8) возвращает 71
-// Вызов addOverNum(15, 32, 6, 13, 19, 8) возвращает 51
-// Вызов addOverNum(20, 74, 11, 62, 46, 12, 36) возвращает 218
+// Объявлена переменная firstArray
+// Значение переменной firstArray это массив [26, 94, 36, 18]
+// Объявлена переменная secondArray
+// Значение переменной secondArray это массив [17, 61, 23]
+// Объявлена переменная thirdArray
+// Значение переменной thirdArray это массив [17, 26, 94, 61, 36, 23, 18]
+// Объявлена переменная anyElementInFirstIsEven
+// Значение переменной anyElementInFirstIsEven это буль true
+// Объявлена переменная anyElementInFirstIsOdd
+// Значение переменной anyElementInFirstIsOdd это буль false
+// Объявлена переменная anyElementInSecondIsEven
+// Значение переменной anyElementInSecondIsEven это буль false
+// Объявлена переменная anyElementInSecondIsOdd
+// Значение переменной anyElementInSecondIsOdd это буль true
+// Объявлена переменная anyElementInThirdIsEven
+// Значение переменной anyElementInThirdIsEven это буль true
+// Объявлена переменная anyElementInThirdIsOdd
+// Значение переменной anyElementInThirdIsOdd это буль true
+// Для перебора массивов использован метод some()
 
-// Change code below this line
-function addOverNum(minNumber, ...args) {
-  let total = 0;
+// ============Исходный код задачи
+// const firstArray = [26, 94, 36, 18];
+// const secondArray = [17, 61, 23];
+// const thirdArray = [17, 26, 94, 61, 36, 23, 18];
+// // Change below this line
 
-  for (const arg of args) {
-    if (arg > minNumber) {
-      total += arg;
-    }
-  }
+// const anyElementInFirstIsEven = firstArray;
+// const anyElementInFirstIsOdd = firstArray;
 
-  return total;
-  // Change code above this line
-}
+// const anyElementInSecondIsEven = secondArray;
+// const anyElementInSecondIsOdd = secondArray;
 
-console.log(addOverNum(50, 15, 27));
-console.log(addOverNum(10, 12, 4, 11, 48, 10, 8));
-console.log(addOverNum(20, 74, 11, 62, 46, 12, 36));
+// const anyElementInThirdIsEven = thirdArray;
+// const anyElementInThirdIsOdd = thirdArray;
+
+// ++++++++++++++Решение
+const firstArray = [26, 94, 36, 18];
+const secondArray = [17, 61, 23];
+const thirdArray = [17, 26, 94, 61, 36, 23, 18];
+// Change below this line
+
+const anyElementInFirstIsEven = firstArray.some((value) => value % 2 === 0);
+const anyElementInFirstIsOdd = firstArray.some((value) => value % 2 !== 0);
+
+const anyElementInSecondIsEven = secondArray.some((value) => value % 2 === 0);
+const anyElementInSecondIsOdd = secondArray.some((value) => value % 2 !== 0);
+
+const anyElementInThirdIsEven = thirdArray.some((value) => value % 2 === 0);
+const anyElementInThirdIsOdd = thirdArray.some((value) => value % 2 !== 0);
+
+console.log(anyElementInFirstIsEven);
+console.log(anyElementInFirstIsOdd);
+console.log(anyElementInSecondIsEven);
+console.log(anyElementInSecondIsOdd);
+console.log(anyElementInThirdIsEven);
+console.log(anyElementInThirdIsOdd);
