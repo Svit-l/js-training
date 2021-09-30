@@ -1,98 +1,76 @@
-// Чистые функции
-// Функция с побочными эффектами - это функция которая в процессе выполнения может изменять или использовать глобальные переменные, изменять значение аргументов ссылочного типа, выполнять операции ввода-вывода и т. п.
-
-// const dirtyMultiply = (array, value) => {
-//   for (let i = 0; i < array.length; i += 1) {
-//     array[i] = array[i] * value;
-//   }
-// };
-
-// const numbers = [1, 2, 3, 4, 5];
-// dirtyMultiply(numbers, 2);
-// // Произошла мутация исходных данных - массива numbers
-// console.log(numbers); // [2, 4, 6, 8, 10]
-// Функция dirtyMultiply(array, value) умножает каждый элемент массива array на число value. Она изменяет (мутирует) исходный массив по ссылке.
-
-// Чистая функция (pure function) - это функция результат которой зависит только от значений переданных аргументов. При одинаковых аргументах она всегда возвращает один и тот же результат и не имеет побочных эффектов, то есть не изменяет значения аргументов.
-
-// Напишем реализацию чистой функции умножения элементов массива, возвращающей новый массив, не изменяя исходный.
-
-// const pureMultiply = (array, value) => {
-//   const newArray = [];
-
-//   array.forEach(element => {
-//     newArray.push(element * value);
-//   });
-
-//   return newArray;
-// };
-
-// const numbers = [1, 2, 3, 4, 5];
-// const doubledNumbers = pureMultiply(numbers, 2);
-
-// // Не произошло мутации исходных данных
-// console.log(numbers); // [1, 2, 3, 4, 5]
-// // Функция вернула новый массив с изменёнными данными
-// console.log(doubledNumbers); // [2, 4, 6, 8, 10]
+// Задача: склад 2.0
 // Задание
-// Функция changeEven(numbers, value) принимает массив чисел numbers и обновляет каждый элемент, значение которого это чётное число, добавляя к нему значение параметра value.
+// Выполни рефакторинг класса Storage, сделав свойство items приватным.
 
-// Выполни рефакторинг функции так, чтобы она стала чистой - не изменяла массив чисел numbers, а создавала, наполняла и возвращала новый массив с обновлёнными значениями.
+// Под комментарием мы добавили инициализацию экземпляра и вызовы методов в той последовательности, в которой твой код будут проверять тесты. Пожалуйста ничего там не меняй.
 
 // Тесты
-// Объявлена функция changeEven(numbers, value)
-// Функция changeEven не изменяет значение параметра numbers
-// Вызов changeEven([1, 2, 3, 4, 5], 10) возвращает новый массив [1, 12, 3, 14, 5]
-// Вызов changeEven([2, 8, 3, 7, 4, 6], 10) возвращает новый массив [12, 18, 3, 7, 14, 16]
-// Вызов changeEven([17, 24, 68, 31, 42], 100) возвращает новый массив [17, 124, 168, 31, 142]
-// Вызов changeEven([44, 13, 81, 92, 36, 54], 100) возвращает новый массив [144, 13, 81, 192, 136, 154]
-// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+// Объявлен класс Storage
+// У объекта storage нет свойства items
+// В классе Storage объявлен метод getItems
+// В классе Storage объявлен метод addItem
+// В классе Storage объявлен метод removeItem
+// Свойство items в классе Storage объявлено приватным
+// Конструктор класса принимает свойство items
+// В результате вызова new Storage(["Nanitoids", "Prolonger", "Antigravitator"]) значение переменной storage это объект
+// Первый вызов storage.getItems(), сразу после инциализации экземпляра, возвращает массив ["Nanitoids", "Prolonger", "Antigravitator"]
+// Второй вызов, storage.getItems(), после вызова storage.addItem("Droid"), возвращает массив ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+// Третий вызов storage.getItems(), после вызова storage.removeItem("Prolonger"), возвращает массив ["Nanitoids", "Antigravitator", "Droid"]
 
 // ============Исходный код задачи
-// function changeEven(numbers, value) {
+// class Storage {
 //   // Change code below this line
-//   for (let i = 0; i < numbers.length; i += 1) {
-//     if (numbers[i] % 2 === 0) {
-//       numbers[i] = numbers[i] + value;
-//     }
+
+//   constructor(items) {
+//     this.items = items;
 //   }
-//   // Change code above this line
+
+//   getItems() {
+//     return this.items;
+//   }
+
+//   addItem(newItem) {
+//     this.items.push(newItem);
+//   }
+
+//   removeItem(itemToRemove) {
+//     this.items = this.items.filter(item => item !== itemToRemove);
+//   }
 // }
+
+// // Change code above this line
+// const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+// storage.addItem("Droid");
+// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+// storage.removeItem("Prolonger");
+// console.log(storage.getItems()); // ["Нанитоиды", "Антигравитатор", "Droid"]
 
 // ++++++++++++++Решение
-// function changeEven(numbers, value) {
-//   // Change code below this line
-
-//   const newArray = [];
-//   numbers.forEach((number) => {
-//     if (number % 2 === 0) {
-//       number += value;
-//       newArray.push(number);
-//     } else {
-//       newArray.push(number);
-//     }
-//   });
-//   return newArray;
-//   // Change code above this line
-// }
-
-// ++++++++++++++Решение 2
-const changeEven = (numbers, value) => {
+class Storage {
   // Change code below this line
+  #items;
+  constructor(items) {
+    this.#items = items;
+  }
 
-  const newArray = [];
-  numbers.forEach((number) => {
-    if (number % 2 === 0) {
-      number += value;
-      newArray.push(number);
-    } else {
-      newArray.push(number);
-    }
-  });
-  return newArray;
-  // Change code above this line
-};
+  getItems() {
+    return this.#items;
+  }
 
-console.log(changeEven([1, 2, 3, 4, 5], 10));
-console.log(changeEven([17, 24, 68, 31, 42], 100));
-console.log(changeEven([44, 13, 81, 92, 36, 54], 100));
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
+
+  removeItem(itemToRemove) {
+    this.#items = this.#items.filter((item) => item !== itemToRemove);
+  }
+}
+
+// Change code above this line
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Нанитоиды", "Антигравитатор", "Droid"]

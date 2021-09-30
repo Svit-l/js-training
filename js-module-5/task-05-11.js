@@ -1,48 +1,105 @@
-// Задача. Фильтрация массива чисел 2.0
+// Задача: конструктор строк
 // Задание
-// Замени объявление функции filterArray() и коллбек для метода forEach() на стрелочные функции.
+// Напиши класс StringBuilder, который принимает один параметр initialValue - произвольную строку,
+// которая записывается на создаваемый объект в свойство value.
+
+// Объяви следующие методы класса:
+
+// getValue() - возвращает текущее значение свойства value.
+// padEnd(str) - получает парметр str (строку) и добавляет её в конец значения свойства value объекта который вызывает этот метод.
+// padStart(str) - получает парметр str (строку) и добавляет её в начало значения свойства value объекта который вызывает этот метод.
+// padBoth(str) - получает парметр str (строку) и добавляет её в начало и в конец значения свойства value объекта который вызывает этот метод.
+// Под комментарием мы добавили инициализацию экземпляра и вызовы методов в той последовательности,
+// в которой твой код будут проверять тесты. Пожалуйста ничего там не меняй.
 
 // Тесты
-// Объявлена переменная filterArray
-// Переменной filterArray присвоена стрелочная функция с параметрами (numbers, value)
-// Для перебора массива numbers использован метод forEach
-// Коллбек для метода forEach это стрелочная функция
-// Вызов функции filterArray([1, 2, 3, 4, 5], 3) возвращает [4, 5]
-// Вызов функции filterArray([1, 2, 3, 4, 5], 4) возвращает [5]
-// Вызов функции filterArray([1, 2, 3, 4, 5], 5) возвращает []
-// Вызов функции filterArray([12, 24, 8, 41, 76], 38) возвращает [41, 76]
-// Вызов функции filterArray([12, 24, 8, 41, 76], 20) возвращает [24, 41, 76]
-// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+// Объявлен класс StringBuilder
+// В классе StringBuilder объявлен метод getValue
+// Метод getValue возвращает значение свойства value экземпляра класса который его вызывает
+// В классе StringBuilder объявлен метод padEnd
+// Метод padEnd изменяет свойство value экземпляра класса, который его вызывает
+// В классе StringBuilder объявлен метод padStart
+// Метод padStart изменяет свойство value экземпляра класса который его вызывает
+// В классе StringBuilder объявлен метод padBoth
+// Метод padBoth изменяет свойство value экземпляра класса который его вызывает
+// В результате вызова new StringBuilder(".") значение переменной builder это объект
+// У объекта builder есть свойство value
+// Первый вызов builder.getValue(), сразу после инциализации экземпляра, возвращает строку .
+// Второй вызов builder.getValue(), после вызова builder.padStart("^"), возвращает строку ^.
+// Третий вызов builder.getValue(), после вызова builder.padEnd("^"), возвращает строку ^.^
+// Четвёртый вызов builder.getValue(), после вызова builder.padBoth("="), возвращает строку =^.^=
 
 // ============Исходный код задачи
-// Change code below this line
-// function filterArray(numbers, value) {
-//   const filteredNumbers = [];
 
-//   numbers.forEach(function (number) {
-//     if (number > value) {
-//       filteredNumbers.push(number);
-//     }
-//   });
+// // Change code above this line
+// const builder = new StringBuilder(".");
+// console.log(builder.getValue()); // "."
+// builder.padStart("^");
+// console.log(builder.getValue()); // "^."
+// builder.padEnd("^");
+// console.log(builder.getValue()); // "^.^"
+// builder.padBoth("=");
+// console.log(builder.getValue()); // "=^.^="
 
-//   // Change code above this line
-//   return filteredNumbers;
+// ++++++++++++++Решение 1
+class StringBuilder {
+  // Change code below this line
+
+  constructor(initialValue) {
+    this.value = initialValue;
+  }
+
+  getValue() {
+    return this.value;
+  }
+
+  padEnd(str) {
+    this.value += str;
+  }
+
+  padStart(str) {
+    this.value = str + this.value;
+  }
+
+  padBoth(str) {
+    this.padStart(str);
+    this.padEnd(str);
+  }
+}
+
+// Change code above this line
+
+// // ++++++++++++++Решение 2
+// class StringBuilder {
+//   constructor(initialValue) {
+//     this.value = initialValue;
+//   }
+
+//   getValue() {
+//     // возвращает текущее значение свойства value.
+//     return this.value;
+//   }
+
+//   padEnd(str) {
+//     // получает парметр str(строку) и добавляет её в конец значения свойства value объекта который вызывает этот метод.
+//     this.value = this.value + str;
+//   }
+
+//   padStart(str) {
+//     //- получает парметр str(строку) и добавляет её в начало значения свойства value объекта который вызывает этот метод.
+//     this.value = str + this.value;
+//   }
+//   padBoth(str) {
+//     // - получает парметр str(строку)и добавляет её в начало и в конец значения свойства value объекта который вызывает этот метод.
+//     this.value = str + this.value + str;
+//   }
 // }
-
-// ++++++++++++++Решение
-// Change code below this line
-const filterArray = (numbers, value) => {
-  const filteredNumbers = [];
-
-  numbers.forEach((number) => {
-    if (number > value) {
-      filteredNumbers.push(number);
-    }
-  });
-
-  // Change code above this line
-  return filteredNumbers;
-};
-
-console.log(filterArray([1, 2, 3, 4, 5], 3));
-console.log(filterArray([12, 24, 8, 41, 76], 20));
+// Change code above this line
+const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="

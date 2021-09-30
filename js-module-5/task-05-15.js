@@ -1,74 +1,135 @@
-// Метод map() и массив объектов
-// Мы уже знаем что повседневная задача это манипуляция массивом объектов. Например, получить массив значений свойства из всех объектов. Есть массив студентов, а нужно получить отдельный массив их имён.
+// Геттеры и сеттеры
+// Геттеры и сеттеры - это более краткий синтаксис объявления методов для взаимодействия со свойствами.
+// Геттер и сеттер имитируют обычное публичное свойство класса, но позволяют изменять другие свойства более удобным способом.
+// Геттер выполняется при попытке получить значение свойства, а сеттер - при попытке его изменить.
 
-// const students = [
-//   { name: "Mango", score: 83 },
-//   { name: "Poly", score: 59 },
-//   { name: "Ajax", score: 37 },
-//   { name: "Kiwi", score: 94 },
-//   { name: "Houston", score: 64 },
-// ];
+// Геттеры и сеттеры хорошо использовать для простых операций чтения и изменения значения свойств,
+// особенно приватных, как их публичный интерфейс.Для работы со свойством которое хранит массив или объект они не подойдут.
 
-// const names = students.map(student => student.name);
-// console.log(names); // ["Mango", "Poly", "Ajax", "Kiwi", "Houston"]
-// Используя метод map() можно перебрать массив объектов, и в коллбек-функции вернуть значение свойства каждого из них.
+// class User {
+//   #email;
 
+//   constructor({ name, email }) {
+//     this.name = name;
+//     this.#email = email;
+//   }
+
+//   // Геттер email
+//   get email() {
+//     return this.#email;
+//   }
+
+//   // Сеттер email
+//   set email(newEmail) {
+//     this.#email = newEmail;
+//   }
+// }
+// Мы объявили геттер и сеттер email поставив перед именем свойства ключевые слова get и set. Внутри этих методов мы или возвращаем значение приватного свойства #email или изменяем его значение. Геттер и сеттер идут впаре и должны называться одинаково.
+
+// const mango = new User({ name: "Mango", email: "mango@mail.com" });
+// console.log(mango.email); // mango@mail.com
+// mango.email = "mango@supermail.com";
+// console.log(mango.email); // mango@supermail.com
+// При обращении к mango.email вызызвается геттер get email() {...} и выполняется его код. При попытке записи mango.email = "mango@supermail.com" вызывается сеттер set email(newEmail) {...} и строка "mango@supermail.com" будет значением параметра newEmail.
+
+// Плюс в том, что это методы, а значит при записи можно выполнить дополнительный код, например с какими-то проверками, в отличии от выполнениях этой же операции напрямую со свойством.
+
+// set email(newEmail) {
+//   if(newEmail === "") {
+//     console.error("Ошибка! Почта не может быть пустой строкой!");
+//     return;
+//   }
+
+//   this.#email = newEmail;
+// }
 // Задание
-// Используя метод map() сделай так, чтобы в переменной titles получился массив названий книг (свойство title) из всех объектов массива books.
+// Выполни рефакторинг класса Car. Сделай свойства model и price приватными, также как #brand. Стандартизируй публичный интерфейс класса заменив уже объявленные методы на геттеры и сеттеры brand, model и price для взаимодействия с приватными свойствами.
 
 // Тесты
-// Объявлена переменная books
-// Значение переменной books это массив
-// Объявлена переменная titles
-// Значение переменной titles это массив ["The Last Kingdom", "Beside Still Waters", "The Dream of a Ridiculous Man", "Redder Than Blood", "Enemy of God"]
-// Для перебора массива books используется метод map() как чистая функция
+// Объявлен класс Car
+// В классе Car объявлено приватное свойство brand
+// В классе Car объявлено приватное свойство model
+// В классе Car объявлено приватное свойство price
+// Конструктор класса принимает объект со свойствами brand, model и price
+// В классе Car объявлен геттер brand
+// В классе Car объявлен сеттер brand
+// В классе Car объявлен геттер model
+// В классе Car объявлен сеттер model
+// В классе Car объявлен геттер price
+// В классе Car объявлен сеттер price
 
 // ============Исходный код задачи
-// const books = [
-//   {
-//     title: "The Last Kingdom",
-//     author: "Bernard Cornwell",
-//     rating: 8.38,
-//   },
-//   {
-//     title: "Beside Still Waters",
-//     author: "Robert Sheckley",
-//     rating: 8.51,
-//   },
-//   {
-//     title: "The Dream of a Ridiculous Man",
-//     author: "Fyodor Dostoevsky",
-//     rating: 7.75,
-//   },
-//   { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
-//   { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
-// ];
-// // Change code below this line
+// class Car {
+//   // Change code below this line
+//   #brand;
 
-// const titles = books;
+//   constructor({ brand, model, price }) {
+//     this.#brand = brand;
+//     this.model = model;
+//     this.price = price;
+//   }
+
+//   getBrand() {
+//     return this.#brand;
+//   }
+
+//   changeBrand(newBrand) {
+//     this.#brand = newBrand;
+//   }
+
+//   getModel() {
+//     return this.model;
+//   }
+
+//   updateModel(newModel) {
+//     this.model = newModel;
+//   }
+
+//   getPrice() {
+//     return this.price;
+//   }
+
+//   setPrice(newPrice) {
+//     this.price = newPrice;
+//   }
+//   // Change code above this line
+// }
 
 // ++++++++++++++Решение
-const books = [
-  {
-    title: "The Last Kingdom",
-    author: "Bernard Cornwell",
-    rating: 8.38,
-  },
-  {
-    title: "Beside Still Waters",
-    author: "Robert Sheckley",
-    rating: 8.51,
-  },
-  {
-    title: "The Dream of a Ridiculous Man",
-    author: "Fyodor Dostoevsky",
-    rating: 7.75,
-  },
-  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
-  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
-];
-// Change code below this line
+class Car {
+  // Change code below this line
+  #brand;
+  #model;
+  #price;
 
-const titles = books.map((book) => book.title);
+  constructor({ brand, model, price }) {
+    this.#brand = brand;
+    this.#model = model;
+    this.#price = price;
+  }
 
-console.log(titles);
+  get brand() {
+    return this.#brand;
+  }
+
+  set brand(newBrand) {
+    this.#brand = newBrand;
+  }
+
+  get model() {
+    return this.#model;
+  }
+
+  set model(newModel) {
+    this.#model = newModel;
+  }
+
+  get price() {
+    return this.#price;
+  }
+
+  set price(newPrice) {
+    this.#price = newPrice;
+  }
+  // Change code above this line
+}

@@ -1,53 +1,119 @@
-// Метод flatMap()
-// Метод flatMap(callback) аналогичен методу map(), но применяется в случаях, когда результат это многомерный массив который необходимо «разгладить».
+// Статические свойства
+// Кроме публичных и приватных свойств будущего экземпляра, в классе можно объявить его собственные свойства, доступные только классу, но не его экземплярам - статические свойства (static). Они полезны для хранения информации относящейся к самому классу.
 
-// массив.flatMap((element, index, array) => {
-//   // Тело коллбек-функции
+// Добавим классу пользователя приватное свойство role - его роль, определяющую набор прав, например администратор, редактор, просто пользователь и т п. Возможные роли пользователей будем хранить как статическое свойство Roles - объект со свойствами.
+
+// Статические свойства объявляются в теле класса. Перед именем свойства добавляется ключевое слово static.
+
+// class User {
+//   // Объявление и инициализация статического свойства
+//   static Roles = {
+//     ADMIN: "admin",
+//     EDITOR: "editor",
+//   };
+
+//   #email;
+//   #role;
+
+//   constructor({ email, role }) {
+//     this.#email = email;
+//     this.#role = role;
+//   }
+
+//   get role() {
+//     return this.#role;
+//   }
+
+//   set role(newRole) {
+//     this.#role = newRole;
+//   }
+// }
+
+// const mango = new User({
+//   email: "mango@mail.com",
+//   role: User.Roles.ADMIN,
 // });
-// В массиве students хранится список студентов со списком предметов, которые посещает студент, в свойстве courses. Несколько студентов могут посещать один и тот же предмет. Необходимо составить список всех предметов, которые посещает эта группа студентов, пока даже повторяющихся.
 
-// const students = [
-//   { name: "Mango", courses: ["mathematics", "physics"] },
-//   { name: "Poly", courses: ["science", "mathematics"] },
-//   { name: "Kiwi", courses: ["physics", "biology"] },
-// ];
+// console.log(mango.Roles); // undefined
+// console.log(User.Roles); // { ADMIN: "admin", EDITOR: "editor" }
 
-// students.map(student => student.courses);
-// // [["mathematics", "physics"], ["science", "mathematics"], ["physics", "biology"]]
-
-// students.flatMap(student => student.courses);
-// // ["mathematics", "physics", "science", "mathematics", "physics", "biology"];
-// Он вызывает коллбек-функцию для каждого элемента исходного массива, а результат её работы записывает в новый массив. Отличие от map() в том, что новый массив «разглаживается» на глубину равную единице (одна вложенность). Этот разглаженный массив и есть результат работы flatMap().
+// console.log(mango.role); // "admin"
+// mango.role = User.Roles.EDITOR;
+// console.log(mango.role); // "editor"
+// Статические свойства также могут быть приватные, то есть доступные только внутри класса. Для этого имя совйства должно начинаться с символа #, также как приватные свойства. Обращение к приватному статическому свойству вне тела класса вызовет ошибку.
 
 // Задание
-// Используя метод flatMap() сделай так, чтобы в переменной genres получился массив всех жанров книг (свойство genres) из массива книг books.
+// Выполни рефакторинг класса Car. Добавь публичное статическое свойство MAX_PRICE со значением 50000 - максимально допустимая цена автомобиля.
+
+// Добавь сеттеру price проверку передаваемого значения параметра newPrice. Если оно больше чем MAX_PRICE, сеттер ничего не делает, а если меньше или равно, то перезаписывает цену автомобиля.
 
 // Тесты
-// Объявлена переменная books
-// Значение переменной books это массив объектов
-// Объявлена переменная genres
-// Значение переменной genres это массив [ "adventure", "history", "fiction", "horror", "mysticism" ]
-// Для перебора массива books используется метод flatMap()
+// Объявлен класс Car
+// У класса Car есть статическое свойство MAX_PRICE
+// Значение статического свойства MAX_PRICE это число 50000
+// У экземпляра нет свойства MAX_PRICE
+// В классе Car объявлен геттер price
+// В классе Car объявлен сеттер price
+// Вызов сеттера price у экземпляра класса, со значением аргумента меньше чем значение MAX_PRICE, изменяет свойство #price
+// Вызов сеттера price у экземпляра класса, со значением аргумента больше чем значение MAX_PRICE, не изменяет свойство #price
 
-const books = [
-  {
-    title: "The Last Kingdom",
-    author: "Bernard Cornwell",
-    genres: ["adventure", "history"],
-  },
-  {
-    title: "Beside Still Waters",
-    author: "Robert Sheckley",
-    genres: ["fiction"],
-  },
-  {
-    title: "Redder Than Blood",
-    author: "Tanith Lee",
-    genres: ["horror", "mysticism"],
-  },
-];
-// Change code below this line
+// ============Исходный код задачи
+// class Car {
+//   // Change code below this line
+//   #price;
 
-const genres = books.flatMap((book) => book.genres);
+//   constructor({ price }) {
+//     this.#price = price;
+//   }
 
-console.log(genres);
+//   get price() {
+//     return this.#price;
+//   }
+
+//   set price(newPrice) {
+//     this.#price = newPrice;
+//   }
+//   // Change code above this line
+// }
+
+// const audi = new Car({ price: 35000 });
+// console.log(audi.price); // 35000
+
+// audi.price = 49000;
+// console.log(audi.price); // 49000
+
+// audi.price = 51000;
+// console.log(audi.price); // 49000
+
+// ++++++++++++++Решение
+class Car {
+  // Change code below this line
+  static MAX_PRICE = 50000;
+
+  #price;
+
+  constructor({ price }) {
+    this.#price = price;
+  }
+
+  get price() {
+    return this.#price;
+  }
+
+  set price(newPrice) {
+    if (newPrice > Car.MAX_PRICE) {
+      return;
+    }
+    this.#price = newPrice;
+  }
+  // Change code above this line
+}
+
+const audi = new Car({ price: 35000 });
+console.log(audi.price); // 35000
+
+audi.price = 49000;
+console.log(audi.price); // 49000
+
+audi.price = 51000;
+console.log(audi.price); // 49000
