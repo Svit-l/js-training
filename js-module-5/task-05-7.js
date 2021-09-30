@@ -1,66 +1,58 @@
-// Задача. Общие элементы
-// Задание
-// Функция getCommonElements(firstArray, secondArray) принимает два массива
-//  произвольной длины в параметры firstArray и secondArray,
-//   и возвращает новый массив их общих элементов, то есть тех которые есть в обоих массивах.
+// Конструктор класса
+// Для инициализации экземпляра в классе есть метод constructor. Если он не объявлен, создаётся конструктор по умолчанию - пустая функция, которая не изменяет экземпляр.
 
-// Выполни рефакторинг функции так, чтобы вместо цикла for она использовала метод forEach.
+// class User {
+//   // Синтаксис объявления метода класса
+//   constructor(name, email) {
+//     // Инициализация свойств экземпляра
+//     this.name = name;
+//     this.email = email;
+//   }
+// }
+
+// const mango = new User("Mango", "mango@mail.com");
+// console.log(mango); // { name: 'Mango', email: 'mango@mail.com' }
+
+// const poly = new User("Poly", "poly@mail.com");
+// console.log(poly); // { name: 'Poly', email: 'poly@mail.com' }
+// Вызов класса с оператором new приводит к созданию нового объекта и вызову конструктора в контексте этого объекта. То есть this внутри конструктора будет ссылаться на новосозданный объект. Это позволяет добавлять каждому объекту свойства с одинаковыми именами, но разными значениями.
+
+// Свойства name и email называются публичные свойства, потому что они будут собственными свойствами объекта-экземпляра и к ним можно будет получить доступ обратившись через точку.
+
+// Задание
+// Добавь классу Car метод constructor который принимает три параметра:
+
+// brand - марка автомобиля.
+// model - модель автомобиля.
+// price - цена автомобиля.
+// Класс Car должен создавать объект с одноимёнными свойствами brand, model и price, значениями которых должны быть переданные аргументы во время её вызова с оператором new.
 
 // Тесты
-// Объявлена функция getCommonElements(firstArray, secondArray)
-// Для перебора параметра (массива) использован метод forEach
-// Вызов getCommonElements([1, 2, 3], [2, 4]) возвращает [2]
-// Вызов getCommonElements([1, 2, 3], [2, 1, 17, 19]) возвращает [1, 2]
-// Вызов getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27]) возвращает [12, 27, 3]
-// Вызов getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40]) возвращает [10, 30, 40]
-// Вызов getCommonElements([1, 2, 3], [10, 20, 30]) возвращает []
-// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+// Объявлен класс Car
+// У класса Car есть метод constructor
+// В результате вызова new Car("Audi", "Q3", 36000) получится объект { brand: "Audi", model: "Q3", price: 36000 }
+// В результате вызова new Car("BMW", "X5", 58900) получится объект { brand: "BMW", model: "X5", price: 58900 }
+// В результате вызова new Car("Nissan","Murano", 31700) получится объект { brand: "Nissan", model: "Murano", price: 31700 }
 
 // ============Исходный код задачи
-// function getCommonElements(firstArray, secondArray) {
-//   const commonElements = [];
+// class Car {
 //   // Change code below this line
 
-//   for (let i = 0; i < firstArray.length; i += 1) {
-//     if (secondArray.includes(firstArray[i])) {
-//       commonElements.push(firstArray[i]);
-//     }
-//   }
-
-//   return commonElements;
 //   // Change code above this line
 // }
 
 // ++++++++++++++Решение
-function getCommonElements(firstArray, secondArray) {
-  const commonElements = [];
+
+class Car {
   // Change code below this line
-
-  firstArray.forEach((element) => {
-    if (secondArray.includes(element)) {
-      commonElements.push(element);
-    }
-  });
-
-  return commonElements;
+  constructor(brand, model, price) {
+    this.brand = brand;
+    this.model = model;
+    this.price = price;
+  }
   // Change code above this line
 }
 
-// // ++++++++++++++Решение 2
-// function getCommonElements(firstArray, secondArray) {
-//   const commonElements = [];
-//   // Change code below this line
-
-//   firstArray.forEach(function (element) {
-//     if (secondArray.includes(element)) {
-//       commonElements.push(element);
-//     }
-//   });
-
-//   return commonElements;
-//   // Change code above this line
-// }
-
-console.log(getCommonElements([1, 2, 3], [2, 4]));
-console.log(getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40]));
-console.log(getCommonElements([1, 2, 3], [10, 20, 30]));
+console.log(new Car("Audi", "Q3", 36000));
+console.log(new Car("BMW", "X5", 58900));
+console.log(new Car("Nissan", "Murano", 31700));

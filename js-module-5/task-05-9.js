@@ -1,48 +1,72 @@
-// Неявный возврат
-// В стрелочной функции после символа => идёт её тело. Здесь может быть два варианта: с фигурными скобками и без них.
+// Методы класса
+// Для работы со свойствами будущего экземпляра используются методы класса.
+// Методы - это просто функции, но с одним отличием, они доступны экземпляру класса.
 
-// const add = (a, b, c) => {
-//   console.log(a, b, c);
-//   return a + b + c;
-// };
-// Если фигурные скобки есть, и функция должна возвращать какое-то значение, необходимо явно поставить return. Это называется явный возврат (explicit return). Такой синтаксис используется в том случае, если в теле функции нужно выполнить ещё какие-то инструкции кроме возврата значения.
+// class User {
+//   constructor({ name, email }) {
+//     this.name = name;
+//     this.email = email;
+//   }
 
-// const add = (a, b, c) => a + b + c;
-// Если фигурных скобок нет, то возвращается результат выражения стоящего после =>. Это называется неявный возврат (implicit return). В примере вернётся результат выражения сложения параметров a, b и c.
+//   // Метод getEmail
+//   getEmail() {
+//     return this.email;
+//   }
 
-// Синтаксис неявного возврата сильно сокращает «шум» объявления функции с телом и возвращаемым выражением, но подходит только в случае когда в теле функции не нужно выполнять никаких дополнительных инструкций кроме возврата значения.
-
-// // До
-// function classicAdd(a, b, c) {
-//   return a + b + c;
+//   // Метод changeEmail
+//   changeEmail(newEmail) {
+//     this.email = newEmail;
+//   }
 // }
 
-// // После
-// const arrowAdd = (a, b, c) => a + b + c;
 // Задание
-// Выполни рефакторинг функции calculateTotalPrice() так, чтобы она использовала неявный возврат.
+// Добавь классу Car два метода.
 
+// getPrice() - возвращает значение свойства price из объекта который его будет вызывать.
+// changePrice(newPrice) - обновляет значение свойства price у объекта который его будет вызывать на newPrice.
 // Тесты
-// Объявлена переменная calculateTotalPrice
-// Переменной calculateTotalPrice присвоена стрелочная функция с параметрами (quantity, pricePerItem)
-// В функции использован неявный возврат
-// Вызов calculateTotalPrice(5, 100) возвращает 500
-// Вызов calculateTotalPrice(8, 60) возвращает 480
-// Вызов calculateTotalPrice(3, 400) возвращает 1200
-// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+// В классе Car объявлен метод getPrice
+// Метод getPrice возвращает значение свойства price экземпляра класса который его вызывает
+// В классе Car объявлен метод changePrice
+// Метод changePrice изменяет значение свойства price экземпляра класса который его вызывает
 
 // ============Исходный код задачи
 
-// // Change code below this line
-// const calculateTotalPrice = (quantity, pricePerItem) => {
-//   return quantity * pricePerItem;
-// };
-// // Change code above this line
+// class Car {
+//   constructor({ brand, model, price }) {
+//     this.brand = brand;
+//     this.model = model;
+//     this.price = price;
+//   }
+//   // Change code below this line
+
+//   // Change code above this line
+// }
 
 // ++++++++++++++Решение
-// Change code below this line
-const calculateTotalPrice = (quantity, pricePerItem) => quantity * pricePerItem;
-// Change code above this line
+class Car {
+  constructor({ brand, model, price }) {
+    this.brand = brand;
+    this.model = model;
+    this.price = price;
+  }
+  // Change code below this line
+  // Метод getEmail
+  getPrice() {
+    return this.price;
+  }
 
-console.log(calculateTotalPrice(5, 100));
-console.log(calculateTotalPrice(3, 400));
+  // Метод changeEmail
+  changePrice(newPrice) {
+    this.price = newPrice;
+  }
+  // Change code above this line
+}
+
+const firstCar = new Car({ brand: "Audi", model: "Q3", price: 36000 });
+console.log(firstCar);
+// console.log(new Car({ brand: "Audi", model: "Q3", price: 36000 }));
+// console.log(new Car({ brand: "BMW", model: "X5", price: 58900 }));
+// console.log(new Car({ brand: "Nissan", model: "Murano", price: 31700 }));
+console.log(firstCar.getPrice());
+// console.log(firstCar.changePrice(50000));

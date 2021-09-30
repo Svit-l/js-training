@@ -1,62 +1,71 @@
-// Стрелочные функции как коллбеки
-// Анонимные стрелочные функции отлично подходят как коллбеки для перебирающих методов массива из-за более краткого синтаксиса объявления, особенно если не нужно тело функции.
-
-// const numbers = [5, 10, 15, 20, 25];
-
-// // Объявление функции
-// numbers.forEach(function (number, index) {
-//   console.log(`Индекс ${index}, значение ${number}`);
-// });
-
-// // Анонимная стрелочная функция
-// numbers.forEach((number, index) => {
-//   console.log(`Индекс ${index}, значение ${number}`);
-// });
-// Стрелочную коллбек-функцию также можно объявлять отдельно и передавать на неё ссылку. Это стоит делать если одна функция используется в нескольих местах программы или если она громоздкая.
-
-// const numbers = [5, 10, 15, 20, 25];
-
-// const logMessage = (number, index) => {
-//   console.log(`Индекс ${index}, значение ${number}`);
-// };
-
-// numbers.forEach(logMessage);
+// Задача: склад
 // Задание
-// Выполни рефакторинг функции calculateTotalPrice(orderedItems) заменив её объявление на стрелочную функцию.
-//  Замени коллбек - функцию передаваемую в метод forEach() на стрелочную функцию.
+// Напиши класс Storage, который будет создавать объекты для управления складом товаров.
+// Класс ожидает только один аргумент - начальный массив товаров, который записывается на создаваемый объект в свойство items.
+
+// Объяви следующие методы класса:
+
+// getItems() - возвращает массив текущих товаров в свойстве items объекта который вызывает этот метод.
+// addItem(newItem) - принимает новый товар newItem и добавляет его в массив товаров в свойстве items объекта который вызывает этот метод.
+// removeItem(itemToRemove) - принимает товар itemToRemove и удаляет его из массива товаров в свойстве items объекта который вызывает этот метод.
+// Под комментарием мы добавили инициализацию экземпляра и вызовы методов в той последовательности, в которой твой код будут проверять тесты. Пожалуйста ничего там не меняй.
 
 // Тесты
-// Объявлена переменная calculateTotalPrice
-// Переменной calculateTotalPrice присвоена стрелочная функция с параметром (orderedItems)
-// Для перебора массива orderedItems использован метод forEach
-// Коллбек для метода forEach это стрелочная функция
-// Вызов функции calculateTotalPrice([12, 85, 37, 4]) возвращает 138
-// Вызов функции calculateTotalPrice([164, 48, 291]) возвращает 503
-// Вызов функции calculateTotalPrice([412, 371, 94, 63, 176]) возвращает 1116
-// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+// Объявлен класс Storage
+// В классе Storage объявлен метод getItems
+// В классе Storage объявлен метод addItem
+// В классе Storage объявлен метод removeItem
+// Метод getItems возвращает значение свойства items экземпляра класса который его вызывает
+// Метод addItem изменяет свойство items экземпляра класса который его вызывает
+// Метод removeItem изменяет свойство items экземпляра класса который его вызывает
+// В результате вызова new Storage(["Nanitoids", "Prolonger", "Antigravitator"]) значение переменной storage это объект
+// У объекта storage есть свойство items
+// Первый вызов storage.getItems(), сразу после инциализации экземпляра, возвращает массив ["Nanitoids", "Prolonger", "Antigravitator"]
+// Второй вызов, storage.getItems(), после вызова storage.addItem("Droid"), возвращает массив ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+// Третий вызов storage.getItems(), после вызова storage.removeItem("Prolonger"), возвращает массив ["Nanitoids", "Antigravitator", "Droid"]
 
 // ============Исходный код задачи
 
-// Change code below this line
-// function calculateTotalPrice(orderedItems) {
-//   let totalPrice = 0;
-
-//   orderedItems.forEach(function (item) {
-//     totalPrice += item;
-//   });
-
-//   return totalPrice;
-// }
+// Change code above this line
+// const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+// storage.addItem("Droid");
+// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+// storage.removeItem("Prolonger");
+// console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
 
 // ++++++++++++++Решение
-const calculateTotalPrice = (orderedItems) => {
-  let totalPrice = 0;
+class Storage {
+  constructor(items) {
+    this.items = items;
+  }
 
-  orderedItems.forEach((item) => (totalPrice += item));
+  getItems() {
+    return this.items;
+  }
 
-  return totalPrice;
-};
+  addItem(newItem) {
+    return this.items.push(newItem);
+  }
 
+  removeItem(itemToRemove) {
+    this.items = this.items.filter((item) => item !== itemToRemove);
+  }
+}
 // Change code above this line
-console.log(calculateTotalPrice([12, 85, 37, 4]));
-console.log(calculateTotalPrice([412, 371, 94, 63, 176]));
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// function removeItem(storage, itemToRemove) {
+//   // const itemIndex = this.items.findIndex((item) => item === itemToRemove);
+//   return storage.filter((item) => item !== itemToRemove);
+// }
+
+// console.log(
+//   removeItem(["Nanitoids", "Prolonger", "Antigravitator"], "Prolonger")
+// );

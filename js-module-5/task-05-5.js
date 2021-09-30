@@ -1,65 +1,81 @@
-// Метод forEach(callback)
-// Перебирающий метод массива, который используется как замена циклов for и for...of при работе с коллекцией.
-
-// массив.forEach(function callback(element, index, array) {
-//   // Тело коллбек-функции
-// });
-// Поэлементно перебирает массив.
-// Вызывает коллбек-функцию для каждого элемента массива.
-// Ничего не возвращает.
-// Аргументы коллбек-функции это значение текущего элемента element, его индекс index и сам исходный массив array. Объявлять можно только те параметры которые нужны, чаще всего это элемент, главное не забывать про их порядок.
-
-// const numbers = [5, 10, 15, 20, 25];
-
-// // Классический for
-// for (let i = 0; i < numbers.length; i += 1) {
-//   console.log(`Индекс ${i}, значение ${numbers[i]}`);
-// }
-
-// // Перебирающий forEach
-// numbers.forEach(function (number, index) {
-//   console.log(`Индекс ${index}, значение ${number}`);
-// });
-// Единственным случаем, когда стоит использовать циклы for или for...of для перебора массива, это задачи с прерыванием выполнения цикла. Прервать выполнение метода forEach нельзя, он всегда перебирает массив до конца.
-
+// Задача: цепочка прототипов
 // Задание
-// Функция calculateTotalPrice(orderedItems) принимает один параметр orderedItems - массив чисел, и рассчитывает общую сумму его элементов, которая сохраняется в переменной totalPrice и возвращается как результат работы функции.
-
-// Выполни рефакторинг функции так, чтобы вместо цикла for она использовала метод forEach.
+// Измени код, построив цепочку прототипов так, чтобы объект ancestor был прототипом для parent, а тот в свою очередь был прототипом для child.
 
 // Тесты
-// Объявлена функция calculateTotalPrice(orderedItems)
-// Для перебора массива orderedItems использован метод forEach
-// Вызов функции calculateTotalPrice([12, 85, 37, 4]) возвращает 138
-// Вызов функции calculateTotalPrice([164, 48, 291]) возвращает 503
-// Вызов функции calculateTotalPrice([412, 371, 94, 63, 176]) возвращает 1116
-// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+// Объявлена переменная ancestor
+// Значение переменной ancestor это объект.
+// Объявлена переменная parent
+// Значение переменной parent это объект.
+// Объявлена переменная child
+// Значение переменной child это объект.
+// Вызов ancestor.isPrototypeOf("parent") возвращает true
+// Вызов parent.isPrototypeOf("child") возвращает true
+// Вызов ancestor.hasOwnProperty("surname") возвращает true
+// Обращение к ancestor.surname возвращает "Dawson"
+// Вызов parent.hasOwnProperty("surname") возвращает true
+// Обращение к parent.surname возвращает "Moore"
+// Вызов child.hasOwnProperty("surname") возвращает false
+// Обращение к child.surname возвращает "Moore"
+// Вызов ancestor.hasOwnProperty("heritage") возвращает true
+// Обращение к ancestor.heritage возвращает "Irish"
+// Вызов parent.hasOwnProperty("heritage") возвращает false
+// Обращение к parent.heritage возвращает "Irish"
+// Вызов child.hasOwnProperty("heritage") возвращает false
+// Обращение к child.heritage возвращает "Irish"
+// Используется метод Object.create()
 
 // ============Исходный код задачи
-// function calculateTotalPrice(orderedItems) {
-//   let totalPrice = 0;
-//   // Change code below this line
+// const ancestor = {
+//   name: "Paul",
+//   age: 83,
+//   surname: "Dawson",
+//   heritage: "Irish",
+// };
+// // Change code below this line
 
-//   for (let i = 0; i < orderedItems.length; i += 1) {
-//     totalPrice += orderedItems[i];
-//   }
+// const parent = {};
+// parent.name = "Stacey";
+// parent.surname = "Moore";
+// parent.age = 54;
 
-//   // Change code above this line
-//   return totalPrice;
-// }
+// const child = {};
+// child.name = "Jason";
+// child.age = 27;
+
+// // Change code above this line
 
 // ++++++++++++++Решение
-function calculateTotalPrice(orderedItems) {
-  let totalPrice = 0;
-  // Change code below this line
+const ancestor = {
+  name: "Paul",
+  age: 83,
+  surname: "Dawson",
+  heritage: "Irish",
+};
+// Change code below this line
 
-  orderedItems.forEach((orderedItem) => {
-    totalPrice += orderedItem;
-  });
+const parent = Object.create(ancestor);
+parent.name = "Stacey";
+parent.surname = "Moore";
+parent.age = 54;
 
-  // Change code above this line
-  return totalPrice;
-}
+const child = Object.create(parent);
+child.name = "Jason";
+child.age = 27;
 
-console.log(calculateTotalPrice([12, 85, 37, 4]));
-console.log(calculateTotalPrice([412, 371, 94, 63, 176]));
+// Change code above this line
+
+console.log(ancestor.isPrototypeOf("parent")); //true
+console.log(parent.isPrototypeOf("child")); //true
+console.log(ancestor.hasOwnProperty("surname")); //true
+console.log(ancestor.surname); //"Dawson"
+console.log(parent.hasOwnProperty("surname")); //true
+console.log(parent.surname); //"Moore"
+console.log(child.hasOwnProperty("surname")); //false
+console.log(child.surname); //"Moore"
+console.log(ancestor.hasOwnProperty("heritage")); //true
+console.log(ancestor.heritage); //"Irish"
+console.log(parent.hasOwnProperty("heritage")); //false
+console.log(parent.heritage); //"Irish"
+console.log(child.hasOwnProperty("heritage")); //false
+console.log(child.heritage); //"Irish"

@@ -1,130 +1,79 @@
-// Несколько колбэков
-// Функция может принимать произвольное количество колбэков. Например, представим что мы пишем логику принятия звонков для телефона. Программа должна включить автоответчик если абонент недоступен, или соединить звонок в противном случае. Доступность абонента будем имитировать генератором случайного числа, чтобы между разными вызовами функции можно было получить различные результаты.
+// Прототип объекта
+// Объекты можно организовать в цепочки так, чтобы свойство не найденное в одном объекте, автоматически искалось бы в другом. Связующим звеном выступает специальное скрытое свойство [[Prototype]], которое в консоли браузера отображается как __proto__.
 
-// function processCall(recipient) {
-//   // Имитируем доступность абонента случайным числом
-//   const isRecipientAvailable = Math.random() > 0.5;
+// const animal = {
+//   legs: 4,
+// };
+// const dog = Object.create(animal);
+// dog.name = "Mango";
 
-//   if (!isRecipientAvailable) {
-//     console.log(`Абонент ${recipient} недоступен, оставьте сообщение.`);
-//     // Логика активации автоответчика
-//   } else {
-//     console.log(`Соединяем с ${recipient}, ожидайте...`);
-//     // Логика принятия звонка
-//   }
-// }
+// console.log(dog); // { name: 'Mango', __proto__: animal }
+// console.log(animal.isPrototypeOf(dog)); // true
+// Метод Object.create(obj) создаёт и возвращает новый объект, связывая его с объектом obj. Объект, на который указывает ссылка в __proto__, называется прототипом. В нашем примере объект animal это прототип для объекта dog. Метод isPrototypeOf() проверяет является ли объект animal прототипом для dog и возвращает true или false.
 
-// processCall("Mango");
-// Проблема такого подхода в том, что функция processCall делает слишком много и привязывает проверку доступности абонента к двум заранее определённым действиям. Что если в будущем вместо автоответчика нужно будет оставлять голограмму?
+// console.log(dog.hasOwnProperty("name")); // true
+// console.log(dog.name); // 'Mango'
 
-// Мы могли бы написать функцию так, чтобы она возвращала какое-то значение и потом по результату её выполнения делать проверки и выполнять нужный код. Но проверки не относятся к внешнему коду и будут его засорять.
+// console.log(dog.hasOwnProperty("legs")); // false
+// console.log(dog.legs); // 4
+// Обращение dog.name работает очевидным образом - возвращает собственное свойство name объекта dog. При обращении к dog.legs интерпретатор ищет свойство legs в объекте dog, не находит и продолжает поиск в объекте по ссылке из dog.__proto__, то есть, в данном случае, в объекте animal - его прототипе.
 
-// Выполним рефакторинг функции так, чтобы она принимала два колбэка onAvailable и onNotAvailable, и вызывала их по условию.
+// То есть прототип - это резервное хранилище свойств и методов объекта, автоматически используемое при их поиске. У объекта, который выступает прототипом может также быть свой прототип, у того свой, и так далее.
 
-// function processCall(recipient, onAvailable, onNotAvailable) {
-//   // Имитируем доступеность абонента случайным числом
-//   const isRecipientAvailable = Math.random() > 0.5;
-
-//   if (!isRecipientAvailable) {
-//     onNotAvailable(recipient);
-//     return;
-//   }
-
-//   onAvailable(recipient);
-// }
-
-// function takeCall(name) {
-//   console.log(`Соединяем с ${name}, ожидайте...`);
-//   // Логика принятия звонка
-// }
-
-// function activateAnsweringMachine(name) {
-//   console.log(`Абонент ${name} недоступен, оставьте сообщение.`);
-//   // Логика активации автоответчика
-// }
-
-// function leaveHoloMessage(name) {
-//   console.log(`Абонент ${name} недоступен, записываем голограмму.`);
-//   // Логика записи голограммы
-// }
-
-// processCall("Mango", takeCall, activateAnsweringMachine);
-// processCall("Poly", takeCall, leaveHoloMessage);
-// Колбэки применяются для обработки действий пользователя на странице, при обработке запросов на сервер, выполнения заранее неизвестных функций и т. п. В этом и заключается их суть - это функции предназначенные для отложенного выполнения.
+// Поиск свойства выполняется до первого совпадения. Интерпретатор ищет свойство по имени в объекте, если не находит, то обращается к свойству __proto__, т. е. переходит по ссылке к объекту-прототипу, а затем и прототипу прототипа. Если интерпретатор доберется до конца цепочки и не найдет свойства с таким именем, то вернёт undefined.
 
 // Задание
-// Необходимо написать логику обработки заказа пиццы.
-// Выполни рефакторинг метода order так, чтобы он принимал вторым и третим параметрами два колбэка onSuccess и onError.
-
-// Если в свойстве pizzas нет пиццы с названием из параметра pizzaName,
-//  метод order должен возвращать результат вызова колбэка onError,
-//   передавая ему аргументом строку "There is no pizza with a name <имя пиццы> in the assortment."
-// Если в свойстве pizzas есть пицца с названием из параметра pizzaName,
-// метод order должен возвращать результат вызова колбэка onSuccess, передавая ему аргументом имя заказанной пиццы.
-// После объявления объекта pizzaPalace мы добавили колбэки и вызовы методов. Пожалуйста ничего там не меняй.
+// Измени код так, чтобы объект parent стал прототипом для объекта в переменной сhild.
 
 // Тесты
-// Метод order объявляет три параметра
-// Вызов pizzaPalace.order("Smoked", makePizza, onOrderError) возвращает "Your order is accepted. Cooking pizza Smoked."
-// Вызов pizzaPalace.order("Four meats", makePizza, onOrderError) возвращает "Your order is accepted. Cooking pizza Four meats."
-// Вызов pizzaPalace.order("Big Mike", makePizza, onOrderError) возвращает "Error! There is no pizza with a name Big Mike in the assortment."
-// Вызов pizzaPalace.order("Vienna", makePizza, onOrderError) возвращает "Error! There is no pizza with a name Vienna in the assortment."
+// Объявлена переменная parent
+// Значение переменной parent это объект
+// Вызов parent.hasOwnProperty("surname") возвращает true
+// Вызов parent.hasOwnProperty("heritage") возвращает true
+// Объявлена переменная child
+// Значение переменной child это объект
+// Вызов child.hasOwnProperty("name") возвращает true
+// Обращение к child.name возвращает "Jason"
+// Вызов child.hasOwnProperty("age") возвращает true
+// Обращение к child.age возвращает 27
+// Вызов child.hasOwnProperty("surname") возвращает false
+// Обращение к child.surname возвращает "Moore"
+// Вызов child.hasOwnProperty("heritage") возвращает false
+// Обращение к child.heritage возвращает "Irish"
+// Вызов parent.isPrototypeOf(child) возвращает true
+// Используется метод Object.create()
 
 // ============Исходный код задачи
-// const pizzaPalace = {
-//   pizzas: ["Ultracheese", "Smoked", "Four meats"],
-//   order(pizzaName) {},
+// const parent = {
+//   name: "Stacey",
+//   surname: "Moore",
+//   age: 54,
+//   heritage: "Irish",
 // };
+// // Change code below this line
+
+// const child = {};
+
 // // Change code above this line
-
-// // Callback for onSuccess
-// function makePizza(pizzaName) {
-//   return `Your order is accepted. Cooking pizza ${pizzaName}.`;
-// }
-
-// // Callback for onError
-// function onOrderError(error) {
-//   return `Error! ${error}`;
-// }
-
-// // Method calls with callbacks
-// pizzaPalace.order("Smoked", makePizza, onOrderError);
-// pizzaPalace.order("Four meats", makePizza, onOrderError);
-// pizzaPalace.order("Big Mike", makePizza, onOrderError);
-// pizzaPalace.order("Vienna", makePizza, onOrderError);
+// child.name = "Jason";
+// child.age = 27;
 
 // ++++++++++++++Решение
-const pizzaPalace = {
-  pizzas: ["Ultracheese", "Smoked", "Four meats"],
-  order(pizzaName, onSuccess, onError) {
-    if (this.pizzas.includes(pizzaName)) {
-      return onSuccess(pizzaName);
-    }
-    return onError(
-      `There is no pizza with a name ${pizzaName} in the assortment.`
-    );
-  },
+const parent = {
+  name: "Stacey",
+  surname: "Moore",
+  age: 54,
+  heritage: "Irish",
 };
+// Change code below this line
+
+const child = Object.create(parent);
 
 // Change code above this line
+child.name = "Jason";
+child.age = 27;
 
-// Callback for onSuccess
-function makePizza(pizzaName) {
-  return `Your order is accepted. Cooking pizza ${pizzaName}.`;
-}
-
-// Callback for onError
-function onOrderError(error) {
-  return `Error! ${error}`;
-}
-
-// Method calls with callbacks
-// pizzaPalace.order("Smoked", makePizza, onOrderError);
-// pizzaPalace.order("Four meats", makePizza, onOrderError);
-// pizzaPalace.order("Big Mike", makePizza, onOrderError);
-// pizzaPalace.order("Vienna", makePizza, onOrderError);
-
-console.log(pizzaPalace.order("Smoked", makePizza, onOrderError));
-console.log(pizzaPalace.order("Four meats", makePizza, onOrderError));
-console.log(pizzaPalace.order("Big Mike", makePizza, onOrderError));
-console.log(pizzaPalace.order("Vienna", makePizza, onOrderError));
+console.log(parent.hasOwnProperty("surname"));
+console.log(parent.hasOwnProperty("heritage"));
+console.log(child.age);
+console.log(child.hasOwnProperty("heritage"));

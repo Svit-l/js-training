@@ -1,60 +1,59 @@
-// Стрелочные функции.
-// Стрелочные функции имеют сокращённый, более лаконичный синтаксис, что уменьшает объем кода, особенно когда функция маленькая или если она используется как коллбек.
+// Объект параметров
+// Класс может принимать большое количество входных данных для свойств будущего объекта. Если параметров много (больше 2-х), то обычно применяют паттерн «Объект параметров». Идея этого паттерна в том, чтобы передавать в качестве параметра один объект с логично именованными свойствами. Значения свойств такого объекта заменят набор аргументов.
 
-// Все стрелки создаются как функциональное выражение, и если функция не анонимна, то она должна быть присвоена переменной.
-
-// // Обычное объявление функции
-// function classicAdd(a, b, c) {
-//   return a + b + c;
+// class User {
+//   // Деструктуризируем объект
+//   constructor({ name, email }) {
+//     this.name = name;
+//     this.email = email;
+//   }
 // }
 
-// // Тоже самое как стрелочная функция
-// const arrowAdd = (a, b, c) => {
-//   return a + b + c;
-// };
-// Ключевое слово function не используется, вместо этого сразу идёт объявление параметров, за которыми следует символ => и тело функции.
+// const mango = new User({
+//   name: "Mango",
+//   email: "mango@mail.com",
+// });
+// console.log(mango); // { name: "Mango", email: "mango@mail.com" }
 
-// Если параметров несколько, то они перечисляются через запятую в круглых скобках, между знаками равно = и стрелкой =>.
-
-// const add = (a, b, c) => {
-//   return a + b + c;
-// };
-// Если параметр один, его объявление может быть без круглых скобок.
-
-// const add = a => {
-//   return a + 5;
-// };
-// Если параметров нет, то обязательно должны быть пустые круглые скобки.
-
-// const greet = () => {
-//   console.log("Привет!");
-// };
+// const poly = new User({
+//   name: "Poly",
+//   email: "poly@mail.com",
+// });
+// console.log(poly); // { name: "Poly", email: "poly@mail.com" }
 // Задание
-// Выполни рефакторинг функции calculateTotalPrice() так, чтобы она была объявлена как стрелочная.
+// Выполни рефакторинг класса Car так, чтобы он принимал один параметр - объект со свойсвами brand, model и price. Деструктуризируй объект в сигнатуре (подписи) конструктора.
 
 // Тесты
-// Объявлена переменная calculateTotalPrice
-// Переменной calculateTotalPrice присвоена стрелочная функция с параметрами (quantity, pricePerItem)
-// Вызов calculateTotalPrice(5, 100) возвращает 500
-// Вызов calculateTotalPrice(8, 60) возвращает 480
-// Вызов calculateTotalPrice(3, 400) возвращает 1200
-// Вызов функции со случайными, но валидными аргументами, возвращает правильное значение
+// Объявлен класс Car
+// У класса Car есть метод constructor
+// В результате вызова new Car({ brand: "Audi", model: "Q3", price: 36000 }) получится объект { brand: "Audi", model: "Q3", price: 36000 }
+// В результате вызова new Car({ brand: "BMW", model: "X5", price: 58900 }) получится объект { brand: "BMW", model: "X5", price: 58900 }
+// В результате вызова new Car({ brand: "Nissan", model: "Murano", price: 31700 }) получится объект { brand: "Nissan", model: "Murano", price: 31700 }
 
 // ============Исходный код задачи
-// Change code below this line
-
-// function calculateTotalPrice(quantity, pricePerItem) {
+// class Car {
+//   // Change code below this line
+//   constructor(brand, model, price) {
+//     this.brand = brand;
+//     this.model = model;
+//     this.price = price;
+//   }
 //   // Change code above this line
-//   return quantity * pricePerItem;
 // }
 
 // ++++++++++++++Решение
 // Change code below this line
 
-const calculateTotalPrice = (quantity, pricePerItem) => {
+class Car {
+  // Change code below this line
+  constructor({ brand, model, price }) {
+    this.brand = brand;
+    this.model = model;
+    this.price = price;
+  }
   // Change code above this line
-  return quantity * pricePerItem;
-};
+}
 
-console.log(calculateTotalPrice(5, 100));
-console.log(calculateTotalPrice(3, 400));
+console.log(new Car({ brand: "Audi", model: "Q3", price: 36000 }));
+console.log(new Car({ brand: "BMW", model: "X5", price: 58900 }));
+console.log(new Car({ brand: "Nissan", model: "Murano", price: 31700 }));

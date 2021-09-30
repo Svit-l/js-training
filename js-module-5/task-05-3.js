@@ -1,52 +1,71 @@
-// Инлайн-колбэки
-// Если колбэк-функция маленькая и нужна только для передачи аргументом, её можно объявить прямо при вызове функции в которую передаём колбэк. Такая функция будет доступна только как значение параметра и больше нигде в коде.
-
-// function registerGuest(name, callback) {
-//   console.log(`Регистрируем гостя ${name}.`);
-//   callback(name);
-// }
-
-// // Передаём инлайн функцию greet как колбэк
-// registerGuest("Mango", function greet(name) {
-//   consle.log(`Добро пожаловать ${name}.`);
-// });
-
-// // Передаём инлайн функцию notify как колбэк
-// registerGuest("Poly", function notify(name) {
-//   consle.log(`Уважаемый(ая) ${name}, ваш номер будет готов через 30 минут.`);
-// });
+// Задача: история заказов
 // Задание
-// Дополни второй вызов функции makePizza(pizzaName, callback), передав вторым аргументом инлайн колбэк-функцию eatPizza(pizzaName), которая логирует строку "Eating pizza <имя пиццы>".
+// Тестировщики нашли баги в коде сервиса хранения истории заказов еды. Тебе необходимо исправить их, правильно расставив this в методах объекта historyService, чтобы методы начали работать правильно.
 
 // Тесты
-// Объявлена функция makePizza
-// Функция makePizza принимает два параметра
-// Вторым аргументом при вызове makePizza("Ultracheese") передана функция eatPizza с единственным параметром pizzaName
+// Объявлена переменная historyService
+// Значение переменной historyService это объект с исходными свойствами и методами
+// Вызов historyService.getOrdersLog() возвращает строку с перечислением данных всех заказов из свойства orders
+// Вызов historyService.getEmails() возвращает массив всех уникальных почтовых адресов из свойства orders
+// Вызов historyService.getOrdersByEmail("solomon@topmail.net") возвращает [{ email: "solomon@topmail.net", dish: "Burger" }, { email: "solomon@topmail.net", dish: "Apple pie" }]
+// Вызов historyService.getOrdersByEmail("artemis@coldmail.net") возвращает [{ email: "artemis@coldmail.net", dish: "Pizza" }]
+// Метод getOrdersLog объекта historyService использует this
+// Метод getEmails объекта historyService использует this
+// Метод getOrdersByEmail объекта historyService использует this
 
 // ============Исходный код задачи
-// function makePizza(pizzaName, callback) {
-//   console.log(`Pizza ${pizzaName} is being prepared, please wait...`);
-//   callback(pizzaName);
-// }
-
-// makePizza("Royal Grand", function deliverPizza(pizzaName) {
-//   console.log(`Delivering pizza ${pizzaName}.`);
-// });
-// // Change code below this line
-
-// makePizza("Ultracheese");
+// const historyService = {
+//   orders: [
+//     { email: "jacob@hotmail.com", dish: "Burrito" },
+//     { email: "solomon@topmail.net", dish: "Burger" },
+//     { email: "artemis@coldmail.net", dish: "Pizza" },
+//     { email: "solomon@topmail.net", dish: "Apple pie" },
+//     { email: "jacob@hotmail.com", dish: "Taco" },
+//   ],
+//   // Change code below this line
+//   getOrdersLog() {
+//     return orders
+//       .map((order) => `email: ${order.email} dish: ${order.dish}`)
+//       .join(" - ");
+//   },
+//   getEmails() {
+//     const emails = orders.map((order) => order.email);
+//     const uniqueEmails = new Set(emails);
+//     return [...uniqueEmails];
+//   },
+//   getOrdersByEmail(email) {
+//     return orders.filter((order) => order.email === email);
+//   },
+//   // Change code above this line
+// };
 
 // ++++++++++++++Решение
-function makePizza(pizzaName, callback) {
-  console.log(`Pizza ${pizzaName} is being prepared, please wait...`);
-  callback(pizzaName);
-}
+const historyService = {
+  orders: [
+    { email: "jacob@hotmail.com", dish: "Burrito" },
+    { email: "solomon@topmail.net", dish: "Burger" },
+    { email: "artemis@coldmail.net", dish: "Pizza" },
+    { email: "solomon@topmail.net", dish: "Apple pie" },
+    { email: "jacob@hotmail.com", dish: "Taco" },
+  ],
+  // Change code below this line
+  getOrdersLog() {
+    return this.orders
+      .map((order) => `email: ${order.email} dish: ${order.dish}`)
+      .join(" - ");
+  },
+  getEmails() {
+    const emails = this.orders.map((order) => order.email);
+    const uniqueEmails = new Set(emails);
+    return [...uniqueEmails];
+  },
+  getOrdersByEmail(email) {
+    return this.orders.filter((order) => order.email === email);
+  },
+  // Change code above this line
+};
 
-makePizza("Royal Grand", function deliverPizza(pizzaName) {
-  console.log(`Delivering pizza ${pizzaName}.`);
-});
-// Change code below this line
-
-makePizza("Ultracheese", function eatPizza(pizzaName) {
-  console.log(`Eating pizza ${pizzaName}.`);
-});
+console.log(historyService.getOrdersLog());
+console.log(historyService.getEmails());
+console.log(historyService.getOrdersByEmail("solomon@topmail.net"));
+console.log(historyService.getOrdersByEmail("artemis@coldmail.net"));
