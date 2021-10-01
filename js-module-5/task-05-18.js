@@ -78,3 +78,11 @@ class User {
   }
 }
 // Change code below this line
+
+class Admin extends User {
+  static AccessLevel = { BASIC: "basic", SUPERUSER: "superuser" };
+  // Тело класса ContentEditor
+}
+
+console.log(Admin.AccessLevel.BASIC);
+console.log(Admin.AccessLevel.SUPERUSER);

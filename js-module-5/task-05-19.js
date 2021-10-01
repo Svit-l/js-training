@@ -1,60 +1,119 @@
-// Методы filter и find
-// Метод filter(callback) используется для единственной операции - фильтрации массива,
-// то есть когда необходимо выбрать более одного элемента из коллекции по какому - то критерию.
+// Конструктор дочернего класса
+// Первым делом в конструкторе дочернего класса необходимо вызвать специальную функцию super(аргументы) - это псевдоним конструктора родительского класса. В противном случае, при попытке обратиться к this в конструкторе дочернего клааса, будет ошибка. При вызове конструктора класса родителя передаём необходимые ему аругменты для инициализации свойств.
 
-// массив.filter((element, index, array) => {
-//   // Тело коллбек-функции
-// });
-// Не изменяет оригинальный массив.
-// Поэлементно перебирает оригинальный массив.
-// Возвращает новый массив.
-// Добавляет в возвращаемый массив элементы которые удовлетворяют условию коллбек-функции.
-// Если коллбек вернул true элемент добавляется в возвращаемый массив.
-// Если коллбек вернул false элемент не добавляется в возвращаемый массив.
-// Если ни один элемент не удовлетворил условию, возвращает пустой массив.
-// const values = [51, -3, 27, 21, -68, 42, -37];
+// class User {
+//   constructor(email) {
+//     this.email = email;
+//   }
 
-// const positiveValues = values.filter(value => value >= 0);
-// console.log(positiveValues); // [51, 27, 21, 42]
+//   get email() {
+//     return this.email;
+//   }
 
-// const negativeValues = values.filter(value => value < 0);
-// console.log(negativeValues); // [-3, -68, -37]
+//   set email(newEmail) {
+//     this.email = newEmail;
+//   }
+// }
 
-// const bigValues = values.filter(value => value > 1000);
-// console.log(bigValues); // []
+// class ContentEditor extends User {
+//   constructor({ email, posts }) {
+//     // Вызов конструктора родительского класса User
+//     super(email);
+//     this.posts = posts;
+//   }
+// }
 
-// // Оригинальный массив не изменился
-// console.log(values); // [51, -3, 27, 21, -68, 42, -37]
-// То есть метод filter вызывает коллбек-функцию для каждого элемента исходного массива и если результат её выполнения true, текущий элемент добавляет в новый массив.
-
+// const editor = new ContentEditor({ email: "mango@mail.com", posts: [] });
+// console.log(editor); // { email: 'mango@mail.com', posts: [] }
+// console.log(editor.email); // 'mango@mail.com'
 // Задание
-// Дополни код так, чтобы в переменной evenNumbers получился массив чётных чисел из массива numbers,
-// а в переменной oddNumbers массив нечётных.Обязательно используй метод filter().
+// Добавь классу Admin метод constructor, который принимает один параметр - объект настроек с двумя свойствами email и accessLevel. Добавь классу Admin публичное свойство accessLevel, значение которого будет передаваться при вызове конструктора.
+
+// Чтобы показать как будет использоваться класс Admin мы добавили инициализацию экземпляра под объявлением класса.
 
 // Тесты
-// Объявлена переменная numbers
-// Значение переменной numbers это массив [17, 24, 82, 61, 36, 18, 47, 52, 73]
-// Объявлена переменная evenNumbers
-// Значение переменной evenNumbers это массив [24, 82, 36, 18, 52]
-// Объявлена переменная oddNumbers
-// Значение переменной oddNumbers это массив [17, 61, 47, 73]
-// Для перебора массива numbers использован метод filter()
+// Объявлен класс Admin
+// Класс Admin наследует от класса User
+// У класса Admin есть публичное статическое свойство AccessLevel
+// У класса Admin есть метод constructor с параметром в виде объекта {email, accessLevel}
+// У класса Admin в конструкторе для свойства email используется обращение к конструктору родительского класса
+// Обращение к Admin.AccessLevel.BASIC возвращает строку "basic"
+// Обращение к Admin.AccessLevel.SUPERUSER возвращает строку "superuser"
 
 // ============Исходный код задачи
 
-// const numbers = [17, 24, 82, 61, 36, 18, 47, 52, 73];
-// // Change code below this line
+// class User {
+//   email;
 
-// const evenNumbers = numbers;
-// const oddNumbers = numbers;
+//   constructor(email) {
+//     this.email = email;
+//   }
+
+//   get email() {
+//     return this.email;
+//   }
+
+//   set email(newEmail) {
+//     this.email = newEmail;
+//   }
+// }
+
+// class Admin extends User {
+//   // Change code below this line
+
+//   static AccessLevel = {
+//     BASIC: "basic",
+//     SUPERUSER: "superuser",
+//   };
+
+//   // Change code above this line
+// }
+
+// const mango = new Admin({
+//   email: "mango@mail.com",
+//   accessLevel: Admin.AccessLevel.SUPERUSER,
+// });
+
+// console.log(mango.email); // "mango@mail.com"
+// console.log(mango.accessLevel); // "superuser"
 
 // ++++++++++++++Решение
-const numbers = [17, 24, 82, 61, 36, 18, 47, 52, 73];
-// Change code below this line
+class User {
+  email;
 
-const evenNumbers = numbers.filter((number) => number % 2 === 0);
+  constructor(email) {
+    this.email = email;
+  }
 
-const oddNumbers = numbers.filter((number) => number % 2 !== 0);
+  get email() {
+    return this.email;
+  }
 
-console.log(evenNumbers);
-console.log(oddNumbers);
+  set email(newEmail) {
+    this.email = newEmail;
+  }
+}
+
+class Admin extends User {
+  // Change code below this line
+  constructor({ email, accessLevel }) {
+    // Вызов конструктора родительского класса User
+    super(email);
+    this.accessLevel = accessLevel;
+  }
+
+  static AccessLevel = {
+    BASIC: "basic",
+    SUPERUSER: "superuser",
+  };
+
+  // Change code above this line
+}
+
+const mango = new Admin({
+  email: "mango@mail.com",
+  accessLevel: Admin.AccessLevel.SUPERUSER,
+});
+
+console.log(Admin.AccessLevel.BASIC); // "basic"
+console.log(mango.accessLevel); // "superuser"

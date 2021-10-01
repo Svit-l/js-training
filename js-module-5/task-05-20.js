@@ -1,102 +1,142 @@
-// Фильтрация уникальных элементов
-// Используя метод filter() можно выполнить фильтрацию массива так, что в нём останутся только уникальные элементы. Этот приём работает только с массивом примитивных значений - не объектов.
+// Методы дочернего класса
+// В дочернем классе можно объявлять методы, которые будут доступны только его экземплярам.
 
-// Вернёмся к группе студентов и массиву всех посещаемых предметов, которые мы получили методом flatMap().
+// // Представим что выше есть объявление класса User
 
-// const students = [
-//   { name: "Mango", courses: ["mathematics", "physics"] },
-//   { name: "Poly", courses: ["science", "mathematics"] },
-//   { name: "Kiwi", courses: ["physics", "biology"] },
-// ];
+// class ContentEditor extends User {
+//   constructor({ email, posts }) {
+//     super(email);
+//     this.posts = posts;
+//   }
 
-// const allCourses = students.flatMap(student => student.courses);
-// // ["mathematics", "physics", "science", "mathematics", "physics", "biology"];
-// В переменной allCourses хранится массив всех посещаемых предметов, которые могут повторяться. Задача заключается в том, чтобы сделать новый массив, в котором будут только уникальные предметы, то есть без повторений.
+//   addPost(post) {
+//     this.posts.push(post);
+//   }
+// }
 
-// const uniqueCourses = allCourses.filter(
-//   (course, index, array) => array.indexOf(course) === index
-// );
-// Используя array.indexOf(course) выполняем поиск первого совпадения текущего элемента course
-// и получаем его индекс в оригинальном массиве всех курсов.
-// В параметре index хранится индекс текущего элемента course при переборе массива методом filter.
-
-// Если результат indexOf() и значение index равны - это уникальный элемент,
-// потому что это первый раз когда такое значение встречается в массиве
-// и на текущей итерации фильтр обрабатывает именно его.
-
-// # Массив всех курсов
-// ["mathematics", "physics", "science", "mathematics", "physics", "biology"];
-// Для элемента "mathematics" под индексом 0:
-
-// indexOf() вернёт 0, потому что ищет первое совпадение.
-// Значение параметра index будет 0.
-// Они равны, значит это уникальный элемент.
-// Для элемента "mathematics" под индексом 3:
-
-// indexOf() вернёт 0, потому что ищет первое совпадение.
-// Значение параметра index будет 3.
-// Они не равны, значит это повторяющийся - не уникальный элемент.
-
+// const editor = new ContentEditor({ email: "mango@mail.com", posts: [] });
+// console.log(editor); // { email: 'mango@mail.com', posts: [] }
+// console.log(editor.email); // 'mango@mail.com'
+// editor.addPost("post-1");
+// console.log(editor.posts); // ['post-1']
 // Задание
-// Дополни код так, чтобы в переменной allGenres был массив всех жанров книг (свойство genres) из массива books, а в переменной uniqueGenres массив уникальных жанров - без повторений.
+// Добавь классу Admin следующие свойства и методы.
+
+// Публичное свойство blacklistedEmails для хранения чёрного списка почтовых адресов пользователей.
+// Значение по умолчанию это пустой массив.
+// Публичный метод blacklist(email) для добавления почты в чёрный список.
+// Метод должен добавлять значение параметра email в массив хранящийся в свойстве blacklistedEmails.
+// Публичный метод isBlacklisted(email) для проверки почты в чёрном списке.
+// Метод должен проверять наличие значения параметра email в массиве хранящемся в свойстве blacklistedEmails и возвращать true или false.
+// После объявления класса мы добавили инициализацию экземпляра и вызовы методов в той последовательности,
+// в которой твой код будут проверять тесты.Пожалуйста ничего там не меняй.
 
 // Тесты
-// Объявлена переменная books
-// Значение переменной books это массив объектов
-// Объявлена переменная allGenres
-// Значение переменной allGenres это массив ["adventure", "history", "fiction", "mysticism", "horror", "mysticism", "adventure"]
-// Объявлена переменная uniqueGenres
-// Значение переменной uniqueGenres это массив ["adventure", "history", "fiction", "mysticism", "horror"]
-// Для вычисления значения переменной allGenders использован метод flatMap()
-// Для вычисления значения переменной uniqueGenres использован метод filter()
+// Объявлен класс Admin
+// Класс Admin наследует от класса User
+// У класса Admin есть публичное свойство blacklistedEmails
+// У класса Admin есть публичный метод blacklist
+// У класса Admin есть публичный метод isBlacklisted
+// После вызова mango.blacklist("poly@mail.com") значение свойства blacklistedEmails это массив ["poly@mail.com"]
+// Вызов mango.isBlacklisted("mango@mail.com") возвращает false
+// Вызов mango.isBlacklisted("poly@mail.com") возвращает true
 
 // // ============Исходный код задачи
-// const books = [
-//   {
-//     title: "The Last Kingdom",
-//     author: "Bernard Cornwell",
-//     genres: ["adventure", "history"],
-//   },
-//   {
-//     title: "Beside Still Waters",
-//     author: "Robert Sheckley",
-//     genres: ["fiction", "mysticism"],
-//   },
-//   {
-//     title: "Redder Than Blood",
-//     author: "Tanith Lee",
-//     genres: ["horror", "mysticism", "adventure"],
-//   },
-// ];
-// // Change code below this line
-// const allGenres = books;
-// const uniqueGenres = allGenres;
+// class User {
+//   email;
+
+//   constructor(email) {
+//     this.email = email;
+//   }
+
+//   get email() {
+//     return this.email;
+//   }
+
+//   set email(newEmail) {
+//     this.email = newEmail;
+//   }
+// }
+// class Admin extends User {
+//   // Change code below this line
+
+//   static AccessLevel = {
+//     BASIC: "basic",
+//     SUPERUSER: "superuser",
+//   };
+
+//   constructor({ email, accessLevel }) {
+//     super(email);
+//     this.accessLevel = accessLevel;
+//   }
+
+//   // Change code above this line
+// }
+
+// const mango = new Admin({
+//   email: "mango@mail.com",
+//   accessLevel: Admin.AccessLevel.SUPERUSER,
+// });
+
+// console.log(mango.email); // "mango@mail.com"
+// console.log(mango.accessLevel); // "superuser"
+
+// mango.blacklist("poly@mail.com");
+// console.log(mango.blacklistedEmails); // ["poly@mail.com"]
+// console.log(mango.isBlacklisted("mango@mail.com")); // false
+// console.log(mango.isBlacklisted("poly@mail.com")); // true
 
 // ++++++++++++++Решение
-const books = [
-  {
-    title: "The Last Kingdom",
-    author: "Bernard Cornwell",
-    genres: ["adventure", "history"],
-  },
-  {
-    title: "Beside Still Waters",
-    author: "Robert Sheckley",
-    genres: ["fiction", "mysticism"],
-  },
-  {
-    title: "Redder Than Blood",
-    author: "Tanith Lee",
-    genres: ["horror", "mysticism", "adventure"],
-  },
-];
-// Change code below this line
-const allGenres = books.flatMap((book) => book.genres);
+class User {
+  email;
 
-console.log(allGenres);
+  constructor(email) {
+    this.email = email;
+  }
 
-const uniqueGenres = allGenres.filter(
-  (genre, index, array) => array.indexOf(genre) === index
-);
+  get email() {
+    return this.email;
+  }
 
-console.log(uniqueGenres);
+  set email(newEmail) {
+    this.email = newEmail;
+  }
+}
+
+class Admin extends User {
+  // Change code below this line
+
+  static AccessLevel = {
+    BASIC: "basic",
+    SUPERUSER: "superuser",
+  };
+
+  constructor({ email, accessLevel, blacklistedEmails }) {
+    super(email);
+    this.accessLevel = accessLevel;
+    this.blacklistedEmails = blacklistedEmails;
+    this.blacklistedEmails = [];
+  }
+
+  blacklist(email) {
+    return this.blacklistedEmails.push(email);
+  }
+
+  isBlacklisted(email) {
+    return this.blacklistedEmails.includes(email);
+  }
+  // Change code above this line
+}
+
+const mango = new Admin({
+  email: "mango@mail.com",
+  accessLevel: Admin.AccessLevel.SUPERUSER,
+});
+
+console.log(mango.email); // "mango@mail.com"
+console.log(mango.accessLevel); // "superuser"
+
+mango.blacklist("poly@mail.com");
+console.log(mango.blacklistedEmails); // ["poly@mail.com"]
+console.log(mango.isBlacklisted("mango@mail.com")); // false
+console.log(mango.isBlacklisted("poly@mail.com")); // true
