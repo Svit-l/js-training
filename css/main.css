@@ -1,0 +1,147 @@
+/* +++++++++++++++++Тема11.DOM  */
+/* ================Abstract-example-5. Свойство classList */
+/* body {
+  margin: 24px;
+}
+
+.is-hidden {
+  display: none;
+} */
+
+/* -------------Свойство style */
+
+/* +++++++++++++++++Свойство innerHTML */
+/* ==================Чтение */
+/* body {
+  margin: 16px;
+  font-family: sans-serif;
+} */
+
+/* ++++++++++++++++++++Создание и удаление элементов 
+     ===================Добавление */
+
+/* body {
+  margin: 24px;
+}
+
+.usernames li {
+  padding: 8px;
+  border: 2px dashed tomato;
+  text-transform: uppercase;
+}
+
+.usernames li:not(:last-child) {
+  margin-bottom: 12px;
+} */
+
+/* ===================Удаление */
+/* body {
+  font-family: sans-serif;
+} */
+
+/* ++++++++++++++++++ Свойство innerHTML */
+/* ====================Изменение */
+/* body {
+  margin: 16px;
+}
+
+.accent {
+  color: tomato;
+  text-decoration: underline;
+} */
+
+/* ====================Изменение. Однотипная (шаблонная) разметка */
+/* body {
+  padding: 16px;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.list-item {
+  padding: 8px;
+  border-width: 2px;
+  border-style: dashed;
+}
+
+.list-item:nth-child(even) {
+  border-color: tomato;
+}
+
+.list-item:nth-child(odd) {
+  border-color: blueviolet;
+}
+
+.list-item:not(:last-child) {
+  margin-bottom: 8px;
+} */
+
+/* ====================Добавление */
+/* body {
+  padding: 16px;
+}
+
+.article {
+  max-width: 320px;
+}
+
+.article-text {
+  color: tomato;
+} */
+
+/* ====================Добавление. Метод insertAdjacentHTML() */
+
+/* body {
+  padding: 16px;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-width: 2px;
+  border-style: dashed;
+}
+
+.list-item.new::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.list-item:nth-child(even) {
+  border-color: tomato;
+}
+
+.list-item:nth-child(odd) {
+  border-color: blueviolet;
+}
+
+.list-item:not(:last-child) {
+  margin-bottom: 8px;
+} */
+
+/* +++++++Проба пера */
+/* body {
+  padding: 16px;
+}
+
+.article {
+  max-width: 320px;
+}
+
+.article-text {
+  color: tomato;
+} */
