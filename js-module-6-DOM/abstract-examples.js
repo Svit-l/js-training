@@ -52,6 +52,10 @@
 // console.log(firstMenuItem);
 
 // +++++++++++++++++Abstract-example-3. Свойства и атрибуты
+// value - содержит текущий текстовый контент элементов форм.
+// checked - хранит состояние чекбокса или радиокнопки.
+// name - хранит значение, указанное в HTML-атрибуте name.
+// src - путь к изображению тега <img>.
 // // ===================================================
 // const message = document.querySelector("#message");
 // console.log(message.value); // Default textarea message
@@ -233,7 +237,7 @@
 // console.log(technologies);
 
 // const list = document.querySelector(".list");
-
+// console.log(list.innerHTML);
 // const markup = technologies
 //   .map((technology) => `<li class="list-item">${technology}</li>`)
 //   .join("");
