@@ -24,6 +24,7 @@
 //   ({ score }) => score >= LOW_SCORE && score < HIGH_SCORE
 // );
 // console.log(average); // Массив объектов с именами Poly и Houston
+
 // Задание
 // Используя метод filter() дополни код так, чтобы:
 

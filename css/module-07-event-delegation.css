@@ -2,7 +2,7 @@
 /* ====================== Свойство event.target */
 /* ====================== Прекращение всплытия */
 
-/* #parent,
+#parent,
 #child,
 #descendant {
   margin: 16px;
@@ -25,10 +25,10 @@
 
 #descendant {
   background-color: #ff9800;
-} */
+}
 
 /* ================= Палитра цветов */
-body {
+/* body {
   margin: 8px;
   font-family: sans-serif;
 }
@@ -59,4 +59,4 @@ body {
 
 .color-palette .item:hover {
   transform: scale(1.1);
-}
+} */
