@@ -87,19 +87,33 @@
 // console.log("After promise.then()");
 
 // =========== Промис с лекции
-const promise = new Promise((resolve, reject) => {
-  const canFulfill = Math.random() > 0.5;
+// const promise = new Promise((resolve, reject) => {
+//   const canFulfill = Math.random() > 0.5;
 
+//   setTimeout(() => {
+//     if (canFulfill) {
+//       resolve("OK");
+//     }
+//     reject("Not OK");
+//   }, 2000);
+// });
+
+// console.log(promise);
+
+// promise.then((result) => {
+//   console.log(result);
+// });
+
+const createPromise = new Promise((resolve, reject) => {
+  const shouldResolve = Math.random() > 0.3;
   setTimeout(() => {
-    if (canFulfill) {
-      resolve("OK");
+    if (shouldResolve) {
+      resolve(`✅ Fulfilled promise `);
     }
-    reject("Not OK");
+    reject(`❌ Rejected promise `);
   }, 2000);
 });
 
-console.log(promise);
-
-promise.then((result) => {
-  console.log(result);
-});
+createPromise
+  .then((result) => console.log(result))
+  .catch((result) => console.log(result));
